@@ -1,84 +1,74 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>André Sagat Muaythai GYM</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <style>
-      /* Rolagem suave */
-      html {
-        scroll-behavior: smooth;
-      }
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>André Sagat Muaythai GYM</title>
 
-      /* Compensa a altura da navbar fixa */
-      section[id] {
-        scroll-margin-top: 90px;
-      }
+  <!-- Bootstrap + Swiper + Fontes -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
-      /* Destaque no menu ativo (opcional) */
-      .navbar .nav-link.active {
-        color: #ffc107 !important;
-        font-weight: 600;
-      }
-    </style>
-  </head>
-  <body class="bg-dark text-light">
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="styles.css">
+</head>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top shadow-sm">
-      <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="#home">
-          <img src="./assets/logo01.png" alt="logo" class="me-2" height="50">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navMenu">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-uppercase">
-            <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#about">Sobre</a></li>
-            <li class="nav-item"><a class="nav-link" href="#modalities">Modalidades</a></li>
-            <li class="nav-item"><a class="nav-link" href="#pricing">Planos</a></li>
-            <li class="nav-item"><a class="nav-link" href="#team">Equipe</a></li>
-            <li class="nav-item"><a class="nav-link" href="#partners">Parceiros</a></li>
-            <li class="nav-item"><a class="nav-link" href="#contact">Contato</a></li>
-          </ul>
+<body class="bg-dark text-light">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#home">
+        <img src="./assets/logo01.png" alt="logo" class="me-2" height="50">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-uppercase">
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">Sobre</a></li>
+          <li class="nav-item"><a class="nav-link" href="#modalities">Modalidades</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pricing">Planos</a></li>
+           <li class="nav-item"><a class="nav-link" href="#team">Equipe</a></li>
+          <li class="nav-item"><a class="nav-link" href="#eventos">Eventos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#patrocinadores">Patrocinadores</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contato</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="home" class="hero">
+    <div class="overlay"></div>
+    <div class="container hero-content">
+      <img src="./assets/andre sagat_tp.png" alt="André Sagat">
+      <p class="mb-4">Treinos para corpo e mente. Disciplina, técnica e superação.</p>
+      <a href="#contact" class="btn btn-warning btn-lg me-2">Agende uma aula</a>
+      <a href="#modalities" class="btn btn-outline-light btn-lg">Nossas modalidades</a>
+    </div>
+  </header>
+
+  <!-- SOBRE -->
+  <section id="about" class="py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h2 class="section-title">Sobre a Academia</h2>
+          <p class="lead">A André Sagat Muaythai GYM é referência em Muay Thai e Jiu-Jitsu. Fundada com foco em formação técnica e respeito às tradições, a academia oferece aulas para todos os níveis.</p>
+          <p>Endereço: Avenida Cangaíba 4530, São Paulo<br>Telefone: (11) 96605-8202<br>Email: studiodemuaythai@gmail.com</p>
+        </div>
+        <div class="col-md-6 text-center">
+          <img src="./assets/andre_sagat.png" alt="André Sagat" class="img-fluid about-photo">
         </div>
       </div>
-    </nav>
+    </div>
+  </section>
 
-    <!-- HERO -->
-    <header id="home" class="hero d-flex align-items-center justify-content-center text-center">
-      <div class="overlay"></div>
-      <div class="container position-relative hero-content">
-        <img src="./assets/andre sagat_tp.png" alt="André Sagat" style="max-height:1s80px;" class="ms-2">
-        <p class="mb-4">Treinos para corpo e mente. Disciplina, técnica e superação.</p>
-        <a href="#contact" class="btn btn-warning btn-lg me-2">Agende uma aula</a>
-        <a href="#modalities" class="btn btn-outline-light btn-lg">Nossas modalidades</a>
-      </div>
-    </header>
-
-    <!-- ABOUT -->
-    <section id="about" class="py-5">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-6">
-            <h2 class="section-title">Sobre a Academia</h2>
-            <p class="lead">A André Sagat Muaythai GYM é referência em Muay Thai e Jiu-Jitsu. Fundada com foco em formação técnica e respeito às tradições, a academia oferece aulas para todos os níveis.</p>
-            <p>Endereço: Avenida Cangaíba 4530, São Paulo<br>Telefone: (11) 96605-8202<br>Email: studiodemuaythai@gmail.com</p>
-          </div>
-          <div class="col-md-6 text-center">
-            <img src="./assets/andre_sagat.png" alt="André Sagat" class="img-fluid rounded-3 about-photo">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- MODALITIES -->
+<!-- MODALITIES -->
 <section id="modalities" class="py-5 bg-secondary bg-opacity-5">
   <div class="container">
     <h2 class="section-title text-center">Modalidades</h2>
@@ -121,64 +111,50 @@
   </div>
 </section>
 
-  <!-- PRICING -->
-<section id="pricing" class="py-5 bg-secondary bg-opacity-10 text-center">
-  <div class="container">
-    <h2 class="section-title text-warning mb-5">Planos e Valores</h2>
-    <div class="row justify-content-center g-4">
+  <!-- PLANOS -->
+  <section id="pricing" class="py-5 bg-secondary bg-opacity-10 text-center">
+    <div class="container">
+      <h2 class="section-title text-warning mb-5">Planos e Valores</h2>
+      <div class="row justify-content-center g-4">
 
-     <div class="col-md-4">
-  <div class="card bg-dark text-light border-0 h-100 p-4 d-flex flex-column">
-    <h3 class="text-uppercase text-warning mb-4">Muaythai</h3>
-    <ul class="list-unstyled fs-5 mb-4">
-      <li class="mb-2"><strong>R$ 120,00</strong> — Segunda a Sábado</li>
-      <li class="mb-2"><strong>R$ 100,00</strong> — 2x por semana</li>
-      <li class="mb-2"><strong>R$ 90,00</strong> — Kids (Segunda a Sexta)</li>
-    </ul>
-    <a href="https://wa.me/5511966058202" target="_blank" class="btn btn-warning text-dark fw-bold px-4 mt-auto">
-      Agendar Aula
-    </a>
-  </div>
-</div>
+        <div class="col-md-4">
+          <div class="card bg-dark text-light border-0 h-100 p-4 d-flex flex-column">
+            <h3 class="text-uppercase text-warning mb-4">Muaythai</h3>
+            <ul class="list-unstyled fs-5 mb-4">
+              <li><strong>R$ 120,00</strong> — Segunda a Sábado</li>
+              <li><strong>R$ 100,00</strong> — 2x por semana</li>
+              <li><strong>R$ 90,00</strong> — Kids (Segunda a Sexta)</li>
+            </ul>
+            <a href="https://wa.me/5511966058202" target="_blank" class="btn btn-warning text-dark fw-bold mt-auto">Agendar Aula</a>
+          </div>
+        </div>
 
-<!-- Jiu-Jitsu -->
-<div class="col-md-4">
-  <div class="card bg-dark text-light border-0  h-100 p-4 d-flex flex-column">
-    <h3 class="text-uppercase text-warning mb-4">Jiu-Jitsu</h3>
-    <ul class="list-unstyled fs-5 mb-4">
-      <li class="mb-2"><strong>R$ 100,00</strong> - Terças - Quintas</li>
-      <li class="mb-2">&nbsp;</li>
-      <li class="mb-2">&nbsp;</li>               
-    </ul>
-    <a href="https://wa.me/5511966058202" target="_blank" class="btn btn-warning text-dark fw-bold px-4 mt-auto">
-      Agendar Aula
-    </a>
-  </div>
-</div>
+        <div class="col-md-4">
+          <div class="card bg-dark text-light border-0 h-100 p-4 d-flex flex-column">
+            <h3 class="text-uppercase text-warning mb-4">Jiu-Jitsu</h3>
+            <ul class="list-unstyled fs-5 mb-4">
+              <li><strong>R$ 100,00</strong> — Terças e Quintas</li>
+            </ul>
+            <a href="https://wa.me/5511966058202" target="_blank" class="btn btn-warning text-dark fw-bold mt-auto">Agendar Aula</a>
+          </div>
+        </div>
 
-<!-- Pacotes e Extras -->
-<div class="col-md-4">
-  <div class="card bg-dark text-light border-0  h-100 p-4 d-flex flex-column">
-    <h3 class="text-uppercase text-warning mb-4">Pacotes & Extras</h3>
-    <ul class="list-unstyled fs-5 mb-4">
-      <li class="mb-2">Muaythai + Jiu-Jitsu — <strong>R$ 160,00</strong></li>
-      <li class="mb-2">Aulas Avulsas — <strong>R$ 40,00</strong></li>
-      <li class="mb-2">Taxa de Matrícula — <strong>R$ 25,00</strong></li>
-    </ul>
-    <a href="https://wa.me/5511966058202" target="_blank" class="btn btn-warning text-dark fw-bold px-4 mt-auto">
-      Agendar Aula
-    </a>
-  </div>
-</div>
-
+        <div class="col-md-4">
+          <div class="card bg-dark text-light border-0 h-100 p-4 d-flex flex-column">
+            <h3 class="text-uppercase text-warning mb-4">Pacotes & Extras</h3>
+            <ul class="list-unstyled fs-5 mb-4">
+              <li>Muaythai + Jiu-Jitsu — <strong>R$ 160,00</strong></li>
+              <li>Aulas Avulsas — <strong>R$ 40,00</strong></li>
+              <li>Taxa de Matrícula — <strong>R$ 25,00</strong></li>
+            </ul>
+            <a href="https://wa.me/5511966058202" target="_blank" class="btn btn-warning text-dark fw-bold mt-auto">Agendar Aula</a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-
-
-
-    <!-- TEAM / GALLERY CAROUSEL -->
+ <!-- TEAM / GALLERY CAROUSEL -->
 <section id="team" class="py-5 bg-dark text-light">
   <div class="container text-center">
     <h2 class="section-title mb-4">Equipe</h2>
@@ -267,119 +243,122 @@
   </div>
 </section>
 
-    <!-- PARTNERS -->
-<section id="partners" class="py-5 bg-black text-center">
-  <div class="container">
-    <h2 class="section-title text-center">Parceiros</h2>
-    <div class="d-flex justify-content-center align-items-center gap-5 flex-wrap mt-4">
+  <!-- EVENTOS -->
+  <section id="eventos" class="py-5 bg-secondary bg-opacity-10 text-center">
+    <div class="container">
+      <h2 class="section-title text-warning mb-5">Eventos</h2>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-4">
+          <div class="card bg-dark text-light h-100 shadow-sm event-card">
+            <img src="assets/sagat_figth.png" class="card-img-top" alt="Campeonato Interno">
+            <div class="card-body">
+              <h5 class="card-title text-warning">Campeonato Interno</h5>
+              <p>Venha participar do nosso campeonato interno! Teste suas habilidades com os alunos da casa.</p>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+              <small><i class="bi bi-calendar-event"></i> 18 de Outubro de 2025</small><br>
+              <small><i class="bi bi-geo-alt"></i> Academia André Sagat Muaythai GYM</small>
+            </div>
+          </div>
+        </div>
 
-      <div class="partner-item text-center">
-        <img src="assets/skyfit.png" alt="SkyFit" style="height:50px;">
-        <div class="mt-2"></div>
-      </div>
+        <div class="col-md-4">
+          <div class="card bg-dark text-light h-100 shadow-sm event-card">
+            <img src="assets/logo01.png" class="card-img-top" alt="Workshop com Mestre Sagat">
+            <div class="card-body">
+              <h5 class="card-title text-warning">Workshop com Mestre Sagat</h5>
+              <p>Treino intensivo com o mestre André Sagat — técnicas avançadas e aprimoramento físico.</p>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+              <small><i class="bi bi-calendar-event"></i> 05 de Novembro de 2025</small><br>
+              <small><i class="bi bi-geo-alt"></i> Ginásio Municipal</small>
+            </div>
+          </div>
+        </div>
 
-      <div class="partner-item text-center">
-        <img src="assets/setfit.png" alt="SetFit" style="height:96px;">
-        <div class="mt-2"></div>
-      </div>
-
-      <div class="partner-item text-center">
-        <img src="" alt="" style="height:96px; filter:brightness(1.2)">
-        <div class="mt-2"></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- SPONSORS 
-
-
-<section id="sponsors" class="py-5 bg-dark text-center text-light">
-  <div class="container">
-    <h2 class="section-title text-warning mb-5">Patrocinadores</h2>
-    <p class="mb-4 fs-5 text-light-50">
-      Agradecemos o apoio dos nossos parceiros que fortalecem o time e acreditam no esporte 
-    </p>
-    <div class="row justify-content-center align-items-center g-4">
-      
-    -->
-      <!-- Patrocinador 1
-      <div class="col-6 col-md-3">
-        <a href="https://site-do-patrocinador1.com" target="_blank">
-          <img src="./assets/patrocinador1.png" alt="Patrocinador 1" class="img-fluid grayscale-hover">
-        </a>
-      </div>
-       -->
-
-      <!-- Patrocinador 2 
-      <div class="col-6 col-md-3">
-        <a href="https://site-do-patrocinador2.com" target="_blank">
-          <img src="./assets/patrocinador2.png" alt="Patrocinador 2" class="img-fluid grayscale-hover">
-        </a>
-      </div>
- -->
-      <!-- Patrocinador 3 
-      <div class="col-6 col-md-3">
-        <a href="https://site-do-patrocinador3.com" target="_blank">
-          <img src="./assets/patrocinador3.png" alt="Patrocinador 3" class="img-fluid grayscale-hover">
-        </a>
-      </div>
- -->
-      <!-- Patrocinador 4 
-      <div class="col-6 col-md-3">
-        <a href="https://site-do-patrocinador4.com" target="_blank">
-          <img src="./assets/patrocinador4.png" alt="Patrocinador 4" class="img-fluid grayscale-hover">
-        </a>
-      </div>
- -->
-    </div>
-  </div>
-</section>
-
-    <!-- CONTATO -->
-    <section id="contact" class="py-5 text-center">
-      <div class="container">
-        <h2 class="section-title">Contato</h2>
-        <p class="mb-1">Agende aulas pelo WhatsApp</p>
-        <a href="https://wa.me/5511966058202" class="btn btn-success btn-lg mb-3" target="_blank"><i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp</a>
-        <div class="mt-4 d-flex justify-content-center">
-          <iframe src="https://www.google.com/maps?q=Avenida+Canga%C3%ADba+4530+S%C3%A3o+Paulo&output=embed" style="border:0;width:100%;max-width:700px;height:300px;" allowfullscreen loading="lazy"></iframe>
+        <div class="col-md-4">
+          <div class="card bg-dark text-light h-100 shadow-sm event-card">
+            <img src="assets/logo01.png" class="card-img-top" alt="Graduação">
+            <div class="card-body">
+              <h5 class="card-title text-warning">Graduação</h5>
+              <p>Momento de reconhecimento e evolução dos alunos. Traga sua energia e foco!</p>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+              <small><i class="bi bi-calendar-event"></i> 15 de Dezembro de 2025</small><br>
+              <small><i class="bi bi-geo-alt"></i> Academia André Sagat Muaythai GYM</small>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
-
-    <!-- FOOTER -->
-<footer class="py-4 bg-black text-center text-light">
-  <div class="container">
-    <img src="./assets/logo01.png" height="56" alt="logo-footer" class="mb-2">
-    <p class="mb-1">© 2025 André Sagat Muay Thai GYM</p>
-
-    <div class="d-flex flex-column flex-md-row align-items-center justify-content-center mt-2">
-      <span class="fw-semibold text-secondary me-md-2 mb-2 mb-md-0">Filiado à CBMT / BT</span>
-      <img src="./assets/CBMTBT.png" alt="Logo CBMT / BT" style="height:50px; width:auto;">
     </div>
+  </section>
 
-    <div class="mt-3">
-      <a href="#" class="text-warning me-3"><i class="fa-brands fa-instagram fa-lg"></i></a>
-      <a href="#" class="text-warning"><i class="fa-brands fa-facebook fa-lg"></i></a>
+  <!-- PATROCINADORES -->
+  <section id="patrocinadores" class="py-5 bg-dark text-center">
+    <div class="container">
+      <h2 class="section-title text-warning mb-5">Patrocinadores</h2>
+      <div class="swiper sponsor-slider">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="assets/logo01.png" alt="Patrocinador 1"></div>
+          <div class="swiper-slide"><img src="assets/sagat_figth.png" alt="Patrocinador 2"></div>
+          <div class="swiper-slide"><img src="assets/logo01.png" alt="Patrocinador 3"></div>
+          <div class="swiper-slide"><img src="assets/sagat_figth.png" alt="Patrocinador 4"></div>
+          <div class="swiper-slide"><img src="assets/logo01.png" alt="Patrocinador 5"></div>
+          <div class="swiper-slide"><img src="assets/sagat_figth.png" alt="Patrocinador 6"></div>
+        </div>
+      </div>
     </div>
-  </div>
-</footer>
+  </section>
 
-    <!-- BOTÃO FIXO WHATSAPP -->
-     <!--
-    <a href="https://wa.me/5511966058202" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
-      <i class="fa-brands fa-whatsapp"></i>
-    </a>
-  -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      // Destaque automático do menu ativo ao rolar
+  <!-- CONTATO -->
+  <section id="contact" class="py-5 text-center">
+    <div class="container">
+      <h2 class="section-title">Contato</h2>
+      <p>Agende aulas pelo WhatsApp</p>
+      <a href="https://wa.me/5511966058202" class="btn btn-success btn-lg mb-3" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i> Abrir WhatsApp
+      </a>
+      <div class="mt-4 d-flex justify-content-center">
+        <iframe src="https://www.google.com/maps?q=Avenida+Cangaíba+4530+São+Paulo&output=embed"
+          style="border:0;width:100%;max-width:700px;height:300px;" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-4 bg-black text-center text-light">
+    <div class="container">
+      <img src="./assets/logo01.png" height="56" alt="logo-footer" class="mb-2">
+      <p class="mb-1">© 2025 André Sagat Muaythai GYM</p>
+      <div class="mt-3">
+        <a href="#" class="text-warning me-3"><i class="fa-brands fa-instagram fa-lg"></i></a>
+        <a href="#" class="text-warning"><i class="fa-brands fa-facebook fa-lg"></i></a>
+      </div>
+    </div>
+  </footer>
+
+   <!-- JS -->
+    
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      new Swiper('.sponsor-slider', {
+        slidesPerView: 4,
+        spaceBetween: 40,
+        loop: true,
+        autoplay: { delay: 2000, disableOnInteraction: false },
+        speed: 1200,
+        breakpoints: {
+          320: { slidesPerView: 2, spaceBetween: 20 },
+          768: { slidesPerView: 3, spaceBetween: 30 },
+          992: { slidesPerView: 4, spaceBetween: 40 }
+        }
+      });
+
       const sections = document.querySelectorAll("section[id]");
       const navLinks = document.querySelectorAll(".nav-link");
-
       window.addEventListener("scroll", () => {
         let scrollY = window.pageYOffset;
         sections.forEach(section => {
@@ -392,6 +371,5 @@
           }
         });
       });
-    </script>
-  </body>
-</html>
+    });
+  </script>

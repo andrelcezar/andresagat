@@ -1,60 +1,308 @@
-/* Styles for André Sagat Muaythai GYM */
-:root{
-  --accent:#FFD43B;
-  --bg:#000000;
+/* ==============================
+   André Sagat Muaythai GYM
+   ============================== */
+
+:root {
+  --accent: #FFD43B;
+  --bg: #000000;
   --muted: #222;
 }
 
-*{box-sizing:border-box}
-body{background:var(--bg);color:#f8f9fa;font-family:'Montserrat',sans-serif;margin:0;padding:0;}
-
-.navbar {background:#000;}
-.hero{min-height:100vh;background:url('assets/hero.jpg') center/cover no-repeat;position:relative;display:flex;align-items:center;}
-.hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.6),rgba(0,0,0,0.6));}
-.hero-content{position:relative;z-index:2;padding:4rem 1rem;}
-.section-title{font-family:'Oswald',sans-serif;color:var(--accent);font-size:2rem;margin-bottom:1rem;}
-.about-photo{max-height:360px;object-fit:cover;}
-.modal-card img{height:240px;object-fit:cover;}
-.card{border-radius:12px;}
-.partner-item img{max-height:110px;object-fit:contain;}
-footer{border-top:1px solid rgba(255,255,255,0.03);}
-
-/* WhatsApp float */
-.whatsapp-float{position:fixed;right:20px;bottom:20px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,0.4);text-decoration:none;z-index:999;}
-.whatsapp-float i{font-size:22px;}
-
-/* responsive tweaks */
-@media (max-width:768px){
-  .hero .display-3{font-size:2.2rem;}
-  .about-photo{max-height:240px;}
+* {
+  box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  background: var(--bg);
+  color: #f8f9fa;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==============================
+   Navbar
+   ============================== */
+.navbar {
+  background: #000;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar .nav-link {
+  color: #fff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: var(--accent) !important;
+}
+
+/* ==============================
+   Hero Section
+   ============================== */
+.hero {
+  min-height: 100vh;
+  background: url('assets/hero.jpg') center/cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 6rem 1rem 2rem;
+}
+
+.hero img {
+  max-height: 180px;
+  width: auto;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #f8f9fa;
+}
+
+/* ==============================
+   Section Titles
+   ============================== */
+.section-title {
+  font-family: 'Oswald', sans-serif;
+  color: var(--accent);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+section[id] {
+  scroll-margin-top: 90px;
+}
+
+/* ==============================
+   Sobre
+   ============================== */
+.about-photo {
+  max-height: 360px;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+/* ==============================
+   Modalidades
+   ============================== */
+#modalities {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0));
+     
+}
+
+#modalities .modal-card {
+  background: rgba(0, 0, 0, 0.8); /* fundo mais escuro para contraste */
+  border: 1px solid rgba(255, 212, 59, 0.15);
+}
+
+#modalities .modal-card .card-body {
+  color: #f1f1f1 !important; /* força texto claro */
+}
+
+#modalities .modal-card .card-title {
+  color: var(--accent) !important; /* amarelo do tema */
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+#modalities .modal-card .card-text {
+  color: #e5e5e5 !important; /* cinza claro */
+  line-height: 1.6;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+#modalities .modal-card {
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+#modalities .modal-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(255, 212, 59, 0.3);
+}
+
+#modalities .card-img-top,
+#modalities .modal-card img {
+  height: 220px;
+  object-fit: cover;
+}
+
+/* ==============================
+   Pricing (Planos)
+   ============================== */
 #pricing .card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 1rem;
-  }
-  #pricing .card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 0 25px rgba(255, 193, 7, 0.3);
-  }
-  #pricing .btn {
-    border-radius: 50px;
-    transition: all 0.3s ease;
-  }
-  #pricing .btn:hover {
-    background-color: #ffc107;
-    color: #000;
-    transform: scale(1.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 1rem;
+}
 
-    .grayscale-hover {
-    filter: grayscale(100%);
-    transition: all 0.3s ease;
-  }
-  .grayscale-hover:hover {
-    filter: grayscale(0%);
-    transform: scale(1.05);
+#pricing .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 25px rgba(255, 193, 7, 0.3);
+}
+
+#pricing .btn {
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+#pricing .btn:hover {
+  background-color: #ffc107;
+  color: #000;
+  transform: scale(1.05);
+}
+
+/* ==============================
+   Grayscale Hover (NOVO - adicionado do seu código)
+   ============================== */
+.grayscale-hover {
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
+}
+
+.grayscale-hover:hover {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+/* ==============================
+   Eventos
+   ============================== */
+#eventos .card {
+  border: 1px solid rgba(255, 212, 59, 0.2);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  background: #111;
+}
+
+#eventos .card img {
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+#eventos .card:hover img {
+  transform: scale(1.08);
+}
+
+#eventos .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 20px rgba(255, 212, 59, 0.3);
+}
+
+/* ==============================
+   Patrocinadores
+   ============================== */
+#patrocinadores {
+  background-color: var(--muted);
+}
+
+#patrocinadores img,
+.partner-item img {
+  max-height: 110px;
+  margin: 0 auto;
+  opacity: 0.9;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+#patrocinadores img:hover,
+.partner-item img:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.sponsor-slider {
+  padding: 10px 0;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-wrapper {
+  align-items: center;
+}
+
+/* ==============================
+   WhatsApp Float
+   ============================== */
+.whatsapp-float {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: #25D366;
+  color: #fff;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  text-decoration: none;
+  z-index: 999;
+}
+
+.whatsapp-float i {
+  font-size: 22px;
+}
+
+/* ==============================
+   Footer
+   ============================== */
+footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  padding-top: 2rem;
+  background: #000;
+}
+
+/* ==============================
+   Responsividade
+   ============================== */
+@media (max-width: 768px) {
+  .hero .display-3 {
+    font-size: 2.2rem;
   }
 
-  
+  .about-photo {
+    max-height: 240px;
+  }
 
+  #patrocinadores .swiper-slide {
+    height: 100px;
+  }
+
+  #modalities .card-img-top,
+  #modalities .modal-card img {
+    height: 180px;
+  }
 }

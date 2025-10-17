@@ -6,3 +6,4 @@ document.querySelectorAll('.nav-link').forEach(a=>{
     if(target) target.scrollIntoView({behavior:'smooth'});
   });
 });
+
