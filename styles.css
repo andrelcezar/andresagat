@@ -193,28 +193,74 @@ section[id] {
 /* ==============================
    Eventos
    ============================== */
-#eventos .card {
-  border: 1px solid rgba(255, 212, 59, 0.2);
-  border-radius: 1rem;
-  transition: all 0.3s ease;
-  overflow: hidden;
-  background: #111;
+#events {
+  background-color: #1d1f23; /* igual ao tema original */
 }
 
-#eventos .card img {
-  height: 220px;
+#events .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#events .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(255, 193, 7, 0.2);
+}
+
+#events .card img {
   object-fit: cover;
-  transition: transform 0.4s ease;
+  height: 200px;
 }
 
-#eventos .card:hover img {
-  transform: scale(1.08);
+#events .carousel-indicators [data-bs-target] {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 5px;
+  background-color: rgba(255, 193, 7, 0.4);
 }
 
-#eventos .card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 20px rgba(255, 212, 59, 0.3);
+#events .carousel-indicators .active {
+  background-color: #ffc107;
 }
+
+ #eventosCarousel {
+    overflow: visible;
+  }
+
+  /* Botões fora do slide */
+  .custom-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+
+  .carousel-control-prev.custom-carousel-btn {
+    left: -60px; /* desloca o botão para fora da área */
+  }
+
+  .carousel-control-next.custom-carousel-btn {
+    right: -60px;
+  }
+
+  /* Ajuste visual dos ícones */
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    width: 40px;
+    height: 40px;
+    background-size: 60%, auto;
+    opacity: 0.9;
+  }
+
+  .carousel-control-prev-icon:hover,
+  .carousel-control-next-icon:hover {
+    opacity: 1;
+    background-color: #ffc107;
+  }
+
+/* novo 
+
+
 
 /* ==============================
    Patrocinadores
@@ -305,4 +351,23 @@ footer {
   #modalities .modal-card img {
     height: 180px;
   }
+
+  #asg-controls {
+  display: flex;
+  gap: 6px;
+}
+
+#asg-controls button {
+  background: transparent;
+  color: var(--asg-btn-text);
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+#asg-controls button:hover {
+  opacity: 0.7;
+}
+
 }
