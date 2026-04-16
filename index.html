@@ -202,12 +202,22 @@
   /* EQUIPE */
   #team { background: var(--dark); }
   .team-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; }
-  .team-card { position: relative; overflow: hidden; border-radius: 4px; cursor: pointer; }
-  .team-card img { width: 100%; height: 260px; object-fit: cover; object-position: top; filter: grayscale(30%); transition: all 0.4s; }
-  .team-card:hover img { filter: grayscale(0%); transform: scale(1.04); }
-  .team-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.70) 40%, transparent 70%); padding: 1.5rem; display: flex; flex-direction: column; justify-content: flex-end; }
-  .team-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: #fff; letter-spacing: 1px; margin-bottom: 2px; }
-  .team-role { font-size: 0.7rem; color: var(--gold); font-family: 'Oswald', sans-serif; letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 5px; }
+  .team-card { position: relative; border-radius: 6px; cursor: pointer; border: 1px solid rgba(212,160,23,0.15); background: var(--dark2); transition: all 0.35s; overflow: hidden; }
+  .team-card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+  .tc-photo { position: relative; overflow: hidden; height: 300px; }
+  .tc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; filter: grayscale(20%); transition: all 0.45s; display: block; }
+  .team-card:hover .tc-photo img { filter: grayscale(0%) brightness(1.05); transform: scale(1.05); }
+  .tc-photo::after { content:''; position:absolute; inset:0; background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 50%); pointer-events:none; }
+  .tc-avatar { height: 300px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: linear-gradient(135deg, #0f0f0f 0%, #1c1a10 50%, #0f0f0f 100%); }
+  .tc-avatar::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(212,160,23,0.07) 0%, transparent 70%); }
+  .tc-avatar::after { content:''; position:absolute; inset:0; background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, transparent 50%); pointer-events:none; }
+  .tc-avatar-ring { width: 120px; height: 120px; border-radius: 50%; border: 2px solid rgba(212,160,23,0.5); display: flex; align-items: center; justify-content: center; background: rgba(212,160,23,0.06); position: relative; z-index: 2; transition: all 0.35s; }
+  .team-card:hover .tc-avatar-ring { border-color: var(--gold); background: rgba(212,160,23,0.15); box-shadow: 0 0 30px rgba(212,160,23,0.2); }
+  .tc-avatar-ring span { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--gold); letter-spacing: 2px; line-height: 1; }
+  .tc-info { padding: 1rem 1.25rem 1.25rem; border-top: 2px solid rgba(212,160,23,0.1); transition: border-color 0.35s; }
+  .team-card:hover .tc-info { border-top-color: var(--gold); }
+  .team-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; color: #fff; letter-spacing: 1.5px; margin-bottom: 5px; }
+  .team-role { font-size: 0.68rem; color: var(--gold); font-family: 'Oswald', sans-serif; letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 5px; }
 
   /* EVENTOS */
   #eventos { background: var(--black); }
@@ -362,9 +372,9 @@
         <div class="hero-logo-ring"></div>
         <img src="https://andrelcezar.github.io/andresagat/assets/logo01.png" alt="Logo André Sagat" class="hero-logo-img">
       </div>
-      <div class="hero-flags" hidden>
-        <img src="https://flagcdn.com/w80/br.png" alt="Brasil" hidden>
-        <img src="https://flagcdn.com/w80/th.png" alt="Tailândia" hidden>
+      <div class="hero-flags">
+        <img src="https://flagcdn.com/w80/br.png" alt="Brasil">
+        <img src="https://flagcdn.com/w80/th.png" alt="Tailândia">
       </div>
     </div>
   </div>
@@ -604,41 +614,62 @@
       <div class="section-divider"></div>
     </div>
     <div class="team-grid">
+
+      <!-- André Sagat -->
       <div class="team-card fade-in">
-        <img src="https://andrelcezar.github.io/andresagat/assets/andre10.png" alt="André Sagat">
-        <div class="team-overlay">
+        <div class="tc-photo">
+          <img src="https://andrelcezar.github.io/andresagat/assets/andre10.png" alt="André Sagat">
+        </div>
+        <div class="tc-info">
           <div class="team-name">ANDRÉ SAGAT</div>
           <div class="team-role"><i class="fa-solid fa-crown"></i> Fundador &amp; Instrutor</div>
         </div>
       </div>
+
+      <!-- Renata -->
       <div class="team-card fade-in">
-        <img src="https://andrelcezar.github.io/andresagat/assets/renata.team2.png" alt="Renata" style="object-position: top: top;;">
-        <div class="team-overlay">
+        <div class="tc-photo">
+          <img src="https://andrelcezar.github.io/andresagat/assets/renata_team2.png" alt="Renata" style="object-position: top center;">
+        </div>
+        <div class="tc-info">
           <div class="team-name">RENATA</div>
           <div class="team-role"><i class="fa-solid fa-shield-halved"></i> Instrutora</div>
         </div>
       </div>
+
+      <!-- Luciano -->
       <div class="team-card fade-in">
-        <img src="https://andrelcezar.github.io/andresagat/assets/luciano.png" alt="Luciano">
-        <div class="team-overlay">
+        <div class="tc-avatar">
+          <div class="tc-avatar-ring"><span>LU</span></div>
+        </div>
+        <div class="tc-info">
           <div class="team-name">LUCIANO</div>
           <div class="team-role"><i class="fa-solid fa-bolt"></i> Instrutor</div>
         </div>
       </div>
+
+      <!-- Brian -->
       <div class="team-card fade-in">
-        <img src="https://andrelcezar.github.io/andresagat/assets/brian.png" alt="Brian">
-        <div class="team-overlay">
+        <div class="tc-avatar">
+          <div class="tc-avatar-ring"><span>BR</span></div>
+        </div>
+        <div class="tc-info">
           <div class="team-name">BRIAN</div>
           <div class="team-role"><i class="fa-solid fa-fire"></i> Instrutor</div>
         </div>
       </div>
+
+      <!-- Cristiano -->
       <div class="team-card fade-in">
-        <img src="https://andrelcezar.github.io/andresagat/assets/cristiano.png" alt="Cristiano">
-        <div class="team-overlay">
+        <div class="tc-avatar">
+          <div class="tc-avatar-ring"><span>CR</span></div>
+        </div>
+        <div class="tc-info">
           <div class="team-name">CRISTIANO</div>
           <div class="team-role"><i class="fa-solid fa-star"></i> Instrutor</div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
