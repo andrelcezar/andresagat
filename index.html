@@ -444,7 +444,6 @@
     <li><a href="#pricing">Planos</a></li>
     <li><a href="#team">Equipe</a></li>
     <li><a href="#eventos">Eventos</a></li>
-    <li><a href="blog.html"><i class="fa-solid fa-rss"></i> Blog</a></li>
     <li><a href="#matricula" class="nav-cta"><i class="fa-solid fa-dumbbell"></i> Matricule-se</a></li>
   </ul>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()">
@@ -470,7 +469,7 @@
       <p class="hero-subtitle">Muay Thai &nbsp;·&nbsp; São Paulo</p>
       <p class="hero-desc">Treino para corpo e mente. Disciplina, técnica e superação. Formação de campeões desde o primeiro treino — para todos os níveis.</p>
       <div class="hero-actions">
-        <a href="#pricing" class="btn-primary"><i class="fa-solid fa-star"></i> Ver Planos</a>
+        <a href="#matricula" class="btn-primary"><i class="fa-solid fa-dumbbell"></i> Matricule-se Grátis</a>
         <a href="#modalities" class="btn-secondary"><i class="fa-solid fa-person-running"></i> Modalidades</a>
       </div>
       <div class="hero-stats">
@@ -715,11 +714,11 @@
       <p>SONHOS DETERMINAM O QUE VOCÊ QUER.</p>
       <span>AÇÃO determina o que VOCÊ CONQUISTA!</span>
       <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-        <a href="https://wa.me/5511966058202?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20planos." target="_blank" class="btn-primary">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp Agora
+        <a href="#matricula" class="btn-primary">
+          <i class="fa-solid fa-dumbbell"></i> Fazer Matrícula
         </a>
-        <a href="#contact" class="btn-secondary">
-          <i class="fa-solid fa-location-dot"></i> Ver Localização
+        <a href="https://wa.me/5511966058202?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20planos." target="_blank" class="btn-secondary">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
         </a>
       </div>
     </div>
@@ -839,27 +838,6 @@
 </section>
  
 <!-- EVENTOS -->
-<!-- NOVIDADES (from blog) -->
-<section id="novidades" style="display:none; padding:6rem 2rem; background:var(--dark);">
-  <div class="container">
-    <div class="section-header" style="text-align:center;margin-bottom:3rem;">
-      <span style="font-family:'Oswald',sans-serif;font-size:0.75rem;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:0.75rem;display:block;">
-        <i class="fa-solid fa-bell"></i> &nbsp;Direto do Blog
-      </span>
-      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);color:#fff;line-height:1;">
-        ÚLTIMAS <span style="color:var(--gold);">NOVIDADES</span>
-      </h2>
-      <div style="width:60px;height:3px;background:linear-gradient(90deg,var(--gold),transparent);margin:1.5rem auto 0;"></div>
-    </div>
-    <div id="novidades-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;"></div>
-    <div style="text-align:center;margin-top:2.5rem;">
-      <a href="blog.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border:1px solid rgba(212,160,23,0.35);color:var(--gold);font-family:'Oswald',sans-serif;font-size:0.85rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all 0.3s;border-radius:2px;" onmouseover="this.style.background='rgba(212,160,23,0.08)'" onmouseout="this.style.background='transparent'">
-        <i class="fa-solid fa-rss"></i> Ver todas as novidades
-      </a>
-    </div>
-  </div>
-</section>
-
 <section id="eventos">
   <div class="container">
     <div class="section-header">
@@ -1180,73 +1158,6 @@
   <i class="fa-solid fa-chevron-up"></i>
 </button>
  
-<script>
-  function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('open');
-  }
-  window.addEventListener('scroll', () => {
-    document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
-    document.getElementById('navbar').style.borderBottomColor =
-      window.scrollY > 10 ? 'rgba(212,160,23,0.35)' : 'rgba(212,160,23,0.2)';
-  });
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-</script>
-<script>
-// ── Sync posts from blog ──────────────────────────────────
-(function syncFromBlog() {
-  const STORAGE_KEY = 'sagat_blog_posts';
-  function getPosts() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; }
-  }
-  function fmtDate(iso) {
-    if (!iso) return '';
-    const [y,m,d] = iso.split('-');
-    const months=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-    return `${d} de ${months[parseInt(m)-1]} de ${y}`;
-  }
-
-  const posts = getPosts();
-  const eventos   = posts.filter(p => p.type === 'evento');
-  const novidades = posts.filter(p => p.type === 'novidade');
-
-  // ── Inject eventos into #eventos slider ───────────────
-  if (eventos.length > 0) {
-    const slider = document.querySelector('.eventos-slider');
-    if (slider) {
-      const blogCards = eventos.slice(0, 6).map(p => {
-        const imgHtml = p.image
-          ? `<img src="${p.image}" alt="${p.title}" class="evento-img" style="height:${p.isFight?'280':'180'}px;object-fit:cover;object-position:center top;filter:brightness(0.88);">`
-          : `<div style="height:180px;background:linear-gradient(135deg,#111 0%,#1c1a10 50%,#111 100%);display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-fist-raised" style="font-size:2.5rem;color:rgba(212,160,23,0.2);"></i></div>`;
-        const badgeTxt = p.isFight ? 'Fight Card' : 'Evento';
-        const badgeIcon = p.isFight ? 'fa-trophy' : 'fa-calendar-star';
-        const tagsHtml = p.tags && p.tags.length
-          ? `<div class="evento-tags">${p.tags.map(t=>`<span class="evento-tag"><i class="fa-solid fa-hashtag"></i>${t}</span>`).join('')}</div>` : '';
-        const localHtml = p.local ? `<div class="evento-local"><i class="fa-solid fa-location-dot"></i> ${p.local}</div>` : '';
-        const dateStr = p.eventDate ? fmtDate(p.eventDate) : fmtDate(p.createdAt);
-        return `
-          <div class="evento-card ${p.isFight?'fight':''}" style="position:relative;">
-            <span class="evento-badge"><i class="fa-solid ${badgeIcon}"></i> ${badgeTxt}</span>
-            ${imgHtml}
-            <div class="evento-content">
-              <div class="evento-date"><i class="fa-solid fa-calendar"></i> ${dateStr}</div>
-              <div class="evento-title">${p.title}</div>
-              ${localHtml}
-              ${tagsHtml}
-            </div>
-          </div>`;
-      }).join('');
-      // prepend blog cards before existing static cards
-      slider.insertAdjacentHTML('afterbegin', blogCards);
-    }
-  }
-
-
-
-
-
 <!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
@@ -1371,32 +1282,6 @@
     el.animate([{transform:'translateX(-4px)'},{transform:'translateX(4px)'},{transform:'translateX(0)'}],{duration:300,iterations:2});
     setTimeout(() => el.style.borderColor = '', 2000);
   }
-  
-  // ── Inject novidades ──────────────────────────────────
-  if (novidades.length > 0) {
-    const sec = document.getElementById('novidades');
-    const grid = document.getElementById('novidades-grid');
-    if (sec && grid) {
-      sec.style.display = '';
-      grid.innerHTML = novidades.slice(0, 3).map(p => {
-        const imgHtml = p.image
-          ? `<img src="${p.image}" alt="${p.title}" style="width:100%;height:180px;object-fit:cover;filter:brightness(0.8);display:block;transition:all 0.4s;">`
-          : `<div style="height:180px;background:linear-gradient(135deg,#111 0%,#1c1a10 50%,#111 100%);display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-bell" style="font-size:2.5rem;color:rgba(212,160,23,0.2);"></i></div>`;
-        return `
-          <div style="background:var(--dark2);border:1px solid rgba(212,160,23,0.15);border-radius:4px;overflow:hidden;transition:all 0.3s;cursor:pointer;" onmouseover="this.style.borderColor='rgba(212,160,23,0.45)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(212,160,23,0.15)';this.style.transform=''">
-            <div style="overflow:hidden;">${imgHtml}</div>
-            <div style="padding:1.25rem 1.5rem 1.5rem;">
-              <div style="font-family:'Oswald',sans-serif;font-size:0.68rem;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:0.5rem;display:flex;align-items:center;gap:6px;">
-                <i class="fa-solid fa-bell"></i> ${fmtDate(p.createdAt)}
-              </div>
-              <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:#fff;letter-spacing:1px;margin-bottom:0.5rem;">${p.title}</div>
-              ${p.excerpt ? `<div style="font-size:0.83rem;color:var(--text-muted);line-height:1.6;">${p.excerpt}</div>` : ''}
-            </div>
-          </div>`;
-      }).join('');
-    }
-  }
-})();
 </script>
 </body>
 </html>
