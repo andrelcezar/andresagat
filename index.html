@@ -838,6 +838,179 @@
 </section>
  
 <!-- CONTACT -->
+<!-- MATRÍCULA -->
+<section id="matricula">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label"><i class="fa-solid fa-dumbbell"></i> &nbsp;Inscrição</span>
+      <h2 class="section-title">FAÇA SUA <span class="gold">MATRÍCULA</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="matricula-grid">
+
+      <!-- LEFT: Info -->
+      <div class="fade-in">
+        <h3 class="mat-info-title">COMECE HOJE A SUA JORNADA</h3>
+        <p class="mat-info-desc">Preencha o formulário ao lado e nossa equipe entrará em contato em até 24h. Você também pode começar com uma <strong style="color:var(--gold)">aula experimental gratuita</strong> — sem compromisso.</p>
+
+        <div class="mat-benefits">
+          <div class="mat-benefit">
+            <div class="mat-benefit-icon"><i class="fa-solid fa-person-running"></i></div>
+            <div class="mat-benefit-text">
+              <strong>Aula Experimental Grátis</strong>
+              <span>Venha conhecer a academia sem pagar nada</span>
+            </div>
+          </div>
+          <div class="mat-benefit">
+            <div class="mat-benefit-icon"><i class="fa-solid fa-users"></i></div>
+            <div class="mat-benefit-text">
+              <strong>Turmas para Todos os Níveis</strong>
+              <span>Iniciantes, intermediários e competidores</span>
+            </div>
+          </div>
+          <div class="mat-benefit">
+            <div class="mat-benefit-icon"><i class="fa-solid fa-child-reaching"></i></div>
+            <div class="mat-benefit-text">
+              <strong>Muay Thai Kids</strong>
+              <span>Para crianças de 8 a 12 anos</span>
+            </div>
+          </div>
+          <div class="mat-benefit">
+            <div class="mat-benefit-icon"><i class="fa-solid fa-calendar-check"></i></div>
+            <div class="mat-benefit-text">
+              <strong>Horários Flexíveis</strong>
+              <span>Manhã, tarde e noite — de seg. a sábado</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mat-nextfit">
+          <div class="mat-nextfit-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <div>
+            <strong>App Nextfit</strong>
+            <span>Após a matrícula, você receberá um e-mail com o link para baixar o app e gerenciar sua conta na academia.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Form -->
+      <div class="mat-form-wrap fade-in">
+        <div class="mat-form-header">
+          <h3><i class="fa-solid fa-file-signature"></i> Formulário de Matrícula</h3>
+          <p>Preencha os dados abaixo — responderemos em até 24h</p>
+        </div>
+
+        <!-- Form body -->
+        <div id="matFormBody">
+          <div class="mat-form-body">
+            <div class="mf-row">
+              <div class="mf-group">
+                <label class="mf-label"><i class="fa-solid fa-user"></i> Nome</label>
+                <input type="text" class="mf-input" id="matNome" placeholder="Seu nome completo" required>
+              </div>
+              <div class="mf-group">
+                <label class="mf-label"><i class="fa-solid fa-calendar"></i> Idade</label>
+                <input type="number" class="mf-input" id="matIdade" placeholder="Ex: 25" min="5" max="99">
+              </div>
+            </div>
+
+            <div class="mf-group">
+              <label class="mf-label"><i class="fa-solid fa-envelope"></i> E-mail</label>
+              <input type="email" class="mf-input" id="matEmail" placeholder="seu@email.com" required>
+            </div>
+
+            <div class="mf-group">
+              <label class="mf-label"><i class="fa-brands fa-whatsapp"></i> WhatsApp</label>
+              <input type="tel" class="mf-input" id="matWhatsapp" placeholder="(11) 9 0000-0000" required>
+            </div>
+
+            <div class="mf-group">
+              <label class="mf-label"><i class="fa-solid fa-tag"></i> Escolha seu plano</label>
+              <div class="plan-options">
+
+                <label class="plan-option">
+                  <input type="radio" name="plano" value="Aula Experimental Gratuita" checked>
+                  <div class="plan-option-info">
+                    <div class="plan-option-name">Aula Experimental</div>
+                    <div class="plan-option-desc">Experimente sem compromisso</div>
+                  </div>
+                  <span class="plan-option-price free"><i class="fa-solid fa-gift"></i> GRÁTIS</span>
+                </label>
+
+                <label class="plan-option">
+                  <input type="radio" name="plano" value="Muay Thai Adulto — 3x por semana — R$ 110">
+                  <div class="plan-option-info">
+                    <div class="plan-option-name">Muay Thai Adulto — 3×/sem</div>
+                    <div class="plan-option-desc">Terças, quintas e sábados</div>
+                  </div>
+                  <span class="plan-option-price">R$ 110</span>
+                </label>
+
+                <label class="plan-option">
+                  <input type="radio" name="plano" value="Muay Thai Adulto — Segunda a Sexta — R$ 130">
+                  <div class="plan-option-info">
+                    <div class="plan-option-name">Muay Thai Adulto — Seg a Sex</div>
+                    <div class="plan-option-desc">Treinos diários de segunda a sexta</div>
+                  </div>
+                  <span class="plan-option-price">R$ 130</span>
+                </label>
+
+                <label class="plan-option">
+                  <input type="radio" name="plano" value="Muay Thai Kids — R$ 110">
+                  <div class="plan-option-info">
+                    <div class="plan-option-name">Muay Thai Kids</div>
+                    <div class="plan-option-desc">Para crianças de 8 a 12 anos</div>
+                  </div>
+                  <span class="plan-option-price">R$ 110</span>
+                </label>
+
+                <label class="plan-option">
+                  <input type="radio" name="plano" value="Treino Funcional — Seg. e Sex. — R$ 60">
+                  <div class="plan-option-info">
+                    <div class="plan-option-name">Treino Funcional</div>
+                    <div class="plan-option-desc">Segundas e Sextas, 17h30–18h30</div>
+                  </div>
+                  <span class="plan-option-price">R$ 60</span>
+                </label>
+
+              </div>
+            </div>
+
+            <div class="mf-group">
+              <label class="mf-label"><i class="fa-solid fa-comment"></i> Mensagem <small style="color:var(--text-muted);font-size:.65rem;letter-spacing:0;text-transform:none">(opcional)</small></label>
+              <textarea class="mf-textarea" id="matMsg" placeholder="Dúvidas, horário preferido, objetivo..."></textarea>
+            </div>
+          </div>
+
+          <div class="mat-form-footer">
+            <button class="mat-submit" id="matSubmitBtn" onclick="submitMatricula()">
+              <div class="spinner" id="matSpinner"></div>
+              <i class="fa-solid fa-paper-plane" id="matBtnIcon"></i>
+              <span id="matBtnText">Enviar Matrícula</span>
+            </button>
+            <p class="mat-privacy"><i class="fa-solid fa-lock"></i> Seus dados são usados apenas para contato</p>
+          </div>
+        </div>
+
+        <!-- Success state -->
+        <div class="mat-success" id="matSuccess">
+          <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+          <h4>MATRÍCULA ENVIADA!</h4>
+          <p>Recebemos seu cadastro, <strong id="successName"></strong>! Em breve nossa equipe entrará em contato pelo WhatsApp ou e-mail.</p>
+          <div class="nextfit-cta">
+            <i class="fa-solid fa-mobile-screen"></i>
+            <div>
+              <strong>Baixe o app Nextfit</strong>
+              <span>Verifique seu e-mail — enviamos o link de acesso ao app</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <section id="contact">
   <div class="container">
     <div class="section-header">
@@ -988,6 +1161,135 @@
     }
   }
 
+
+
+
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // ── EmailJS init ──────────────────────────────────────
+  // INSTRUÇÕES DE CONFIGURAÇÃO:
+  // 1. Acesse https://www.emailjs.com e crie uma conta gratuita
+  // 2. Crie um Email Service conectado ao Gmail (studiodemuaythai@gmail.com)
+  // 3. Crie dois Email Templates:
+  //    - template_academia : notificação para a academia (to: studiodemuaythai@gmail.com)
+  //    - template_aluno    : boas-vindas + instrução Nextfit para o aluno
+  // 4. Substitua os valores abaixo pelos seus IDs reais:
+  const EJS_PUBLIC_KEY   = 'YOUR_PUBLIC_KEY';   // Account > API Keys
+  const EJS_SERVICE_ID   = 'YOUR_SERVICE_ID';   // Email Services
+  const EJS_TMPL_ACADEMIA = 'template_academia'; // Email Templates
+  const EJS_TMPL_ALUNO   = 'template_aluno';    // Email Templates
+
+  emailjs.init({ publicKey: EJS_PUBLIC_KEY });
+
+  // ── Nav / Scroll ──────────────────────────────────────
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  window.addEventListener('scroll', () => {
+    document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
+    document.getElementById('navbar').style.borderBottomColor =
+      window.scrollY > 10 ? 'rgba(212,160,23,0.35)' : 'rgba(212,160,23,0.2)';
+  });
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ── WhatsApp mask ─────────────────────────────────────
+  document.getElementById('matWhatsapp').addEventListener('input', function(e) {
+    let v = e.target.value.replace(/\D/g,'');
+    if (v.length > 11) v = v.slice(0,11);
+    if (v.length > 7) v = `(${v.slice(0,2)}) ${v.slice(2,3)} ${v.slice(3,7)}-${v.slice(7)}`;
+    else if (v.length > 2) v = `(${v.slice(0,2)}) ${v.slice(2)}`;
+    e.target.value = v;
+  });
+
+  // ── Submit ────────────────────────────────────────────
+  async function submitMatricula() {
+    const nome     = document.getElementById('matNome').value.trim();
+    const email    = document.getElementById('matEmail').value.trim();
+    const whatsapp = document.getElementById('matWhatsapp').value.trim();
+    const idade    = document.getElementById('matIdade').value.trim();
+    const msg      = document.getElementById('matMsg').value.trim();
+    const plano    = document.querySelector('input[name="plano"]:checked')?.value || '';
+    const isExperimental = plano.includes('Experimental');
+
+    // Validation
+    if (!nome)  { shakeField('matNome');    return; }
+    if (!email || !email.includes('@')) { shakeField('matEmail'); return; }
+    if (!whatsapp) { shakeField('matWhatsapp'); return; }
+
+    // Loading state
+    setLoading(true);
+
+    const commonParams = { nome, email, whatsapp, idade, plano, mensagem: msg || '—' };
+
+    try {
+      // Email 1: notificação para a academia
+      await emailjs.send(EJS_SERVICE_ID, EJS_TMPL_ACADEMIA, {
+        ...commonParams,
+        to_email: 'studiodemuaythai@gmail.com',
+        reply_to: email,
+        subject:  `Nova Matrícula: ${nome} — ${plano}`,
+      });
+
+      // Email 2: boas-vindas para o aluno (só se não for aula experimental)
+      // Para aula experimental também enviamos, mas com texto diferente (controlado no template)
+      await emailjs.send(EJS_SERVICE_ID, EJS_TMPL_ALUNO, {
+        ...commonParams,
+        to_email: email,
+        is_experimental: isExperimental ? 'sim' : 'não',
+        subject: isExperimental
+          ? 'Sua aula experimental foi agendada! — André Sagat GYM'
+          : 'Bem-vindo(a) à André Sagat Muaythai GYM! 🦁',
+        nextfit_url: 'https://www.nextfit.com.br',
+        nextfit_ios: 'https://apps.apple.com/br/app/nextfit/id1449761779',
+        nextfit_android: 'https://play.google.com/store/apps/details?id=br.com.nextfit',
+        academia_whatsapp: '(11) 96605-8202',
+        academia_endereco: 'Av. Cangaíba, 4530 — São Paulo, SP',
+      });
+
+      // Show success
+      document.getElementById('successName').textContent = nome.split(' ')[0];
+      document.getElementById('matFormBody').style.display = 'none';
+      const s = document.getElementById('matSuccess');
+      s.style.display = 'flex';
+      s.style.flexDirection = 'column';
+
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      // Fallback: open mailto
+      const body = encodeURIComponent(
+        `Nome: ${nome}\nIdade: ${idade}\nWhatsApp: ${whatsapp}\nPlano: ${plano}\nMensagem: ${msg}`
+      );
+      window.location.href = `mailto:studiodemuaythai@gmail.com?subject=Nova%20Matr%C3%ADcula%3A%20${encodeURIComponent(nome)}&body=${body}`;
+      alert('Redirecionando para seu e-mail. Por favor, configure o EmailJS para envio automático.');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function setLoading(on) {
+    const btn = document.getElementById('matSubmitBtn');
+    const ico = document.getElementById('matBtnIcon');
+    const txt = document.getElementById('matBtnText');
+    const sp  = document.getElementById('matSpinner');
+    btn.disabled = on;
+    ico.style.display = on ? 'none' : '';
+    sp.style.display  = on ? 'block' : 'none';
+    txt.textContent   = on ? 'Enviando...' : 'Enviar Matrícula';
+  }
+
+  function shakeField(id) {
+    const el = document.getElementById(id);
+    el.style.borderColor = '#e74c3c';
+    el.focus();
+    el.animate([{transform:'translateX(-4px)'},{transform:'translateX(4px)'},{transform:'translateX(0)'}],{duration:300,iterations:2});
+    setTimeout(() => el.style.borderColor = '', 2000);
+  }
+  
   // ── Inject novidades ──────────────────────────────────
   if (novidades.length > 0) {
     const sec = document.getElementById('novidades');
