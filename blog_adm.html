@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog & Novidades — André Sagat Muaythai GYM</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --gold: #D4A017; --gold-light: #F0C040; --gold-dark: #9A7010;
+    --black: #0a0a0a; --dark: #111111; --dark2: #1a1a1a; --dark3: #222222;
+    --text: #e8e0d0; --text-muted: #888880;
+    --green: #2ecc71; --red: #e74c3c;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--black); color:var(--text); font-family:'Inter',sans-serif; overflow-x:hidden; }
+  ::-webkit-scrollbar { width:6px; }
+  ::-webkit-scrollbar-track { background:var(--black); }
+  ::-webkit-scrollbar-thumb { background:var(--gold-dark); border-radius:3px; }
+
+  /* ── NAV ── */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    background:rgba(10,10,10,0.96); backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(212,160,23,0.2);
+    padding:0 2rem; height:70px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .nav-logo img { height:44px; filter:drop-shadow(0 0 8px rgba(212,160,23,0.4)); }
+  .nav-brand { font-family:'Bebas Neue',sans-serif; font-size:1.4rem; color:var(--gold); letter-spacing:2px; line-height:1.1; }
+  .nav-brand span { display:block; font-size:0.7rem; letter-spacing:4px; color:var(--text-muted); font-family:'Oswald',sans-serif; font-weight:300; }
+  .nav-links { display:flex; gap:1.8rem; list-style:none; align-items:center; }
+  .nav-links a { color:var(--text-muted); text-decoration:none; font-family:'Oswald',sans-serif; font-weight:400; font-size:0.82rem; letter-spacing:2px; text-transform:uppercase; transition:color 0.3s; }
+  .nav-links a:hover, .nav-links a.active { color:var(--gold); }
+  .nav-cta { background:var(--gold) !important; color:var(--black) !important; padding:8px 20px; border-radius:2px; font-weight:600 !important; display:inline-flex !important; align-items:center; gap:6px; }
+  .nav-cta:hover { background:var(--gold-light) !important; }
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
+  .hamburger span { width:24px; height:2px; background:var(--gold); }
+
+  /* ── HERO BLOG ── */
+  .blog-hero {
+    padding: 140px 2rem 60px;
+    background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(212,160,23,0.07) 0%, transparent 70%),
+                linear-gradient(180deg, #0a0a0a 0%, #111 100%);
+    text-align: center;
+    border-bottom: 1px solid rgba(212,160,23,0.15);
+  }
+  .blog-hero-label { font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:4px; color:var(--gold); text-transform:uppercase; display:block; margin-bottom:0.75rem; }
+  .blog-hero-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.8rem,6vw,5rem); color:#fff; line-height:0.95; margin-bottom:1rem; }
+  .blog-hero-title .gold { color:var(--gold); }
+  .blog-hero-desc { color:var(--text-muted); font-size:1rem; max-width:500px; margin:0 auto 2rem; line-height:1.7; }
+  .blog-divider { width:60px; height:3px; background:linear-gradient(90deg,var(--gold),transparent); margin:0 auto 2rem; }
+
+  /* Filter tabs */
+  .filter-tabs { display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap; }
+  .filter-tab {
+    font-family:'Oswald',sans-serif; font-size:0.78rem; letter-spacing:2px; text-transform:uppercase;
+    padding:8px 20px; border:1px solid rgba(212,160,23,0.25); color:var(--text-muted);
+    background:transparent; cursor:pointer; border-radius:2px; transition:all 0.3s; display:flex; align-items:center; gap:6px;
+  }
+  .filter-tab:hover { border-color:var(--gold); color:var(--gold); }
+  .filter-tab.active { background:var(--gold); color:var(--black); border-color:var(--gold); font-weight:600; }
+
+  /* ── CONTAINER ── */
+  .container { max-width:1200px; margin:0 auto; padding:0 2rem; }
+
+  /* ── SECTIONS ── */
+  .blog-section { padding:5rem 2rem; }
+  .blog-section:nth-child(even) { background:var(--dark); }
+
+  .section-header { display:flex; align-items:center; gap:1.5rem; margin-bottom:2.5rem; }
+  .section-header::after { content:''; flex:1; height:1px; background:linear-gradient(to right, rgba(212,160,23,0.35), transparent); }
+  .section-header-label { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; color:var(--gold); letter-spacing:3px; white-space:nowrap; display:flex; align-items:center; gap:10px; }
+  .section-header-count { font-family:'Oswald',sans-serif; font-size:0.7rem; background:rgba(212,160,23,0.12); border:1px solid rgba(212,160,23,0.3); color:var(--gold); padding:3px 10px; letter-spacing:2px; }
+
+  /* ── CARDS GRID ── */
+  .posts-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+  .posts-grid.eventos-grid { grid-template-columns:repeat(3,1fr); }
+
+  .post-card {
+    background:var(--dark2); border:1px solid rgba(212,160,23,0.12);
+    border-radius:4px; overflow:hidden; transition:all 0.3s; position:relative;
+    display:flex; flex-direction:column;
+  }
+  .post-card:hover { border-color:rgba(212,160,23,0.45); transform:translateY(-4px); box-shadow:0 12px 35px rgba(0,0,0,0.5); }
+  .post-card.fight { border-color:rgba(212,160,23,0.3); }
+  .post-card.fight:hover { border-color:var(--gold); box-shadow:0 12px 40px rgba(212,160,23,0.15); }
+
+  .post-img-wrap { position:relative; overflow:hidden; }
+  .post-img { width:100%; height:200px; object-fit:cover; object-position:center top; filter:brightness(0.8); transition:all 0.4s; display:block; }
+  .post-card.fight .post-img { height:260px; filter:brightness(0.88); }
+  .post-card:hover .post-img { filter:brightness(0.95); transform:scale(1.03); }
+  .post-img-placeholder { width:100%; height:200px; background:linear-gradient(135deg,#111 0%,#1c1a10 50%,#111 100%); display:flex; align-items:center; justify-content:center; }
+  .post-img-placeholder .fa { font-size:3rem; color:rgba(212,160,23,0.2); }
+
+  .post-badge {
+    position:absolute; top:12px; left:12px; z-index:5;
+    font-family:'Bebas Neue',sans-serif; font-size:0.72rem; letter-spacing:2px;
+    padding:4px 12px; display:flex; align-items:center; gap:5px;
+    clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));
+  }
+  .post-badge.badge-evento { background:var(--gold); color:var(--black); }
+  .post-badge.badge-novidade { background:#1a3a5c; color:#7eb8f0; border:1px solid #7eb8f0; clip-path:none; }
+  .post-badge.badge-fight { background:var(--gold); color:var(--black); }
+
+  .post-body { padding:1.25rem 1.5rem 1.5rem; display:flex; flex-direction:column; flex:1; }
+  .post-meta { display:flex; align-items:center; gap:1rem; margin-bottom:0.6rem; flex-wrap:wrap; }
+  .post-date { font-family:'Oswald',sans-serif; font-size:0.68rem; letter-spacing:2px; color:var(--gold); text-transform:uppercase; display:flex; align-items:center; gap:5px; }
+  .post-category-pill { font-family:'Oswald',sans-serif; font-size:0.62rem; letter-spacing:1.5px; color:var(--text-muted); text-transform:uppercase; border:1px solid rgba(212,160,23,0.2); padding:2px 8px; border-radius:2px; }
+  .post-title { font-family:'Bebas Neue',sans-serif; font-size:1.25rem; color:#fff; letter-spacing:1px; margin-bottom:0.5rem; line-height:1.2; }
+  .post-excerpt { font-size:0.85rem; color:var(--text-muted); line-height:1.6; flex:1; margin-bottom:1rem; }
+  .post-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; }
+  .post-tag { font-family:'Oswald',sans-serif; font-size:0.62rem; letter-spacing:1.5px; color:var(--text-muted); border:1px solid rgba(212,160,23,0.2); padding:3px 8px; border-radius:2px; display:flex; align-items:center; gap:4px; }
+  .post-tag .fa { color:var(--gold); font-size:0.6rem; }
+
+  /* Empty state */
+  .empty-state { grid-column:1/-1; text-align:center; padding:4rem 2rem; }
+  .empty-state .fa { font-size:3rem; color:rgba(212,160,23,0.2); margin-bottom:1rem; display:block; }
+  .empty-state p { color:var(--text-muted); font-family:'Oswald',sans-serif; letter-spacing:2px; font-size:0.85rem; text-transform:uppercase; }
+
+  /* ── ADMIN PANEL ── */
+  .admin-toggle-btn {
+    position:fixed; bottom:2rem; right:2rem; z-index:998;
+    width:52px; height:52px; border-radius:50%;
+    background:var(--gold); color:var(--black); border:none; cursor:pointer;
+    font-size:1.2rem; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 4px 20px rgba(212,160,23,0.4); transition:all 0.3s;
+  }
+  .admin-toggle-btn:hover { background:var(--gold-light); transform:scale(1.1); }
+
+  .admin-overlay {
+    position:fixed; inset:0; z-index:2000;
+    background:rgba(0,0,0,0.85); backdrop-filter:blur(8px);
+    display:none; align-items:center; justify-content:center; padding:1rem;
+  }
+  .admin-overlay.open { display:flex; }
+
+  .admin-panel {
+    background:var(--dark); border:1px solid rgba(212,160,23,0.25);
+    border-radius:6px; width:100%; max-width:640px; max-height:90vh;
+    overflow-y:auto; display:flex; flex-direction:column;
+  }
+
+  .admin-header {
+    padding:1.5rem 2rem; border-bottom:1px solid rgba(212,160,23,0.15);
+    display:flex; align-items:center; justify-content:space-between; flex-shrink:0;
+  }
+  .admin-header h2 { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; color:var(--gold); letter-spacing:2px; display:flex; align-items:center; gap:10px; }
+  .admin-close { background:none; border:none; color:var(--text-muted); font-size:1.2rem; cursor:pointer; padding:4px; transition:color 0.3s; }
+  .admin-close:hover { color:var(--gold); }
+
+  .admin-body { padding:2rem; display:flex; flex-direction:column; gap:1.25rem; }
+
+  .form-group { display:flex; flex-direction:column; gap:6px; }
+  .form-label { font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:2px; color:var(--gold); text-transform:uppercase; display:flex; align-items:center; gap:6px; }
+  .form-input, .form-select, .form-textarea {
+    background:var(--dark2); border:1px solid rgba(212,160,23,0.2);
+    color:var(--text); font-family:'Inter',sans-serif; font-size:0.9rem;
+    padding:10px 14px; border-radius:3px; transition:border-color 0.3s; width:100%;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    outline:none; border-color:var(--gold);
+  }
+  .form-select option { background:var(--dark2); }
+  .form-textarea { resize:vertical; min-height:90px; line-height:1.6; }
+
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+
+  /* Image upload */
+  .upload-area {
+    border:2px dashed rgba(212,160,23,0.25); border-radius:4px; padding:2rem;
+    text-align:center; cursor:pointer; transition:all 0.3s; position:relative;
+  }
+  .upload-area:hover { border-color:var(--gold); background:rgba(212,160,23,0.03); }
+  .upload-area input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
+  .upload-area .fa { font-size:2rem; color:rgba(212,160,23,0.4); margin-bottom:0.5rem; display:block; }
+  .upload-area p { font-size:0.8rem; color:var(--text-muted); font-family:'Oswald',sans-serif; letter-spacing:1px; }
+  .upload-area.has-file { border-color:rgba(212,160,23,0.5); background:rgba(212,160,23,0.04); }
+  .upload-preview { max-width:100%; max-height:120px; border-radius:3px; margin-top:0.75rem; display:none; }
+
+  /* Tags input */
+  .tags-input-wrap { display:flex; gap:8px; }
+  .tags-input-wrap .form-input { flex:1; }
+  .tags-list { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+  .tag-chip {
+    background:rgba(212,160,23,0.1); border:1px solid rgba(212,160,23,0.3);
+    color:var(--gold); font-family:'Oswald',sans-serif; font-size:0.65rem;
+    letter-spacing:1px; padding:4px 10px; border-radius:2px;
+    display:flex; align-items:center; gap:6px; text-transform:uppercase;
+  }
+  .tag-chip button { background:none; border:none; color:var(--gold); cursor:pointer; font-size:0.7rem; padding:0; line-height:1; }
+
+  /* Submit */
+  .admin-footer { padding:1.5rem 2rem; border-top:1px solid rgba(212,160,23,0.15); display:flex; gap:1rem; flex-shrink:0; }
+  .btn-publish {
+    flex:1; background:var(--gold); color:var(--black); border:none;
+    font-family:'Oswald',sans-serif; font-weight:700; font-size:0.9rem;
+    letter-spacing:2px; text-transform:uppercase; padding:14px;
+    cursor:pointer; border-radius:3px; display:flex; align-items:center; justify-content:center; gap:8px;
+    transition:all 0.3s;
+    clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+  }
+  .btn-publish:hover { background:var(--gold-light); }
+  .btn-cancel { background:transparent; color:var(--text-muted); border:1px solid rgba(255,255,255,0.1); font-family:'Oswald',sans-serif; font-size:0.85rem; letter-spacing:1px; padding:14px 24px; cursor:pointer; border-radius:3px; transition:all 0.3s; }
+  .btn-cancel:hover { border-color:rgba(255,255,255,0.3); color:var(--text); }
+
+  /* Toast */
+  .toast {
+    position:fixed; bottom:6rem; right:2rem; z-index:3000;
+    background:var(--dark2); border:1px solid rgba(212,160,23,0.4);
+    padding:1rem 1.5rem; border-radius:4px; font-family:'Oswald',sans-serif;
+    font-size:0.85rem; letter-spacing:1px; color:var(--gold);
+    display:flex; align-items:center; gap:10px;
+    transform:translateY(20px); opacity:0; transition:all 0.4s;
+    pointer-events:none;
+  }
+  .toast.show { transform:translateY(0); opacity:1; }
+
+  /* Posts manage list */
+  .manage-section { padding:0 2rem 2rem; border-top:1px solid rgba(212,160,23,0.1); margin-top:0.5rem; }
+  .manage-title { font-family:'Oswald',sans-serif; font-size:0.7rem; letter-spacing:3px; color:var(--text-muted); text-transform:uppercase; padding:1rem 0 0.75rem; display:flex; align-items:center; gap:8px; }
+  .manage-list { display:flex; flex-direction:column; gap:8px; max-height:220px; overflow-y:auto; }
+  .manage-item {
+    display:flex; align-items:center; gap:12px; padding:10px 14px;
+    background:var(--dark3); border-radius:3px; border:1px solid rgba(212,160,23,0.08);
+  }
+  .manage-item-info { flex:1; min-width:0; }
+  .manage-item-title { font-family:'Oswald',sans-serif; font-size:0.82rem; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .manage-item-meta { font-size:0.68rem; color:var(--text-muted); margin-top:2px; }
+  .manage-item-cat { font-size:0.62rem; font-family:'Oswald',sans-serif; letter-spacing:1px; text-transform:uppercase; padding:2px 8px; border-radius:2px; flex-shrink:0; }
+  .cat-evento { background:rgba(212,160,23,0.15); color:var(--gold); }
+  .cat-novidade { background:rgba(126,184,240,0.12); color:#7eb8f0; }
+  .manage-delete { background:none; border:none; color:rgba(231,76,60,0.5); cursor:pointer; font-size:0.9rem; padding:4px; transition:color 0.3s; flex-shrink:0; }
+  .manage-delete:hover { color:var(--red); }
+
+  /* Scroll top */
+  .scroll-top { position:fixed; bottom:2rem; left:2rem; width:46px; height:46px; background:var(--dark2); color:var(--gold); border:1px solid rgba(212,160,23,0.3); cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; z-index:999; opacity:0; transition:opacity 0.3s; border-radius:2px; }
+  .scroll-top.visible { opacity:1; }
+  .scroll-top:hover { background:rgba(212,160,23,0.1); }
+
+  /* FOOTER */
+  footer { background:var(--dark); border-top:1px solid rgba(212,160,23,0.15); padding:2.5rem 2rem; }
+  .footer-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+  .footer-brand { display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .footer-brand img { height:40px; filter:drop-shadow(0 0 8px rgba(212,160,23,0.3)); }
+  .footer-brand-name { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; color:var(--gold); letter-spacing:2px; }
+  .footer-brand-sub { font-size:0.7rem; color:var(--text-muted); font-family:'Oswald',sans-serif; letter-spacing:3px; }
+  .footer-copy { color:var(--text-muted); font-size:0.78rem; text-align:center; }
+  .footer-back { color:var(--gold); text-decoration:none; font-family:'Oswald',sans-serif; font-size:0.78rem; letter-spacing:2px; text-transform:uppercase; display:flex; align-items:center; gap:6px; transition:color 0.3s; }
+  .footer-back:hover { color:var(--gold-light); }
+
+  /* RESPONSIVE */
+  @media (max-width:1024px) { .posts-grid { grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:768px) {
+    .hamburger { display:flex; }
+    .nav-links { display:none; }
+    .nav-links.open { display:flex; flex-direction:column; position:fixed; top:70px; left:0; right:0; background:rgba(10,10,10,0.98); padding:2rem; gap:1.5rem; border-bottom:1px solid rgba(212,160,23,0.2); z-index:999; }
+    .posts-grid { grid-template-columns:1fr; }
+    .form-row { grid-template-columns:1fr; }
+    .admin-panel { max-height:95vh; }
+    .footer-inner { flex-direction:column; text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="logo_new.png" alt="André Sagat Logo" onerror="this.src='https://andrelcezar.github.io/andresagat/assets/logo01.png'">
+    <div class="nav-brand">André Sagat <span>Muaythai Gym</span></div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#horarios">Horários</a></li>
+    <li><a href="index.html#pricing">Planos</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li>
+    <li><a href="index.html#contact" class="nav-cta"><i class="fa-solid fa-dumbbell"></i> Matricule-se</a></li>
+  </ul>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<div class="blog-hero">
+  <span class="blog-hero-label"><i class="fa-solid fa-rss"></i> &nbsp;Informações & Agenda</span>
+  <h1 class="blog-hero-title">BLOG &amp; <span class="gold">NOVIDADES</span></h1>
+  <div class="blog-divider"></div>
+  <p class="blog-hero-desc">Fique por dentro dos eventos, resultados e novidades da André Sagat Muaythai GYM.</p>
+  <div class="filter-tabs">
+    <button class="filter-tab active" data-filter="all" onclick="filterPosts('all',this)">
+      <i class="fa-solid fa-border-all"></i> Todos
+    </button>
+    <button class="filter-tab" data-filter="evento" onclick="filterPosts('evento',this)">
+      <i class="fa-solid fa-fist-raised"></i> Eventos
+    </button>
+    <button class="filter-tab" data-filter="novidade" onclick="filterPosts('novidade',this)">
+      <i class="fa-solid fa-bell"></i> Novidades
+    </button>
+  </div>
+</div>
+
+<!-- SECTION EVENTOS -->
+<section class="blog-section" id="section-eventos">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header-label">
+        <i class="fa-solid fa-fist-raised"></i> Eventos
+        <span class="section-header-count" id="count-eventos">0</span>
+      </span>
+    </div>
+    <div class="posts-grid" id="grid-eventos"></div>
+  </div>
+</section>
+
+<!-- SECTION NOVIDADES -->
+<section class="blog-section" id="section-novidades">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header-label">
+        <i class="fa-solid fa-bell"></i> Novidades
+        <span class="section-header-count" id="count-novidades">0</span>
+      </span>
+    </div>
+    <div class="posts-grid" id="grid-novidades"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-brand">
+      <img src="logo_new.png" alt="André Sagat" onerror="this.src='https://andrelcezar.github.io/andresagat/assets/logo01.png'">
+      <div>
+        <div class="footer-brand-name">ANDRÉ SAGAT</div>
+        <div class="footer-brand-sub">Muaythai GYM</div>
+      </div>
+    </a>
+    <div class="footer-copy"><i class="fa-regular fa-copyright"></i> 2025 André Sagat Muaythai GYM</div>
+    <a href="index.html" class="footer-back"><i class="fa-solid fa-arrow-left"></i> Voltar ao site</a>
+  </div>
+</footer>
+
+<!-- SCROLL TOP -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+
+<!-- ADMIN TOGGLE -->
+<button class="admin-toggle-btn" onclick="openAdmin()" title="Publicar novo post">
+  <i class="fa-solid fa-plus"></i>
+</button>
+
+<!-- ADMIN OVERLAY -->
+<div class="admin-overlay" id="adminOverlay" onclick="handleOverlayClick(event)">
+  <div class="admin-panel" id="adminPanel">
+
+    <div class="admin-header">
+      <h2><i class="fa-solid fa-pen-to-square"></i> Novo Post</h2>
+      <button class="admin-close" onclick="closeAdmin()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="admin-body">
+
+      <!-- Tipo -->
+      <div class="form-group">
+        <label class="form-label"><i class="fa-solid fa-tag"></i> Categoria</label>
+        <select class="form-select" id="postType" onchange="toggleEventoFields()">
+          <option value="evento">🥊 Evento</option>
+          <option value="novidade">📢 Novidade</option>
+        </select>
+      </div>
+
+      <!-- Título -->
+      <div class="form-group">
+        <label class="form-label"><i class="fa-solid fa-heading"></i> Título</label>
+        <input type="text" class="form-input" id="postTitle" placeholder="Ex: Grand Fight Muay Thai — 5ª Edição">
+      </div>
+
+      <!-- Data + Local (evento) -->
+      <div class="form-row" id="eventoFields">
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-calendar"></i> Data do Evento</label>
+          <input type="date" class="form-input" id="postEventDate">
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fa-solid fa-location-dot"></i> Local</label>
+          <input type="text" class="form-input" id="postLocal" placeholder="Ex: Guaxupé — MG">
+        </div>
+      </div>
+
+      <!-- Descrição -->
+      <div class="form-group">
+        <label class="form-label"><i class="fa-solid fa-align-left"></i> Descrição</label>
+        <textarea class="form-textarea" id="postExcerpt" placeholder="Resumo do post..."></textarea>
+      </div>
+
+      <!-- Imagem -->
+      <div class="form-group">
+        <label class="form-label"><i class="fa-solid fa-image"></i> Imagem (opcional)</label>
+        <div class="upload-area" id="uploadArea">
+          <input type="file" id="postImage" accept="image/*" onchange="handleImageUpload(event)">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <p>Clique ou arraste uma imagem aqui</p>
+          <img class="upload-preview" id="uploadPreview" alt="preview">
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="form-group">
+        <label class="form-label"><i class="fa-solid fa-hashtag"></i> Tags <small style="color:var(--text-muted);font-size:0.65rem;letter-spacing:0">(Enter para adicionar)</small></label>
+        <div class="tags-input-wrap">
+          <input type="text" class="form-input" id="tagInput" placeholder="Ex: Cinturão, 80kg, Guaxupé..." onkeydown="handleTagKey(event)">
+          <button onclick="addTag()" style="background:var(--gold);color:var(--black);border:none;padding:0 16px;border-radius:3px;cursor:pointer;font-size:0.9rem;"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <div class="tags-list" id="tagsList"></div>
+      </div>
+
+      <!-- Fight card toggle -->
+      <div class="form-group" id="fightToggleWrap">
+        <label class="form-label" style="cursor:pointer;">
+          <input type="checkbox" id="isFight" style="width:16px;height:16px;accent-color:var(--gold);margin-right:4px;">
+          <i class="fa-solid fa-trophy"></i> É um Fight Card (disputa de cinturão)
+        </label>
+      </div>
+
+    </div>
+
+    <!-- Posts existentes -->
+    <div class="manage-section">
+      <div class="manage-title"><i class="fa-solid fa-list"></i> Posts publicados</div>
+      <div class="manage-list" id="manageList"></div>
+    </div>
+
+    <div class="admin-footer">
+      <button class="btn-cancel" onclick="closeAdmin()">Cancelar</button>
+      <button class="btn-publish" onclick="publishPost()">
+        <i class="fa-solid fa-paper-plane"></i> Publicar Post
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toastMsg">Post publicado!</span>
+</div>
+
+<script>
+const STORAGE_KEY = 'sagat_blog_posts';
+
+// ── Helpers ──────────────────────────────────────────────
+function getPosts() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+  catch { return []; }
+}
+function savePosts(posts) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+}
+function fmtDate(iso) {
+  if (!iso) return '';
+  const [y,m,d] = iso.split('-');
+  const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  return `${d} de ${months[parseInt(m)-1]} de ${y}`;
+}
+function fmtDateBR(iso) {
+  if (!iso) return '';
+  const [y,m,d] = iso.split('-');
+  return `${d}/${m}/${y}`;
+}
+function showToast(msg, isErr=false) {
+  const t = document.getElementById('toast');
+  const i = t.querySelector('.fa');
+  document.getElementById('toastMsg').textContent = msg;
+  i.className = isErr ? 'fa-solid fa-circle-xmark' : 'fa-solid fa-circle-check';
+  t.style.borderColor = isErr ? 'rgba(231,76,60,0.5)' : 'rgba(212,160,23,0.4)';
+  t.style.color = isErr ? '#e74c3c' : 'var(--gold)';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ── Tags ─────────────────────────────────────────────────
+let currentTags = [];
+function handleTagKey(e) { if (e.key === 'Enter') { e.preventDefault(); addTag(); } }
+function addTag() {
+  const inp = document.getElementById('tagInput');
+  const val = inp.value.trim();
+  if (!val || currentTags.includes(val)) { inp.value=''; return; }
+  currentTags.push(val);
+  inp.value='';
+  renderTagChips();
+}
+function removeTag(tag) {
+  currentTags = currentTags.filter(t => t !== tag);
+  renderTagChips();
+}
+function renderTagChips() {
+  document.getElementById('tagsList').innerHTML = currentTags.map(t =>
+    `<span class="tag-chip">${t}<button onclick="removeTag('${t}')"><i class="fa-solid fa-xmark"></i></button></span>`
+  ).join('');
+}
+
+// ── Image upload ──────────────────────────────────────────
+let postImageB64 = null;
+function handleImageUpload(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    postImageB64 = ev.target.result;
+    const prev = document.getElementById('uploadPreview');
+    prev.src = postImageB64;
+    prev.style.display = 'block';
+    document.getElementById('uploadArea').classList.add('has-file');
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── Toggle evento fields ──────────────────────────────────
+function toggleEventoFields() {
+  const type = document.getElementById('postType').value;
+  const eFields = document.getElementById('eventoFields');
+  const fWrap = document.getElementById('fightToggleWrap');
+  eFields.style.display = type === 'evento' ? 'grid' : 'none';
+  fWrap.style.display = type === 'evento' ? 'block' : 'none';
+}
+
+// ── Admin open/close ──────────────────────────────────────
+function openAdmin() {
+  document.getElementById('adminOverlay').classList.add('open');
+  renderManageList();
+}
+function closeAdmin() {
+  document.getElementById('adminOverlay').classList.remove('open');
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('adminOverlay')) closeAdmin();
+}
+
+// ── Publish ───────────────────────────────────────────────
+function publishPost() {
+  const title   = document.getElementById('postTitle').value.trim();
+  const type    = document.getElementById('postType').value;
+  const excerpt = document.getElementById('postExcerpt').value.trim();
+  const eDate   = document.getElementById('postEventDate').value;
+  const local   = document.getElementById('postLocal').value.trim();
+  const isFight = document.getElementById('isFight').checked;
+
+  if (!title) { showToast('Adicione um título!', true); return; }
+
+  const post = {
+    id: Date.now(),
+    type,
+    title,
+    excerpt,
+    eventDate: type === 'evento' ? eDate : null,
+    local: type === 'evento' ? local : null,
+    isFight: type === 'evento' ? isFight : false,
+    tags: [...currentTags],
+    image: postImageB64 || null,
+    createdAt: new Date().toISOString().split('T')[0],
+  };
+
+  const posts = getPosts();
+  posts.unshift(post);
+  savePosts(posts);
+
+  // reset form
+  document.getElementById('postTitle').value = '';
+  document.getElementById('postExcerpt').value = '';
+  document.getElementById('postEventDate').value = '';
+  document.getElementById('postLocal').value = '';
+  document.getElementById('isFight').checked = false;
+  document.getElementById('uploadPreview').style.display = 'none';
+  document.getElementById('uploadArea').classList.remove('has-file');
+  postImageB64 = null;
+  currentTags = [];
+  renderTagChips();
+
+  renderAll();
+  renderManageList();
+  showToast(`Post "${title}" publicado!`);
+}
+
+// ── Delete ────────────────────────────────────────────────
+function deletePost(id) {
+  if (!confirm('Remover este post?')) return;
+  const posts = getPosts().filter(p => p.id !== id);
+  savePosts(posts);
+  renderAll();
+  renderManageList();
+  showToast('Post removido.', false);
+}
+
+// ── Render card ───────────────────────────────────────────
+function renderCard(p) {
+  const dateLabel = p.type === 'evento'
+    ? (p.eventDate ? fmtDate(p.eventDate) : p.createdAt ? fmtDate(p.createdAt) : '')
+    : (p.createdAt ? fmtDate(p.createdAt) : '');
+
+  const imgHtml = p.image
+    ? `<img src="${p.image}" alt="${p.title}" class="post-img">`
+    : `<div class="post-img-placeholder"><i class="fa-solid fa-${p.type === 'evento' ? 'fist-raised' : 'bell'}"></i></div>`;
+
+  const badgeHtml = p.type === 'evento'
+    ? `<span class="post-badge ${p.isFight ? 'badge-fight' : 'badge-evento'}">
+        <i class="fa-solid fa-${p.isFight ? 'trophy' : 'calendar-star'}"></i>
+        ${p.isFight ? 'Fight Card' : 'Evento'}
+       </span>`
+    : `<span class="post-badge badge-novidade"><i class="fa-solid fa-bell"></i> Novidade</span>`;
+
+  const localHtml = p.local
+    ? `<div class="post-date" style="margin-top:4px"><i class="fa-solid fa-location-dot"></i> ${p.local}</div>` : '';
+
+  const tagsHtml = p.tags && p.tags.length
+    ? `<div class="post-tags">${p.tags.map(t =>
+        `<span class="post-tag"><i class="fa-solid fa-hashtag"></i>${t}</span>`
+      ).join('')}</div>` : '';
+
+  return `
+    <div class="post-card ${p.isFight ? 'fight' : ''}">
+      <div class="post-img-wrap">
+        ${imgHtml}
+        ${badgeHtml}
+      </div>
+      <div class="post-body">
+        <div class="post-meta">
+          <span class="post-date"><i class="fa-solid fa-calendar"></i> ${dateLabel}</span>
+        </div>
+        <div class="post-title">${p.title}</div>
+        ${p.excerpt ? `<div class="post-excerpt">${p.excerpt}</div>` : ''}
+        ${localHtml}
+        ${tagsHtml}
+      </div>
+    </div>`;
+}
+
+// ── Render grids ──────────────────────────────────────────
+function renderAll() {
+  const posts = getPosts();
+  const eventos   = posts.filter(p => p.type === 'evento');
+  const novidades = posts.filter(p => p.type === 'novidade');
+
+  document.getElementById('count-eventos').textContent   = eventos.length;
+  document.getElementById('count-novidades').textContent = novidades.length;
+
+  const gE = document.getElementById('grid-eventos');
+  const gN = document.getElementById('grid-novidades');
+
+  gE.innerHTML = eventos.length
+    ? eventos.map(renderCard).join('')
+    : `<div class="empty-state"><i class="fa-solid fa-calendar-xmark"></i><p>Nenhum evento publicado ainda</p></div>`;
+
+  gN.innerHTML = novidades.length
+    ? novidades.map(renderCard).join('')
+    : `<div class="empty-state"><i class="fa-solid fa-bell-slash"></i><p>Nenhuma novidade publicada ainda</p></div>`;
+
+  // show/hide sections based on filter
+  applyFilter(currentFilter);
+}
+
+// ── Filter ────────────────────────────────────────────────
+let currentFilter = 'all';
+function filterPosts(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilter(filter);
+}
+function applyFilter(filter) {
+  const sE = document.getElementById('section-eventos');
+  const sN = document.getElementById('section-novidades');
+  sE.style.display = (filter === 'all' || filter === 'evento')  ? '' : 'none';
+  sN.style.display = (filter === 'all' || filter === 'novidade') ? '' : 'none';
+}
+
+// ── Manage list ───────────────────────────────────────────
+function renderManageList() {
+  const posts = getPosts();
+  const el = document.getElementById('manageList');
+  if (!posts.length) {
+    el.innerHTML = `<div style="color:var(--text-muted);font-size:0.78rem;font-family:'Oswald',sans-serif;letter-spacing:1px;padding:0.5rem 0;">Nenhum post ainda.</div>`;
+    return;
+  }
+  el.innerHTML = posts.slice(0,10).map(p => `
+    <div class="manage-item">
+      <div class="manage-item-info">
+        <div class="manage-item-title">${p.title}</div>
+        <div class="manage-item-meta">${fmtDate(p.createdAt)} ${p.eventDate ? '· Evento: '+fmtDateBR(p.eventDate) : ''}</div>
+      </div>
+      <span class="manage-item-cat cat-${p.type}">${p.type}</span>
+      <button class="manage-delete" onclick="deletePost(${p.id})" title="Remover">
+        <i class="fa-solid fa-trash-can"></i>
+      </button>
+    </div>`).join('');
+}
+
+// ── Scroll top ────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 300);
+});
+
+// ── INIT ──────────────────────────────────────────────────
+toggleEventoFields();
+renderAll();
+</script>
+</body>
+</html>
