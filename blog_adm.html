@@ -263,10 +263,171 @@
     .admin-panel { max-height:95vh; }
     .footer-inner { flex-direction:column; text-align:center; }
   }
+
+  /* ── LOGIN SCREEN ──────────────────────────────────────────── */
+  #loginScreen {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--black);
+    display: flex; align-items: center; justify-content: center;
+    padding: 1.5rem;
+  }
+  .login-box {
+    width: 100%; max-width: 420px;
+    background: var(--dark);
+    border: 1px solid rgba(212,160,23,0.25);
+    border-radius: 8px; overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+    animation: loginSlideIn 0.45s cubic-bezier(.22,.68,0,1.2) both;
+  }
+  @keyframes loginSlideIn {
+    from { opacity:0; transform:translateY(28px) scale(0.97); }
+    to   { opacity:1; transform:translateY(0)   scale(1); }
+  }
+  .login-header {
+    background: linear-gradient(135deg, rgba(212,160,23,0.12), rgba(212,160,23,0.04));
+    border-bottom: 1px solid rgba(212,160,23,0.15);
+    padding: 2rem; text-align: center;
+  }
+  .login-logo {
+    width: 72px; height: 72px; margin: 0 auto 1rem;
+    filter: drop-shadow(0 0 14px rgba(212,160,23,0.4));
+  }
+  .login-title {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;
+    color: var(--gold); letter-spacing: 3px;
+  }
+  .login-subtitle {
+    font-family: 'Oswald', sans-serif; font-size: 0.7rem;
+    letter-spacing: 3px; color: var(--text-muted); margin-top: 4px;
+    text-transform: uppercase;
+  }
+  .login-body { padding: 2rem; display: flex; flex-direction: column; gap: 1.1rem; }
+  .login-group { display: flex; flex-direction: column; gap: 5px; }
+  .login-label {
+    font-family: 'Oswald', sans-serif; font-size: 0.7rem;
+    letter-spacing: 2px; color: var(--gold); text-transform: uppercase;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .login-input {
+    background: var(--dark2); border: 1px solid rgba(212,160,23,0.2);
+    color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.95rem;
+    padding: 12px 14px; border-radius: 3px; transition: border-color 0.3s; width: 100%;
+  }
+  .login-input:focus { outline: none; border-color: var(--gold); }
+  .login-input.shake {
+    border-color: #e74c3c;
+    animation: loginShake 0.4s ease;
+  }
+  @keyframes loginShake {
+    0%,100%{transform:translateX(0)}
+    20%{transform:translateX(-6px)}
+    40%{transform:translateX(6px)}
+    60%{transform:translateX(-4px)}
+    80%{transform:translateX(4px)}
+  }
+  .login-error {
+    display: none; align-items: center; gap: 8px;
+    background: rgba(231,76,60,0.1); border: 1px solid rgba(231,76,60,0.3);
+    color: #e74c3c; font-family: 'Oswald', sans-serif; font-size: 0.75rem;
+    letter-spacing: 1px; padding: 10px 14px; border-radius: 3px; text-transform: uppercase;
+  }
+  .login-error.show { display: flex; }
+  .login-btn {
+    background: var(--gold); color: var(--black); border: none;
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 0.95rem;
+    letter-spacing: 2px; text-transform: uppercase; padding: 14px;
+    cursor: pointer; border-radius: 3px; width: 100%;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: all 0.25s;
+    clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+  }
+  .login-btn:hover { background: var(--gold-light); }
+  .login-hint {
+    font-size: 0.72rem; color: var(--text-muted); text-align: center;
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+  }
+  .login-footer {
+    padding: 0 2rem 2rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  /* Logged-in indicator */
+  .admin-badge {
+    display: none; align-items: center; gap: 8px;
+    background: rgba(212,160,23,0.1); border: 1px solid rgba(212,160,23,0.25);
+    padding: 6px 14px; border-radius: 2px;
+    font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 2px;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .admin-badge.visible { display: flex; }
+  .logout-btn {
+    background: none; border: none; color: rgba(231,76,60,0.6);
+    font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px;
+    cursor: pointer; display: flex; align-items: center; gap: 5px;
+    text-transform: uppercase; transition: color 0.2s; padding: 0;
+  }
+  .logout-btn:hover { color: #e74c3c; }
+
+  /* Blur content while logged out */
+  #adminContent {
+    filter: blur(6px) brightness(0.4);
+    pointer-events: none; user-select: none;
+    transition: filter 0.5s, opacity 0.5s;
+  }
+  #adminContent.unlocked {
+    filter: none; pointer-events: auto; user-select: auto;
+  }
+
 </style>
 </head>
 <body>
 
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+  <div class="login-box">
+
+    <div class="login-header">
+      <img src="logo_new.png" class="login-logo" alt="André Sagat"
+           onerror="this.src='https://andrelcezar.github.io/andresagat/assets/logo01.png'">
+      <div class="login-title">ÁREA RESTRITA</div>
+      <div class="login-subtitle">Blog Admin — André Sagat GYM</div>
+    </div>
+
+    <div class="login-body">
+      <div class="login-group">
+        <label class="login-label"><i class="fa-solid fa-user"></i> Usuário</label>
+        <input type="text" class="login-input" id="loginUser"
+               placeholder="seu usuário" autocomplete="username"
+               onkeydown="if(event.key==='Enter') document.getElementById('loginPass').focus()">
+      </div>
+      <div class="login-group">
+        <label class="login-label"><i class="fa-solid fa-lock"></i> Senha</label>
+        <div style="position:relative;">
+          <input type="password" class="login-input" id="loginPass"
+                 placeholder="••••••••" autocomplete="current-password"
+                 onkeydown="if(event.key==='Enter') doLogin()"
+                 style="padding-right:44px;">
+          <button onclick="togglePassVis()" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1rem;" id="passEye">
+            <i class="fa-solid fa-eye"></i>
+          </button>
+        </div>
+      </div>
+      <div class="login-error" id="loginError">
+        <i class="fa-solid fa-circle-xmark"></i> Usuário ou senha incorretos
+      </div>
+    </div>
+
+    <div class="login-footer">
+      <button class="login-btn" onclick="doLogin()">
+        <i class="fa-solid fa-right-to-bracket"></i> Entrar
+      </button>
+      <p class="login-hint"><i class="fa-solid fa-shield-halved"></i> Acesso restrito à equipe da academia</p>
+    </div>
+
+  </div>
+</div>
+
+
+<div id="adminContent">
 <!-- NAV -->
 <nav id="navbar">
   <a href="index.html" class="nav-logo">
@@ -280,6 +441,14 @@
     <li><a href="blog.html" class="active">Blog</a></li>
     <li><a href="index.html#contact" class="nav-cta"><i class="fa-solid fa-dumbbell"></i> Matricule-se</a></li>
   </ul>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <span class="admin-badge" id="adminBadge">
+      <i class="fa-solid fa-shield-halved"></i> Admin
+      <button class="logout-btn" onclick="doLogout()" title="Sair">
+        <i class="fa-solid fa-right-from-bracket"></i> Sair
+      </button>
+    </span>
+  </div>
   <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
     <span></span><span></span><span></span>
   </button>
@@ -709,6 +878,94 @@ window.addEventListener('scroll', () => {
 // ── INIT ──────────────────────────────────────────────────
 toggleEventoFields();
 renderAll();
+
+// ── AUTH ──────────────────────────────────────────────────
+// To change credentials, edit the values below:
+const AUTH = {
+  user: 'admin',       // ← altere o usuário aqui
+  pass: 'sagat@2025'   // ← altere a senha aqui
+};
+const SESSION_KEY     = 'sagat_admin_auth';
+const SESSION_DURATION = 4 * 60 * 60 * 1000; // 4 horas
+
+function checkSession() {
+  try {
+    const s = JSON.parse(sessionStorage.getItem(SESSION_KEY));
+    if (s && s.ok && (Date.now() - s.ts) < SESSION_DURATION) return true;
+  } catch {}
+  return false;
+}
+
+function saveSession() {
+  sessionStorage.setItem(SESSION_KEY, JSON.stringify({ ok: true, ts: Date.now() }));
+}
+
+function doLogin() {
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value;
+  const err       = document.getElementById('loginError');
+  const passInput = document.getElementById('loginPass');
+  const userInput = document.getElementById('loginUser');
+
+  if (u === AUTH.user && p === AUTH.pass) {
+    err.classList.remove('show');
+    saveSession();
+    unlockAdmin();
+  } else {
+    err.classList.add('show');
+    passInput.classList.add('shake');
+    userInput.classList.add('shake');
+    passInput.value = '';
+    setTimeout(() => {
+      passInput.classList.remove('shake');
+      userInput.classList.remove('shake');
+    }, 500);
+    passInput.focus();
+  }
+}
+
+function unlockAdmin() {
+  const screen = document.getElementById('loginScreen');
+  screen.style.transition = 'opacity 0.4s';
+  screen.style.opacity = '0';
+  setTimeout(() => screen.style.display = 'none', 400);
+  document.getElementById('adminContent').classList.add('unlocked');
+  const badge = document.getElementById('adminBadge');
+  if (badge) badge.classList.add('visible');
+}
+
+function doLogout() {
+  sessionStorage.removeItem(SESSION_KEY);
+  location.reload();
+}
+
+function togglePassVis() {
+  const inp = document.getElementById('loginPass');
+  const ico = document.getElementById('passEye').querySelector('i');
+  if (inp.type === 'password') {
+    inp.type = 'text';
+    ico.className = 'fa-solid fa-eye-slash';
+  } else {
+    inp.type = 'password';
+    ico.className = 'fa-solid fa-eye';
+  }
+}
+
+// Auto-login se sessão ainda válida
+(function initAuth() {
+  if (checkSession()) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminContent').classList.add('unlocked');
+    const badge = document.getElementById('adminBadge');
+    if (badge) badge.classList.add('visible');
+  } else {
+    setTimeout(() => {
+      const u = document.getElementById('loginUser');
+      if (u) u.focus();
+    }, 300);
+  }
+})();
 </script>
+</div><!-- /adminContent -->
 </body>
 </html>
