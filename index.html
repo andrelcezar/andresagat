@@ -303,7 +303,7 @@
   .master-badge { position: absolute; top: 12px; right: 12px; z-index: 10; background: var(--gold); color: var(--black); font-family: 'Oswald', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; padding: 4px 10px; text-transform: uppercase; clip-path: polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px); }
 
   /* EVENTOS */
-  #eventos { background: var(--black); }
+  #eventos { background: var(--black); display: none; }
   .eventos-slider { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
   .evento-card { background: var(--dark2); border: 1px solid rgba(212,160,23,0.12); border-radius: 4px; overflow: hidden; transition: all 0.3s; }
   .evento-card:hover { border-color: rgba(212,160,23,0.4); transform: translateY(-3px); }
@@ -654,16 +654,6 @@
     clip-path: polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
   }
   .sched-btn-confirm:hover { background: #27ae60; transform: translateY(-1px); }
-
-  /* Eventos empty state */
-  .eventos-empty {
-    grid-column: 1/-1; text-align: center; padding: 4rem 1rem;
-    border: 1px dashed rgba(212,160,23,0.15); border-radius: 4px;
-  }
-  .eventos-empty .fa { font-size: 2.5rem; color: rgba(212,160,23,0.15); display: block; margin-bottom: 1rem; }
-  .eventos-empty p { font-family: 'Oswald', sans-serif; font-size: 0.8rem; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; }
-  .eventos-empty a { color: var(--gold); text-decoration: none; }
-  .eventos-empty a:hover { color: var(--gold-light); }
 
   /* Novidades section */
   #novidades { background: var(--dark); padding: 6rem 2rem; display: none; }
@@ -1824,15 +1814,13 @@
     const novidades = posts.filter(p => p.type === 'novidade');
 
     // ── Eventos slider ──
+    const secEventos = document.getElementById('eventos');
     const slider = document.getElementById('eventosSlider');
-    if (slider) {
+    if (secEventos && slider) {
       if (eventos.length === 0) {
-        slider.innerHTML = `
-          <div class="eventos-empty">
-            <i class="fa-solid fa-calendar-xmark"></i>
-            <p>Nenhum evento publicado ainda.<br>Em breve novidades por aqui!</p>
-          </div>`;
+        secEventos.style.display = 'none';
       } else {
+        secEventos.style.display = '';
         slider.innerHTML = eventos.map(p => {
           const isFight = !!p.isFight;
           const dateStr = p.eventDate ? fmtBlogDate(p.eventDate) : fmtBlogDate(p.createdAt);
