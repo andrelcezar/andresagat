@@ -4,6 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog & Novidades — André Sagat Muaythai GYM</title>
+<meta name="description" content="Acompanhe eventos, fight cards e novidades da André Sagat Muaythai GYM, academia de Muay Thai em São Paulo.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://andrelcezar.github.io/andresagat/blog.html">
+<meta name="theme-color" content="#0a0a0a">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Blog & Novidades — André Sagat Muaythai GYM">
+<meta property="og:description" content="Acompanhe eventos, fight cards e novidades da André Sagat Muaythai GYM.">
+<meta property="og:image" content="https://andrelcezar.github.io/andresagat/assets/logo.sagat.png">
+<meta property="og:url" content="https://andrelcezar.github.io/andresagat/blog.html">
+<link rel="icon" type="image/png" href="assets/logo.sagat.png">
+<link rel="apple-touch-icon" href="assets/logo.sagat.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
@@ -142,7 +156,7 @@
 <!-- NAV -->
 <nav id="navbar">
   <a href="index.html" class="nav-logo">
-    <img src="logo_new.png" alt="André Sagat" onerror="this.src='https://andrelcezar.github.io/andresagat/assets/logo01.png'">
+    <img src="assets/logo.sagat.png" alt="André Sagat">
     <div class="nav-brand">André Sagat <span>Muaythai Gym</span></div>
   </a>
   <ul class="nav-links" id="navLinks">
@@ -217,7 +231,7 @@
 <footer>
   <div class="footer-inner">
     <a href="index.html" class="footer-brand">
-      <img src="logo_new.png" alt="André Sagat" onerror="this.src='https://andrelcezar.github.io/andresagat/assets/logo01.png'">
+      <img src="assets/logo.sagat.png" alt="André Sagat">
       <div>
         <div class="footer-brand-name">ANDRÉ SAGAT</div>
         <div class="footer-brand-sub">Muaythai GYM</div>
@@ -251,6 +265,12 @@ function fmtDate(iso) {
   return `${parseInt(d)} de ${months[parseInt(m)-1]} de ${y}`;
 }
 
+function escapeHtml(str) {
+  return String(str ?? '').replace(/[&<>"']/g, c => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  }[c]));
+}
+
 // ── Build card ────────────────────────────────────────────
 function buildCard(p) {
   const isFight  = !!(p.isFight && p.type === 'evento');
@@ -265,18 +285,18 @@ function buildCard(p) {
       : `<span class="card-badge badge-novidade"><i class="fa-solid fa-bell"></i> Novidade</span>`;
 
   const imgHtml = p.image
-    ? `<img src="${p.image}" class="card-img ${szClass}" alt="${p.title}">`
+    ? `<img src="${escapeHtml(p.image)}" class="card-img ${szClass}" alt="${escapeHtml(p.title)}" loading="lazy">`
     : `<div class="card-ph ${szClass}"><i class="fa-solid fa-${isEvento?'fist-raised':'bell'}"></i></div>`;
 
   const localHtml = p.local
-    ? `<div class="card-local"><i class="fa-solid fa-location-dot"></i> ${p.local}</div>` : '';
+    ? `<div class="card-local"><i class="fa-solid fa-location-dot"></i> ${escapeHtml(p.local)}</div>` : '';
 
   const excerptHtml = p.excerpt
-    ? `<div class="card-excerpt">${p.excerpt}</div>` : '';
+    ? `<div class="card-excerpt">${escapeHtml(p.excerpt)}</div>` : '';
 
   const tagsHtml = p.tags && p.tags.length
     ? `<div class="card-tags">${p.tags.map(t=>
-        `<span class="card-tag"><i class="fa-solid fa-hashtag"></i>${t}</span>`
+        `<span class="card-tag"><i class="fa-solid fa-hashtag"></i>${escapeHtml(t)}</span>`
       ).join('')}</div>` : '';
 
   return `
@@ -287,7 +307,7 @@ function buildCard(p) {
       </div>
       <div class="card-body">
         <div class="card-date"><i class="fa-solid fa-calendar"></i>${dateStr}</div>
-        <div class="card-title">${p.title}</div>
+        <div class="card-title">${escapeHtml(p.title)}</div>
         ${excerptHtml}
         ${localHtml}
         ${tagsHtml}
@@ -296,7 +316,7 @@ function buildCard(p) {
 }
 
 function emptyState(icon, msg) {
-  return `<div class="empty"><i class="fa-solid fa-${icon}"></i><p>${msg}</p></div>`;
+  return `<div class="empty"><i class="fa-solid fa-${icon}"></i><p>${escapeHtml(msg)}</p></div>`;
 }
 
 // ── Render both grids ─────────────────────────────────────

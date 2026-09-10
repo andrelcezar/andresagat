@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog & Novidades — André Sagat Muaythai GYM</title>
+<title>Área Restrita — Blog Admin — André Sagat Muaythai GYM</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="assets/logo.sagat.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
@@ -386,8 +390,7 @@
   <div class="login-box">
 
     <div class="login-header">
-      <img src="logo_new.png" class="login-logo" alt="André Sagat"
-           onerror="this.src='https://andrelcezar.github.io/andresagat/assets/logo01.png'">
+      <img src="assets/logo.sagat.png" class="login-logo" alt="André Sagat">
       <div class="login-title">ÁREA RESTRITA</div>
       <div class="login-subtitle">Blog Admin — André Sagat GYM</div>
     </div>
@@ -431,7 +434,7 @@
 <!-- NAV -->
 <nav id="navbar">
   <a href="index.html" class="nav-logo">
-    <img src="logo_new.png" alt="André Sagat Logo" onerror="this.src='https://andrelcezar.github.io/andresagat/assets/logo01.png'">
+    <img src="assets/logo.sagat.png" alt="André Sagat Logo">
     <div class="nav-brand">André Sagat <span>Muaythai Gym</span></div>
   </a>
   <ul class="nav-links" id="navLinks">
@@ -503,7 +506,7 @@
 <footer>
   <div class="footer-inner">
     <a href="index.html" class="footer-brand">
-      <img src="logo_new.png" alt="André Sagat" onerror="this.src='https://andrelcezar.github.io/andresagat/assets/logo01.png'">
+      <img src="assets/logo.sagat.png" alt="André Sagat">
       <div>
         <div class="footer-brand-name">ANDRÉ SAGAT</div>
         <div class="footer-brand-sub">Muaythai GYM</div>
@@ -632,6 +635,11 @@ function getPosts() {
 function savePosts(posts) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
 }
+function escapeHtml(str) {
+  return String(str ?? '').replace(/[&<>"']/g, c => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  }[c]));
+}
 function fmtDate(iso) {
   if (!iso) return '';
   const [y,m,d] = iso.split('-');
@@ -665,13 +673,13 @@ function addTag() {
   inp.value='';
   renderTagChips();
 }
-function removeTag(tag) {
-  currentTags = currentTags.filter(t => t !== tag);
+function removeTagAt(index) {
+  currentTags.splice(index, 1);
   renderTagChips();
 }
 function renderTagChips() {
-  document.getElementById('tagsList').innerHTML = currentTags.map(t =>
-    `<span class="tag-chip">${t}<button onclick="removeTag('${t}')"><i class="fa-solid fa-xmark"></i></button></span>`
+  document.getElementById('tagsList').innerHTML = currentTags.map((t, i) =>
+    `<span class="tag-chip">${escapeHtml(t)}<button onclick="removeTagAt(${i})"><i class="fa-solid fa-xmark"></i></button></span>`
   ).join('');
 }
 
@@ -774,7 +782,7 @@ function renderCard(p) {
     : (p.createdAt ? fmtDate(p.createdAt) : '');
 
   const imgHtml = p.image
-    ? `<img src="${p.image}" alt="${p.title}" class="post-img">`
+    ? `<img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}" class="post-img" loading="lazy">`
     : `<div class="post-img-placeholder"><i class="fa-solid fa-${p.type === 'evento' ? 'fist-raised' : 'bell'}"></i></div>`;
 
   const badgeHtml = p.type === 'evento'
@@ -785,11 +793,11 @@ function renderCard(p) {
     : `<span class="post-badge badge-novidade"><i class="fa-solid fa-bell"></i> Novidade</span>`;
 
   const localHtml = p.local
-    ? `<div class="post-date" style="margin-top:4px"><i class="fa-solid fa-location-dot"></i> ${p.local}</div>` : '';
+    ? `<div class="post-date" style="margin-top:4px"><i class="fa-solid fa-location-dot"></i> ${escapeHtml(p.local)}</div>` : '';
 
   const tagsHtml = p.tags && p.tags.length
     ? `<div class="post-tags">${p.tags.map(t =>
-        `<span class="post-tag"><i class="fa-solid fa-hashtag"></i>${t}</span>`
+        `<span class="post-tag"><i class="fa-solid fa-hashtag"></i>${escapeHtml(t)}</span>`
       ).join('')}</div>` : '';
 
   return `
@@ -802,8 +810,8 @@ function renderCard(p) {
         <div class="post-meta">
           <span class="post-date"><i class="fa-solid fa-calendar"></i> ${dateLabel}</span>
         </div>
-        <div class="post-title">${p.title}</div>
-        ${p.excerpt ? `<div class="post-excerpt">${p.excerpt}</div>` : ''}
+        <div class="post-title">${escapeHtml(p.title)}</div>
+        ${p.excerpt ? `<div class="post-excerpt">${escapeHtml(p.excerpt)}</div>` : ''}
         ${localHtml}
         ${tagsHtml}
       </div>
@@ -860,10 +868,10 @@ function renderManageList() {
   el.innerHTML = posts.slice(0,10).map(p => `
     <div class="manage-item">
       <div class="manage-item-info">
-        <div class="manage-item-title">${p.title}</div>
+        <div class="manage-item-title">${escapeHtml(p.title)}</div>
         <div class="manage-item-meta">${fmtDate(p.createdAt)} ${p.eventDate ? '· Evento: '+fmtDateBR(p.eventDate) : ''}</div>
       </div>
-      <span class="manage-item-cat cat-${p.type}">${p.type}</span>
+      <span class="manage-item-cat cat-${p.type}">${escapeHtml(p.type)}</span>
       <button class="manage-delete" onclick="deletePost(${p.id})" title="Remover">
         <i class="fa-solid fa-trash-can"></i>
       </button>
