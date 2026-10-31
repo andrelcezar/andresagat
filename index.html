@@ -315,15 +315,15 @@
 
   /* PATROCINADORES */
   #patrocinadores { background: var(--dark); }
-  .sponsors-track { overflow: hidden; position: relative; }
-  .sponsors-track::before, .sponsors-track::after { content:''; position:absolute; top:0;bottom:0; width:120px; z-index:2; }
-  .sponsors-track::before { left:0; background: linear-gradient(to right, var(--dark), transparent); }
-  .sponsors-track::after { right:0; background: linear-gradient(to left, var(--dark), transparent); }
-  .sponsors-inner { display: flex; gap: 3rem; animation: scrollSponsors 20s linear infinite; width: max-content; }
-  @keyframes scrollSponsors { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-  .sponsor-item { height: 60px; display: flex; align-items: center; filter: grayscale(100%) brightness(0.6); transition: filter 0.3s; flex-shrink: 0; }
-  .sponsor-item:hover { filter: grayscale(0%) brightness(1); }
-  .sponsor-item img { height: 100%; width: auto; max-width: 140px; object-fit: contain; }
+  .sponsors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.25rem; }
+  .sponsor-card {
+    background: var(--dark2); border: 1px solid rgba(212,160,23,0.15); border-radius: 6px;
+    height: 112px; padding: 1.25rem; display: flex; align-items: center; justify-content: center;
+    filter: grayscale(100%) brightness(0.8); transition: all 0.3s;
+  }
+  .sponsor-card:hover { border-color: var(--gold); filter: grayscale(0%) brightness(1); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
+  .sponsor-card img { max-height: 100%; max-width: 100%; object-fit: contain; }
+
 
   /* CONTACT */
   #contact { background: var(--black); }
@@ -1111,19 +1111,16 @@
       <h2 class="section-title">PATROCINADORES <span class="gold">&amp; PARCEIROS</span></h2>
       <div class="section-divider"></div>
     </div>
-    <div class="sponsors-track">
-      <div class="sponsors-inner">
-        <div class="sponsor-item"><img loading="lazy" src="assets/skyfit.png" alt="Skyfit"></div>
-        <div class="sponsor-item"><img loading="lazy" src="assets/setfit.png" alt="Setfit"></div>
-        <div class="sponsor-item"><img loading="lazy" src="assets/swift.svg" alt="Swift"></div>
-        <div class="sponsor-item"><img loading="lazy" src="assets/logo.sagat.png" alt="André Sagat"></div>
-        <div class="sponsor-item"><img loading="lazy" src="assets/dent.jpeg" alt="Gonzaga & Oliveira Odontologia"></div>
-        <div class="sponsor-item"><img loading="lazy" src="assets/skyfit.png" alt="Skyfit"></div>
-        <div class="sponsor-item"><img loading="lazy" src="assets/setfit.png" alt="Setfit"></div>
-        <div class="sponsor-item"><img loading="lazy" src="assets/swift.svg" alt="Swift"></div>
-        <div class="sponsor-item"><img loading="lazy" src="assets/logo.sagat.png" alt="André Sagat"></div>
-        <div class="sponsor-item"><img loading="lazy" src="assets/dent.jpeg" alt="Gonzaga & Oliveira Odontologia"></div>
-      </div>
+    <div class="sponsors-grid">
+      <div class="sponsor-card"><img loading="lazy" src="assets/skyfit.png" alt="Skyfit"></div>
+      <div class="sponsor-card"><img loading="lazy" src="assets/setfit.png" alt="Setfit"></div>
+      <div class="sponsor-card"><img loading="lazy" src="assets/swift.svg" alt="Swift"></div>
+      <div class="sponsor-card"><img loading="lazy" src="assets/logo.sagat.png" alt="André Sagat"></div>
+      <div class="sponsor-card"><img loading="lazy" src="assets/dent.jpeg" alt="Gonzaga & Oliveira Odontologia"></div>
+      <div class="sponsor-card"><img loading="lazy" src="assets/la-firma-bar.png" alt="La Firma Bar"></div>
+      <div class="sponsor-card"><img loading="lazy" src="assets/dream-cakes.png" alt="Dream Cake's - Doceria da Nath"></div>
+      <div class="sponsor-card"><img loading="lazy" src="assets/torres-barber.png" alt="Torres Barber & Co."></div>
+      <div class="sponsor-card"><img loading="lazy" src="assets/otica-organiza.png" alt="Ótica Organiza"></div>
     </div>
   </div>
 </section>
