@@ -302,6 +302,38 @@
   /* Master crown badge */
   .master-badge { position: absolute; top: 12px; right: 12px; z-index: 10; background: var(--gold); color: var(--black); font-family: 'Oswald', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; padding: 4px 10px; text-transform: uppercase; clip-path: polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px); }
 
+  /* CAMPANHA KAIO VINÍCIUS */
+  #kaio { background: var(--black); }
+  .kaio-grid {
+    display: grid; grid-template-columns: 0.75fr 1fr; gap: 3.5rem; align-items: center;
+    background: linear-gradient(135deg, rgba(212,160,23,0.08), rgba(212,160,23,0.02));
+    border: 1px solid rgba(212,160,23,0.25); border-radius: 8px; padding: 3rem;
+  }
+  .kaio-photo-wrap { position: relative; }
+  .kaio-photo-wrap img { width: 100%; border-radius: 6px; filter: grayscale(10%) contrast(1.05); display: block; }
+  .kaio-photo-badge {
+    position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--gold); color: var(--black); font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.95rem; letter-spacing: 1px; padding: 8px 22px; white-space: nowrap;
+    display: flex; align-items: center; gap: 8px;
+    clip-path: polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+  }
+  .kaio-eyebrow { font-family: 'Oswald', sans-serif; font-size: 0.75rem; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px; }
+  .kaio-name { font-family: 'Bebas Neue', sans-serif; font-size: 2.6rem; color: #fff; letter-spacing: 2px; line-height: 1; }
+  .kaio-subtitle { font-family: 'Oswald', sans-serif; font-size: 0.85rem; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; margin: 0.75rem 0 1.5rem; display: flex; align-items: center; gap: 8px; }
+  .kaio-subtitle .fa { color: var(--gold); }
+  .kaio-desc { color: var(--text-muted); line-height: 1.8; margin-bottom: 1.1rem; font-size: 1rem; }
+  .kaio-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.75rem 0 1.25rem; }
+  .kaio-tagline { font-family: 'Oswald', sans-serif; font-size: 0.82rem; color: var(--text); letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+  .kaio-tagline .fa { color: var(--gold); }
+  @media (max-width: 1024px) {
+    .kaio-grid { grid-template-columns: 1fr; padding: 2rem; }
+    .kaio-photo-wrap { max-width: 340px; margin: 0 auto; }
+  }
+  @media (max-width: 768px) {
+    .kaio-grid { padding: 1.5rem; gap: 2.5rem; }
+  }
+
   /* EVENTOS */
   #eventos { background: var(--black); display: none; }
   .eventos-slider { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
@@ -690,6 +722,7 @@
     <li><a href="#modalities">Modalidades</a></li>
     <li><a href="#pricing">Planos</a></li>
     <li><a href="#team">Equipe</a></li>
+    <li><a href="#kaio">Vaquinha</a></li>
     <li><a href="#eventos">Eventos</a></li>
     <li><a href="blog.html" target="_blank" rel="noopener noreferrer" hidden><i class="fa-solid fa-rss"></i> Blog</a></li>
     <li><a href="#matricula" class="nav-cta"><i class="fa-solid fa-dumbbell"></i> Matricule-se</a></li>
@@ -1072,7 +1105,36 @@
     </div>
   </div>
 </section>
- 
+
+<!-- CAMPANHA KAIO VINÍCIUS -->
+<section id="kaio">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label"><i class="fa-solid fa-hand-holding-heart"></i> &nbsp;Vaquinha Solidária</span>
+      <h2 class="section-title">SONHO DA <span class="gold">TAILÂNDIA</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="kaio-grid fade-in">
+      <div class="kaio-photo-wrap">
+        <img src="assets/kaio-vinicius.jpg" alt="Kaio Vinícius, atleta da André Sagat Muaythai GYM" loading="lazy">
+        <div class="kaio-photo-badge"><i class="fa-solid fa-crown"></i> Campeão Brasileiro</div>
+      </div>
+      <div class="kaio-content">
+        <span class="kaio-eyebrow"><i class="fa-solid fa-trophy"></i> Mundial de Muay Thai</span>
+        <h3 class="kaio-name">KAIO VINÍCIUS</h3>
+        <p class="kaio-subtitle"><i class="fa-solid fa-location-dot"></i> Bangkok, Tailândia</p>
+        <p class="kaio-desc">Nosso atleta Kaio Vinícius, Campeão Brasileiro de Muay Thai, foi selecionado para representar o Brasil no Mundial de Muay Thai, em Bangkok, na Tailândia. Agora é hora de levar o nosso atleta ainda mais longe!</p>
+        <p class="kaio-desc">O Kaio é nosso atleta, nosso orgulho — e agora precisa da nossa ajuda para realizar esse grande sonho. <strong style="color:var(--gold)">Qualquer valor faz a diferença!</strong></p>
+        <div class="kaio-cta">
+          <a href="#" class="btn-primary"><i class="fa-solid fa-heart"></i> Doar na Vakinha</a>
+          <a href="https://wa.me/5511966058202?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20vaquinha%20do%20Kaio%20Vin%C3%ADcius%20para%20o%20Mundial%20na%20Tail%C3%A2ndia." target="_blank" rel="noopener noreferrer" class="btn-secondary"><i class="fa-brands fa-whatsapp"></i> Saiba Mais</a>
+        </div>
+        <p class="kaio-tagline"><i class="fa-solid fa-people-group"></i> Juntos nessa jornada! Nossa força é a equipe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- EVENTOS -->
 <section id="eventos">
   <div class="container">
