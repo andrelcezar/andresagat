@@ -345,6 +345,18 @@
   .evento-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: #fff; letter-spacing: 1px; margin-bottom: 0.5rem; }
   .evento-local { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
 
+  /* CINTURÕES KAIO */
+  #conquistas { background: var(--dark); }
+  .belts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+  .belt-card { background: var(--dark2); border: 1px solid rgba(212,160,23,0.12); border-radius: 4px; overflow: hidden; transition: all 0.3s; }
+  .belt-card:hover { border-color: rgba(212,160,23,0.4); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
+  .belt-img { width: 100%; height: 220px; object-fit: cover; filter: brightness(0.85); transition: all 0.4s; display: block; }
+  .belt-card:hover .belt-img { filter: brightness(1); transform: scale(1.04); }
+  .belt-content { padding: 1.25rem 1.5rem; }
+  .belt-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: #fff; letter-spacing: 1px; margin-bottom: 0.3rem; }
+  .belt-subtitle { font-size: 0.78rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+  .belt-subtitle .fa { color: var(--gold); }
+
   /* PATROCINADORES */
   #patrocinadores { background: var(--dark); }
   .sponsors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.25rem; }
@@ -1142,6 +1154,47 @@
           <a href="https://wa.me/5511966058202?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20vaquinha%20do%20Kaio%20Vin%C3%ADcius%20para%20o%20Mundial%20na%20Tail%C3%A2ndia." target="_blank" rel="noopener noreferrer" class="btn-secondary"><i class="fa-brands fa-whatsapp"></i> Saiba Mais</a>
         </div>
         <p class="kaio-tagline"><i class="fa-solid fa-people-group"></i> Juntos nessa jornada! Nossa força é a equipe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CINTURÕES KAIO -->
+<section id="conquistas">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label"><i class="fa-solid fa-trophy"></i> &nbsp;Conquistas</span>
+      <h2 class="section-title">CINTURÕES DO <span class="gold">KAIO</span></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="belts-grid">
+      <div class="belt-card fade-in">
+        <img class="belt-img" loading="lazy" src="assets/belt-grand-fight-champion.jpg" alt="Cinturão Grand Fight Champion, conquistado por Kaio Vinícius">
+        <div class="belt-content">
+          <h3 class="belt-title">Grand Fight Champion</h3>
+          <p class="belt-subtitle"><i class="fa-solid fa-medal"></i> 5ª Edição Guaxupé</p>
+        </div>
+      </div>
+      <div class="belt-card fade-in">
+        <img class="belt-img" loading="lazy" src="assets/belt-grand-fight-campeao.jpg" alt="Cinturão Grand Fight Campeão Muaythai-Boxe, conquistado por Kaio Vinícius">
+        <div class="belt-content">
+          <h3 class="belt-title">Grand Fight Campeão</h3>
+          <p class="belt-subtitle"><i class="fa-solid fa-medal"></i> Muaythai · Boxe</p>
+        </div>
+      </div>
+      <div class="belt-card fade-in">
+        <img class="belt-img" loading="lazy" src="assets/belt-alcateia-fight.jpg" alt="Cinturão Alcateia Fight Campeão, conquistado por Kaio Vinícius">
+        <div class="belt-content">
+          <h3 class="belt-title">Alcateia Fight</h3>
+          <p class="belt-subtitle"><i class="fa-solid fa-medal"></i> Campeão</p>
+        </div>
+      </div>
+      <div class="belt-card fade-in">
+        <img class="belt-img" loading="lazy" src="assets/belt-maia-fight.jpg" alt="Cinturão Maia Fight Muay Thai Campeão, conquistado por Kaio Vinícius">
+        <div class="belt-content">
+          <h3 class="belt-title">Maia Fight Muay Thai</h3>
+          <p class="belt-subtitle"><i class="fa-solid fa-medal"></i> Campeão</p>
+        </div>
       </div>
     </div>
   </div>
