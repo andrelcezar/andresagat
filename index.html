@@ -385,8 +385,7 @@
   .social-links { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
   .social-link { display: flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid rgba(212,160,23,0.25); color: var(--text-muted); text-decoration: none; font-family: 'Oswald', sans-serif; font-size: 0.82rem; letter-spacing: 1px; transition: all 0.3s; border-radius: 2px; }
   .social-link:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,160,23,0.05); }
-  .contact-map { border-radius: 4px; overflow: hidden; border: 1px solid rgba(212,160,23,0.2); }
-  .contact-map iframe { width: 100%; height: 380px; border: none; filter: grayscale(60%) brightness(0.8) contrast(1.1); }
+  .contact-map { display: flex; align-items: center; justify-content: center; padding: 1rem; }
 
   /* FOOTER */
   footer { background: var(--dark); border-top: 1px solid rgba(212,160,23,0.15); padding: 3rem 2rem; }
@@ -407,8 +406,8 @@
   .scroll-top:hover { background: var(--gold-light); }
 
   /* ANIMATIONS */
-  .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  .js .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .js .fade-in.visible, .js .fade-in:focus-within { opacity: 1; transform: translateY(0); }
 
   /* RESPONSIVE */
   @media (max-width: 1024px) {
@@ -417,10 +416,10 @@
     .team-grid-athletes { grid-template-columns: repeat(2, 1fr); }
     .pricing-grid { grid-template-columns: 1fr; }
   }
-  @media (max-width: 768px) {
+  @media (max-width: 960px) {
     .nav-links { display: none; }
     .hamburger { display: flex; }
-    .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 70px; left: 0; right: 0; background: rgba(10,10,10,0.98); padding: 2rem; gap: 1.5rem; border-bottom: 1px solid rgba(212,160,23,0.2); }
+    .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 70px; left: 0; right: 0; max-height: calc(100dvh - 70px); overflow-y: auto; background: rgba(10,10,10,0.98); padding: 2rem; gap: 1.5rem; border-bottom: 1px solid rgba(212,160,23,0.2); }
     .hero-content { grid-template-columns: 1fr; text-align: center; }
     .hero-visual { display: none; }
     .hero-actions { justify-content: center; }
@@ -461,16 +460,12 @@
 
   .mf-group { display: flex; flex-direction: column; gap: 5px; }
   .mf-label { font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
-  .mf-input, .mf-select, .mf-textarea {
+  .mf-select {
     background: var(--dark3); border: 1px solid rgba(212,160,23,0.18);
     color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.9rem;
     padding: 11px 14px; border-radius: 3px; transition: border-color 0.3s; width: 100%;
   }
-  .mf-input:focus, .mf-select:focus, .mf-textarea:focus { outline: none; border-color: var(--gold); }
-  .mf-input::placeholder, .mf-textarea::placeholder { color: var(--text-muted); font-size: 0.85rem; }
   .mf-select option { background: var(--dark2); }
-  .mf-textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
-  .mf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
   /* Plan cards selector */
   .plan-options { display: flex; flex-direction: column; gap: 8px; }
@@ -478,9 +473,9 @@
   .plan-option:hover { border-color: rgba(212,160,23,0.4); }
   .plan-option input[type=radio] { accent-color: var(--gold); width: 16px; height: 16px; flex-shrink: 0; }
   .plan-option:has(input:checked) { border-color: var(--gold); background: rgba(212,160,23,0.07); }
-  .plan-option-info { flex: 1; }
-  .plan-option-name { font-family: 'Oswald', sans-serif; font-size: 0.85rem; color: #fff; letter-spacing: 1px; }
-  .plan-option-desc { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+  .plan-option-info { flex: 1; min-width: 0; }
+  .plan-option-name { display: block; font-family: 'Oswald', sans-serif; font-size: 0.85rem; color: #fff; letter-spacing: 1px; }
+  .plan-option-desc { display: block; font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
   .plan-option-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--gold); letter-spacing: 1px; }
   .plan-option-price.free { color: var(--green, #2ecc71); font-size: 1rem; font-family: 'Oswald', sans-serif; letter-spacing: 2px; }
 
@@ -490,216 +485,20 @@
     font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1rem;
     letter-spacing: 2px; text-transform: uppercase; padding: 16px;
     cursor: pointer; border-radius: 3px; display: flex; align-items: center; justify-content: center; gap: 10px;
-    transition: all 0.3s;
-    clip-path: polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
+    transition: background-color .3s;
   }
   .mat-submit:hover { background: var(--gold-light); }
-  .mat-submit:disabled { opacity: 0.6; cursor: not-allowed; }
-  .mat-submit .spinner { width: 18px; height: 18px; border: 2px solid rgba(0,0,0,0.3); border-top-color: var(--black); border-radius: 50%; animation: spin 0.8s linear infinite; display: none; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .mat-privacy { text-align: center; font-size: 0.72rem; color: var(--text-muted); margin-top: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 5px; }
-
-  /* Success state */
-  .mat-success {
-    display: none; text-align: center; padding: 3rem 2rem;
-    flex-direction: column; align-items: center; gap: 1rem;
-  }
-  .mat-success .success-icon { width: 72px; height: 72px; border-radius: 50%; background: rgba(46,204,113,0.12); border: 2px solid #2ecc71; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #2ecc71; margin: 0 auto; }
-  .mat-success h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: #fff; letter-spacing: 2px; }
-  .mat-success p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; max-width: 340px; }
-  .mat-success .nextfit-cta { display: flex; align-items: center; gap: 10px; padding: 1rem 1.5rem; background: rgba(212,160,23,0.08); border: 1px solid rgba(212,160,23,0.3); border-radius: 4px; margin-top: 0.5rem; width: 100%; max-width: 340px; }
-  .mat-success .nextfit-cta .fa { font-size: 1.5rem; color: var(--gold); }
-  .mat-success .nextfit-cta strong { font-family: 'Oswald', sans-serif; font-size: 0.85rem; color: #fff; display: block; }
-  .mat-success .nextfit-cta span { font-size: 0.72rem; color: var(--text-muted); }
+  .mat-privacy { text-align: center; font-size: .8rem; color: var(--text-muted); margin-top: .75rem; }
+  .mat-privacy a { color: var(--gold-light); }
+  .plan-fieldset { border: 0; min-inline-size: 0; }
+  .plan-fieldset legend { margin-bottom: .5rem; }
+  #preferredShift[hidden] { display: none; }
 
   @media (max-width: 768px) {
-    .matricula-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .mf-row { grid-template-columns: 1fr; }
+    .matricula-grid { grid-template-columns: minmax(0, 1fr); gap: 3rem; }
+    .mat-form-body, .mat-form-header { padding: 1.25rem; }
+    .mat-form-footer { padding: 0 1.25rem 1.25rem; }
   }
-
-  /* ── AGENDAMENTO POPUP ──────────────────────────────────────── */
-  .sched-overlay {
-    position: fixed; inset: 0; z-index: 2000;
-    background: rgba(0,0,0,0.88); backdrop-filter: blur(10px);
-    display: none; align-items: center; justify-content: center; padding: 1rem;
-    opacity: 0; transition: opacity 0.3s;
-  }
-  .sched-overlay.open { display: flex; }
-  .sched-overlay.visible { opacity: 1; }
-
-  .sched-modal {
-    background: var(--dark); border: 1px solid rgba(212,160,23,0.3);
-    border-radius: 8px; width: 100%; max-width: 520px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.7);
-    transform: translateY(20px); transition: transform 0.35s cubic-bezier(.22,.68,0,1.2);
-    overflow: hidden;
-  }
-  .sched-overlay.visible .sched-modal { transform: translateY(0); }
-
-  .sched-header {
-    background: linear-gradient(135deg, rgba(212,160,23,0.15), rgba(212,160,23,0.04));
-    padding: 1.5rem 2rem; border-bottom: 1px solid rgba(212,160,23,0.15);
-    display: flex; align-items: flex-start; justify-content: space-between;
-  }
-  .sched-header-info h3 {
-    font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;
-    color: var(--gold); letter-spacing: 2px; display: flex; align-items: center; gap: 10px;
-  }
-  .sched-header-info p { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
-  .sched-close {
-    background: none; border: none; color: var(--text-muted);
-    font-size: 1.2rem; cursor: pointer; padding: 4px; transition: color 0.2s; flex-shrink: 0;
-  }
-  .sched-close:hover { color: var(--gold); }
-
-  /* STEP INDICATOR */
-  .sched-steps {
-    display: flex; align-items: center; padding: 1.25rem 2rem;
-    border-bottom: 1px solid rgba(212,160,23,0.1); gap: 0;
-  }
-  .sched-step {
-    display: flex; align-items: center; gap: 8px;
-    font-family: 'Oswald', sans-serif; font-size: 0.72rem;
-    letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted);
-    flex: 1;
-  }
-  .sched-step.active { color: var(--gold); }
-  .sched-step.done { color: rgba(212,160,23,0.6); }
-  .step-num {
-    width: 24px; height: 24px; border-radius: 50%;
-    border: 1px solid rgba(212,160,23,0.3);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.7rem; flex-shrink: 0; transition: all 0.3s;
-  }
-  .sched-step.active .step-num { background: var(--gold); color: var(--black); border-color: var(--gold); }
-  .sched-step.done  .step-num { background: rgba(212,160,23,0.2); color: var(--gold); border-color: rgba(212,160,23,0.4); }
-  .step-line { flex: 1; height: 1px; background: rgba(212,160,23,0.15); margin: 0 8px; }
-
-  /* CALENDAR */
-  .sched-body { padding: 1.5rem 2rem; }
-
-  .cal-nav {
-    display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;
-  }
-  .cal-nav-btn {
-    width: 34px; height: 34px; background: var(--dark2); border: 1px solid rgba(212,160,23,0.2);
-    color: var(--gold); cursor: pointer; border-radius: 3px; font-size: 0.9rem;
-    display: flex; align-items: center; justify-content: center; transition: all 0.2s;
-  }
-  .cal-nav-btn:hover { background: rgba(212,160,23,0.1); border-color: var(--gold); }
-  .cal-month-label {
-    font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem;
-    color: #fff; letter-spacing: 2px;
-  }
-
-  .cal-weekdays {
-    display: grid; grid-template-columns: repeat(7, 1fr);
-    gap: 4px; margin-bottom: 6px;
-  }
-  .cal-weekday {
-    text-align: center; font-family: 'Oswald', sans-serif;
-    font-size: 0.65rem; letter-spacing: 1.5px; color: var(--text-muted);
-    text-transform: uppercase; padding: 4px 0;
-  }
-  .cal-weekday.weekend { color: rgba(212,160,23,0.5); }
-
-  .cal-days {
-    display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px;
-  }
-  .cal-day {
-    aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-    border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.85rem;
-    cursor: pointer; transition: all 0.2s; border: 1px solid transparent;
-    color: var(--text); position: relative;
-  }
-  .cal-day:hover:not(.disabled):not(.empty) { background: rgba(212,160,23,0.12); border-color: rgba(212,160,23,0.35); color: var(--gold); }
-  .cal-day.selected { background: var(--gold); color: var(--black); border-color: var(--gold); font-weight: 600; }
-  .cal-day.today { border-color: rgba(212,160,23,0.5); color: var(--gold); }
-  .cal-day.disabled { opacity: 0.22; cursor: not-allowed; }
-  .cal-day.empty { cursor: default; }
-  .cal-day.weekend:not(.disabled) { color: rgba(212,160,23,0.7); }
-
-  /* TIME SLOT STEP */
-  .time-slots-wrap { display: none; }
-  .time-step-back {
-    display: flex; align-items: center; gap: 8px; margin-bottom: 1.25rem;
-    font-family: 'Oswald', sans-serif; font-size: 0.78rem; letter-spacing: 1.5px;
-    color: var(--text-muted); cursor: pointer; transition: color 0.2s; width: fit-content;
-  }
-  .time-step-back:hover { color: var(--gold); }
-  .time-selected-date {
-    font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem;
-    color: var(--gold); letter-spacing: 2px; margin-bottom: 1rem;
-    display: flex; align-items: center; gap: 8px;
-  }
-
-  .turno-block { margin-bottom: 1.25rem; }
-  .turno-label {
-    font-family: 'Oswald', sans-serif; font-size: 0.68rem; letter-spacing: 2.5px;
-    color: var(--text-muted); text-transform: uppercase;
-    margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
-  }
-  .turno-label .fa { color: var(--gold); }
-  .slots-row { display: flex; flex-wrap: wrap; gap: 8px; }
-  .time-slot {
-    padding: 8px 16px; background: var(--dark2); border: 1px solid rgba(212,160,23,0.18);
-    border-radius: 3px; font-family: 'Oswald', sans-serif; font-size: 0.82rem;
-    letter-spacing: 1px; color: var(--text); cursor: pointer; transition: all 0.2s;
-  }
-  .time-slot:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,160,23,0.06); }
-  .time-slot.selected { background: var(--gold); color: var(--black); border-color: var(--gold); font-weight: 600; }
-
-  /* CONFIRM STEP */
-  .confirm-wrap { display: none; text-align: center; padding: 0.5rem 0; }
-  .confirm-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(46,204,113,0.1); border: 2px solid #2ecc71; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #2ecc71; margin: 0 auto 1rem; }
-  .confirm-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: #fff; letter-spacing: 2px; margin-bottom: 0.5rem; }
-  .confirm-summary { background: var(--dark2); border: 1px solid rgba(212,160,23,0.18); border-radius: 4px; padding: 1rem 1.25rem; margin: 1rem 0; text-align: left; }
-  .confirm-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-  .confirm-row:last-child { border-bottom: none; }
-  .confirm-row .fa { color: var(--gold); font-size: 0.8rem; width: 16px; text-align: center; flex-shrink: 0; }
-  .confirm-row span { font-size: 0.83rem; color: var(--text); }
-  .confirm-row strong { font-family: 'Oswald', sans-serif; font-size: 0.75rem; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; min-width: 70px; display: inline-block; }
-  .confirm-note { font-size: 0.78rem; color: var(--text-muted); line-height: 1.65; }
-
-  /* FOOTER ACTIONS */
-  .sched-footer {
-    padding: 1.25rem 2rem; border-top: 1px solid rgba(212,160,23,0.1);
-    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-  }
-  .sched-cancel-link {
-    font-family: 'Oswald', sans-serif; font-size: 0.75rem; letter-spacing: 1.5px;
-    color: var(--text-muted); cursor: pointer; text-decoration: none; transition: color 0.2s;
-  }
-  .sched-cancel-link:hover { color: var(--gold); }
-  .sched-btn-next {
-    background: var(--gold); color: var(--black); border: none;
-    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 0.88rem;
-    letter-spacing: 2px; text-transform: uppercase; padding: 12px 28px;
-    cursor: pointer; border-radius: 3px; display: flex; align-items: center; gap: 8px;
-    transition: all 0.25s; opacity: 0.45; pointer-events: none;
-    clip-path: polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
-  }
-  .sched-btn-next.ready { opacity: 1; pointer-events: auto; }
-  .sched-btn-next.ready:hover { background: var(--gold-light); }
-
-  @media (max-width: 540px) {
-    .sched-modal { max-width: 100%; border-radius: 12px 12px 0 0; }
-    .sched-overlay { align-items: flex-end; padding: 0; }
-    .sched-body { padding: 1.25rem; }
-    .sched-footer { padding: 1rem 1.25rem; }
-    .sched-header { padding: 1.25rem; }
-  }
-
-  /* Confirm aula button */
-  .sched-btn-confirm {
-    background: #2ecc71; color: #fff; border: none;
-    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 0.88rem;
-    letter-spacing: 2px; text-transform: uppercase; padding: 12px 24px;
-    cursor: pointer; border-radius: 3px; display: flex; align-items: center; gap: 8px;
-    transition: all 0.25s;
-    clip-path: polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
-  }
-  .sched-btn-confirm:hover { background: #27ae60; transform: translateY(-1px); }
 
   /* Novidades section */
   #novidades { background: var(--dark); padding: 6rem 2rem; display: none; }
@@ -716,15 +515,24 @@
   .novidades-cta { text-align: center; margin-top: 2rem; }
   @media (max-width:768px) { .novidades-grid { grid-template-columns: 1fr; } }
 
+  .skip-link { position: fixed; top: 0; left: 1rem; z-index: 3000; padding: .75rem; background: #fff; color: #111; transform: translateY(-110%); }
+  .skip-link:focus { transform: none; }
+  :focus-visible { outline: 2px solid #f2c647; outline-offset: 3px; }
+  .scroll-top:not(.visible) { visibility: hidden; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    .js .fade-in { opacity: 1; transform: none; }
+  }
 </style>
 </head>
 
 <body>
  
 <!-- NAV -->
-<nav id="navbar">
+<a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+<nav id="navbar" aria-label="Navegação principal">
   <a href="#home" class="nav-logo">
-    <img src="assets/logo.sagat.png" alt="André Sagat Logo">
+    <img src="assets/logo-sagat.webp" alt="André Sagat Logo">
     <div class="nav-brand">
       André Sagat
       <span>Muaythai Gym</span>
@@ -738,13 +546,14 @@
     <li><a href="#team">Equipe</a></li>
     <li><a href="#kaio">Vaquinha</a></li>
     <li id="navEventosItem" hidden><a href="#eventos">Eventos</a></li>
-    <li><a href="blog.html" target="_blank" rel="noopener noreferrer" hidden><i class="fa-solid fa-rss"></i> Blog</a></li>
-    <li><a href="#matricula" class="nav-cta"><i class="fa-solid fa-dumbbell"></i> Matricule-se</a></li>
+    <li><a href="blog.html"><i aria-hidden="true" class="fa-solid fa-rss"></i> Blog</a></li>
+    <li><a href="#matricula" class="nav-cta"><i aria-hidden="true" class="fa-solid fa-dumbbell"></i> Matricule-se</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+  <button type="button" class="hamburger" id="hamburger" aria-label="Menu principal" aria-controls="navLinks" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
+<main id="conteudo" tabindex="-1">
  
 <!-- HERO -->
 <section id="home">
@@ -753,7 +562,7 @@
   <div class="hero-content container">
     <div class="hero-text">
       <div class="hero-badge">
-        <i class="fa-solid fa-circle fa-2xs"></i>
+        <i aria-hidden="true" class="fa-solid fa-circle fa-2xs"></i>
         Academia de Muay Thai
       </div>
       <h1 class="hero-title">
@@ -764,8 +573,8 @@
       <p class="hero-subtitle">Muay Thai &nbsp;·&nbsp; São Paulo</p>
       <p class="hero-desc">Treino para corpo e mente. Disciplina, técnica e superação. Formação de campeões desde o primeiro treino — para todos os níveis.</p>
       <div class="hero-actions">
-        <a href="#matricula" class="btn-primary"><i class="fa-solid fa-dumbbell"></i> Matricule-se Grátis</a>
-        <a href="#modalities" class="btn-secondary"><i class="fa-solid fa-person-running"></i> Modalidades</a>
+        <a href="#matricula" class="btn-primary"><i aria-hidden="true" class="fa-solid fa-dumbbell"></i> Solicitar aula experimental grátis</a>
+        <a href="#modalities" class="btn-secondary"><i aria-hidden="true" class="fa-solid fa-person-running"></i> Modalidades</a>
       </div>
       <div class="hero-stats">
         <div class="stat-item">
@@ -777,7 +586,7 @@
           <span class="stat-label">Alunos</span>
         </div>
         <div class="stat-item">
-          <span class="stat-number">5 <i class="fa-solid fa-star" style="color:var(--gold);font-size:1.4rem;vertical-align:middle"></i></span>
+          <span class="stat-number">5 <i aria-hidden="true" class="fa-solid fa-star" style="color:var(--gold);font-size:1.4rem;vertical-align:middle"></i></span>
           <span class="stat-label">Avaliação</span>
         </div>
       </div>
@@ -785,7 +594,7 @@
     <div class="hero-visual">
       <div style="position:relative;display:flex;align-items:center;justify-content:center;">
         <div class="hero-logo-ring"></div>
-        <img src="assets/logo.sagat.png" alt="Logo André Sagat" class="hero-logo-img">
+        <img src="assets/logo-sagat.webp" alt="Logo André Sagat" class="hero-logo-img" width="500" height="500" fetchpriority="high">
       </div>
     </div>
   </div>
@@ -794,16 +603,16 @@
 <!-- GOLD STRIPE -->
 <div class="gold-stripe">
   <div class="gold-stripe-inner">
-    <span class="gold-stripe-item"><i class="fas fa-fist-raised"></i> Muay Thai Adulto</span>
-    <span class="gold-stripe-item"><i class="fas fa-child"></i> Muay Thai Kids</span>
-    <span class="gold-stripe-item"><i class="fas fa-trophy"></i> Personal Fight</span>
-    <span class="gold-stripe-item"><i class="fas fa-fire"></i> Treino Funcional</span>
-    <span class="gold-stripe-item"><i class="fas fa-map-marker-alt"></i> Av. Cangaíba, 4530</span>
-    <span class="gold-stripe-item"><i class="fas fa-fist-raised"></i> Muay Thai Adulto</span>
-    <span class="gold-stripe-item"><i class="fas fa-child"></i> Muay Thai Kids</span>
-    <span class="gold-stripe-item"><i class="fas fa-trophy"></i> Personal Fight</span>
-    <span class="gold-stripe-item"><i class="fas fa-fire"></i> Treino Funcional</span>
-    <span class="gold-stripe-item"><i class="fas fa-map-marker-alt"></i> Av. Cangaíba, 4530</span>
+    <span class="gold-stripe-item"><i aria-hidden="true" class="fas fa-fist-raised"></i> Muay Thai Adulto</span>
+    <span class="gold-stripe-item"><i aria-hidden="true" class="fas fa-child"></i> Muay Thai Kids</span>
+    <span class="gold-stripe-item"><i aria-hidden="true" class="fas fa-trophy"></i> Personal Fight</span>
+    <span class="gold-stripe-item"><i aria-hidden="true" class="fas fa-fire"></i> Treino Funcional</span>
+    <span class="gold-stripe-item"><i aria-hidden="true" class="fas fa-map-marker-alt"></i> Av. Cangaíba, 4530</span>
+    <span class="gold-stripe-item"><i aria-hidden="true" class="fas fa-fist-raised"></i> Muay Thai Adulto</span>
+    <span class="gold-stripe-item"><i aria-hidden="true" class="fas fa-child"></i> Muay Thai Kids</span>
+    <span class="gold-stripe-item"><i aria-hidden="true" class="fas fa-trophy"></i> Personal Fight</span>
+    <span class="gold-stripe-item"><i aria-hidden="true" class="fas fa-fire"></i> Treino Funcional</span>
+    <span class="gold-stripe-item"><i aria-hidden="true" class="fas fa-map-marker-alt"></i> Av. Cangaíba, 4530</span>
   </div>
 </div>
  
@@ -812,31 +621,31 @@
   <div class="container">
     <div class="about-grid">
       <div class="about-img-wrap fade-in">
-        <img loading="lazy" src="assets/extra2.png" alt="André Sagat Academia">
+        <img loading="lazy" src="assets/academia.webp" width="640" height="800" alt="André Sagat Academia">
         <div class="about-img-accent"></div>
-        <div class="about-img-tag"><i class="fa-solid fa-medal"></i> + DE 10 ANOS</div>
+        <div class="about-img-tag"><i aria-hidden="true" class="fa-solid fa-medal"></i> + DE 10 ANOS</div>
       </div>
       <div class="about-content fade-in">
-        <span class="section-label"><i class="fa-solid fa-circle-info"></i> &nbsp;Nossa História</span>
+        <span class="section-label"><i aria-hidden="true" class="fa-solid fa-circle-info"></i> &nbsp;Nossa História</span>
         <h2 class="section-title">SOBRE A <span class="gold">ACADEMIA</span></h2>
         <div class="section-divider" style="margin:1.5rem 0;"></div>
         <p>A André Sagat Muaythai GYM é referência em Muay Thai em São Paulo. Fundada com foco em formação técnica e respeito às tradições tailandesas, a academia oferece aulas para todos os níveis — do iniciante ao competidor.</p>
         <p>Com estrutura completa e instrutores qualificados, desenvolvemos atletas e pessoas que buscam disciplina, condicionamento e superação no dia a dia.</p>
         <div class="about-features">
           <div class="feature-item">
-            <div class="feature-icon"><i class="fa-solid fa-hand-fist"></i></div>
+            <div class="feature-icon"><i aria-hidden="true" class="fa-solid fa-hand-fist"></i></div>
             <div class="feature-text"><strong>Técnica</strong><span>Todos os níveis</span></div>
           </div>
           <div class="feature-item">
-            <div class="feature-icon"><i class="fa-solid fa-trophy"></i></div>
+            <div class="feature-icon"><i aria-hidden="true" class="fa-solid fa-trophy"></i></div>
             <div class="feature-text"><strong>Competição</strong><span>Formação de campeões</span></div>
           </div>
           <div class="feature-item">
-            <div class="feature-icon"><i class="fa-solid fa-child-reaching"></i></div>
+            <div class="feature-icon"><i aria-hidden="true" class="fa-solid fa-child-reaching"></i></div>
             <div class="feature-text"><strong>Infantil</strong><span>8 a 12 anos</span></div>
           </div>
           <div class="feature-item">
-            <div class="feature-icon"><i class="fa-solid fa-dumbbell"></i></div>
+            <div class="feature-icon"><i aria-hidden="true" class="fa-solid fa-dumbbell"></i></div>
             <div class="feature-text"><strong>Funcional</strong><span>Condicionamento físico</span></div>
           </div>
         </div>
@@ -849,45 +658,45 @@
 <section id="horarios">
   <div class="container">
     <div class="section-header">
-      <span class="section-label"><i class="fa-solid fa-clock"></i> &nbsp;Grade de Aulas</span>
+      <span class="section-label"><i aria-hidden="true" class="fa-solid fa-clock"></i> &nbsp;Grade de Aulas</span>
       <h2 class="section-title">HORÁRIOS DE <span class="gold">TREINO</span></h2>
       <div class="section-divider"></div>
     </div>
     <div class="horarios-grid">
       <div class="horario-card fade-in">
-        <div class="horario-icon"><i class="fa-solid fa-sun"></i></div>
+        <div class="horario-icon"><i aria-hidden="true" class="fa-solid fa-sun"></i></div>
         <div class="horario-title">MANHÃ</div>
         <ul class="horario-times">
-          <li><i class="fa-solid fa-chevron-right"></i>07:00 – 08:30</li>
-          <li><i class="fa-solid fa-chevron-right"></i>08:30 – 10:00</li>
+          <li><i aria-hidden="true" class="fa-solid fa-chevron-right"></i>07:00 – 08:30</li>
+          <li><i aria-hidden="true" class="fa-solid fa-chevron-right"></i>08:30 – 10:00</li>
         </ul>
-        <p class="horario-note"><i class="fa-solid fa-calendar-days"></i>Segunda a Sexta</p>
+        <p class="horario-note"><i aria-hidden="true" class="fa-solid fa-calendar-days"></i>Segunda a Sexta</p>
       </div>
       <div class="horario-card fade-in">
-        <div class="horario-icon"><i class="fa-solid fa-cloud-sun"></i></div>
+        <div class="horario-icon"><i aria-hidden="true" class="fa-solid fa-cloud-sun"></i></div>
         <div class="horario-title">TARDE</div>
         <ul class="horario-times">
-          <li><i class="fa-solid fa-chevron-right"></i>15:00 – 16:30</li>
-          <li><i class="fa-solid fa-chevron-right"></i>16:30 – 18:00</li>
+          <li><i aria-hidden="true" class="fa-solid fa-chevron-right"></i>15:00 – 16:30</li>
+          <li><i aria-hidden="true" class="fa-solid fa-chevron-right"></i>16:30 – 18:00</li>
         </ul>
-        <p class="horario-note"><i class="fa-solid fa-calendar-days"></i>Segunda a Sexta</p>
+        <p class="horario-note"><i aria-hidden="true" class="fa-solid fa-calendar-days"></i>Segunda a Sexta</p>
       </div>
       <div class="horario-card fade-in">
-        <div class="horario-icon"><i class="fa-solid fa-moon"></i></div>
+        <div class="horario-icon"><i aria-hidden="true" class="fa-solid fa-moon"></i></div>
         <div class="horario-title">NOITE</div>
         <ul class="horario-times">
-          <li><i class="fa-solid fa-chevron-right"></i>19:00 – 20:30</li>
-          <li><i class="fa-solid fa-chevron-right"></i>20:30 – 22:00</li>
+          <li><i aria-hidden="true" class="fa-solid fa-chevron-right"></i>19:00 – 20:30</li>
+          <li><i aria-hidden="true" class="fa-solid fa-chevron-right"></i>20:30 – 22:00</li>
         </ul>
-        <p class="horario-note"><i class="fa-solid fa-calendar-days"></i>Segunda a Sexta</p>
+        <p class="horario-note"><i aria-hidden="true" class="fa-solid fa-calendar-days"></i>Segunda a Sexta</p>
       </div>
       <div class="horario-card fade-in">
-        <div class="horario-icon"><i class="fa-solid fa-person-running"></i></div>
+        <div class="horario-icon"><i aria-hidden="true" class="fa-solid fa-person-running"></i></div>
         <div class="horario-title">FUNCIONAL</div>
         <ul class="horario-times">
-          <li><i class="fa-solid fa-chevron-right"></i>17:30 – 18:30</li>
+          <li><i aria-hidden="true" class="fa-solid fa-chevron-right"></i>17:30 – 18:30</li>
         </ul>
-        <p class="horario-note"><i class="fa-solid fa-calendar-days"></i>Seg. e Sexta</p>
+        <p class="horario-note"><i aria-hidden="true" class="fa-solid fa-calendar-days"></i>Seg. e Sexta</p>
       </div>
     </div>
   </div>
@@ -897,7 +706,7 @@
 <section id="modalities">
   <div class="container">
     <div class="section-header">
-      <span class="section-label"><i class="fa-solid fa-hand-fist"></i> &nbsp;O Que Oferecemos</span>
+      <span class="section-label"><i aria-hidden="true" class="fa-solid fa-hand-fist"></i> &nbsp;O Que Oferecemos</span>
       <h2 class="section-title">NOSSAS <span class="gold">MODALIDADES</span></h2>
       <div class="section-divider"></div>
     </div>
@@ -905,7 +714,7 @@
       <div class="modality-card fade-in">
         <img loading="lazy" src="assets/modalidade-adulto.jpg" alt="Muay Thai Adulto">
         <div class="modality-overlay">
-          <span class="modality-tag"><i class="fa-solid fa-hand-fist"></i> Arte Marcial</span>
+          <span class="modality-tag"><i aria-hidden="true" class="fa-solid fa-hand-fist"></i> Arte Marcial</span>
           <h3 class="modality-name">MUAY THAI ADULTO</h3>
           <p class="modality-desc">Treinos para condicionamento, técnica e luta. Aulas para iniciantes, intermediários e competidores.</p>
         </div>
@@ -914,7 +723,7 @@
       <div class="modality-card fade-in">
         <img loading="lazy" src="assets/modalidade-kids.jpg" alt="Muay Thai Kids">
         <div class="modality-overlay">
-          <span class="modality-tag"><i class="fa-solid fa-child-reaching"></i> Infantil · 8–12 Anos</span>
+          <span class="modality-tag"><i aria-hidden="true" class="fa-solid fa-child-reaching"></i> Infantil · 8–12 Anos</span>
           <h3 class="modality-name">MUAY THAI KIDS</h3>
           <p class="modality-desc">Treinos voltados para crianças com foco em disciplina, coordenação motora e diversão.</p>
         </div>
@@ -923,7 +732,7 @@
       <div class="modality-card fade-in">
         <img loading="lazy" src="assets/modalidade-personal.jpg" alt="Personal Fight">
         <div class="modality-overlay">
-          <span class="modality-tag"><i class="fa-solid fa-user-gear"></i> Exclusivo</span>
+          <span class="modality-tag"><i aria-hidden="true" class="fa-solid fa-user-gear"></i> Exclusivo</span>
           <h3 class="modality-name">PERSONAL FIGHT</h3>
           <p class="modality-desc">Aulas personalizadas com atenção individual, foco em seus objetivos e evolução acelerada.</p>
         </div>
@@ -937,7 +746,7 @@
 <section id="pricing">
   <div class="container">
     <div class="section-header">
-      <span class="section-label"><i class="fa-solid fa-tag"></i> &nbsp;Investimento</span>
+      <span class="section-label"><i aria-hidden="true" class="fa-solid fa-tag"></i> &nbsp;Investimento</span>
       <h2 class="section-title">PLANOS E <span class="gold">VALORES</span></h2>
       <div class="section-divider"></div>
       <p style="color:var(--text-muted);margin-top:1rem;font-size:.95rem;">Escolha o plano ideal para a sua rotina. Matricule-se e comece hoje.</p>
@@ -945,41 +754,41 @@
     <div class="pricing-grid">
       <div class="pricing-card fade-in">
         <div class="pricing-card-header">
-          <div class="pricing-type"><i class="fa-solid fa-hand-fist"></i> Muay Thai</div>
+          <div class="pricing-type"><i aria-hidden="true" class="fa-solid fa-hand-fist"></i> Muay Thai</div>
           <div class="pricing-name">ADULTO</div>
         </div>
         <div class="pricing-card-body">
           <div class="price-row">
-            <span class="price-label"><i class="fa-solid fa-calendar-week"></i> 3× por semana</span>
+            <span class="price-label"><i aria-hidden="true" class="fa-solid fa-calendar-week"></i> 3× por semana</span>
             <span class="price-value"><span class="currency">R$</span> 110</span>
           </div>
           <div class="price-row">
-            <span class="price-label"><i class="fa-solid fa-calendar-check"></i> Segunda a Sexta</span>
+            <span class="price-label"><i aria-hidden="true" class="fa-solid fa-calendar-check"></i> Segunda a Sexta</span>
             <span class="price-value"><span class="currency">R$</span> 130</span>
           </div>
         </div>
       </div>
       <div class="pricing-card featured fade-in">
         <div class="pricing-card-header">
-          <div class="featured-badge"><i class="fa-solid fa-star"></i> Mais Popular</div>
-          <div class="pricing-type"><i class="fa-solid fa-child-reaching"></i> Infantil</div>
+          <div class="featured-badge"><i aria-hidden="true" class="fa-solid fa-star"></i> Mais Popular</div>
+          <div class="pricing-type"><i aria-hidden="true" class="fa-solid fa-child-reaching"></i> Infantil</div>
           <div class="pricing-name">MUAY THAI KIDS</div>
         </div>
         <div class="pricing-card-body">
           <div class="price-row">
-            <span class="price-label"><i class="fa-solid fa-calendar-week"></i> 8 a 12 anos</span>
+            <span class="price-label"><i aria-hidden="true" class="fa-solid fa-calendar-week"></i> 8 a 12 anos</span>
             <span class="price-value"><span class="currency">R$</span> 110</span>
           </div>
         </div>
       </div>
       <div class="pricing-card fade-in">
         <div class="pricing-card-header">
-          <div class="pricing-type"><i class="fa-solid fa-person-running"></i> Fitness</div>
+          <div class="pricing-type"><i aria-hidden="true" class="fa-solid fa-person-running"></i> Fitness</div>
           <div class="pricing-name">FUNCIONAL</div>
         </div>
         <div class="pricing-card-body">
           <div class="price-row">
-            <span class="price-label"><i class="fa-solid fa-calendar-days"></i> Seg. e Sexta</span>
+            <span class="price-label"><i aria-hidden="true" class="fa-solid fa-calendar-days"></i> Seg. e Sexta</span>
             <span class="price-value"><span class="currency">R$</span> 60</span>
           </div>
         </div>
@@ -987,14 +796,14 @@
     </div>
     <div class="pricing-extras fade-in">
       <div class="extra-item">
-        <div class="ei-icon"><i class="fa-solid fa-file-signature"></i></div>
+        <div class="ei-icon"><i aria-hidden="true" class="fa-solid fa-file-signature"></i></div>
         <div>
           <div class="ei-label">Taxa de Matrícula</div>
           <div class="ei-price">R$ 30,00</div>
         </div>
       </div>
       <div class="extra-item">
-        <div class="ei-icon"><i class="fa-solid fa-ticket"></i></div>
+        <div class="ei-icon"><i aria-hidden="true" class="fa-solid fa-ticket"></i></div>
         <div>
           <div class="ei-label">Aula Avulsa</div>
           <div class="ei-price">R$ 40,00</div>
@@ -1006,10 +815,10 @@
       <span>AÇÃO determina o que VOCÊ CONQUISTA!</span>
       <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
         <a href="#matricula" class="btn-primary">
-          <i class="fa-solid fa-dumbbell"></i> Fazer Matrícula
+          <i aria-hidden="true" class="fa-solid fa-dumbbell"></i> Fazer Matrícula
         </a>
         <a href="https://wa.me/5511966058202?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20planos." target="_blank" rel="noopener noreferrer" class="btn-secondary">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+          <i aria-hidden="true" class="fa-brands fa-whatsapp"></i> WhatsApp
         </a>
       </div>
     </div>
@@ -1020,14 +829,14 @@
 <section id="team">
   <div class="container">
     <div class="section-header">
-      <span class="section-label"><i class="fa-solid fa-users"></i> &nbsp;Nossos Professores</span>
+      <span class="section-label"><i aria-hidden="true" class="fa-solid fa-users"></i> &nbsp;Nossos Professores</span>
       <h2 class="section-title">A NOSSA <span class="gold">EQUIPE</span></h2>
       <div class="section-divider"></div>
     </div>
     <!-- MESTRES -->
     <div class="team-block">
       <div class="team-block-header">
-        <span class="team-block-label"><i class="fa-solid fa-crown"></i> Mestres</span>
+        <span class="team-block-label"><i aria-hidden="true" class="fa-solid fa-crown"></i> Mestres</span>
       </div>
       <div class="team-grid-masters">
 
@@ -1035,10 +844,10 @@
           <div class="tc-photo">
             <img loading="lazy" src="assets/sagat.team.jpg" alt="André Sagat">
           </div>
-          <span class="master-badge"><i class="fa-solid fa-crown"></i> Fundador</span>
+          <span class="master-badge"><i aria-hidden="true" class="fa-solid fa-crown"></i> Fundador</span>
           <div class="tc-info">
             <div class="team-name">ANDRÉ SAGAT</div>
-            <div class="team-role"><i class="fa-solid fa-crown"></i> Fundador &amp; Mestre</div>
+            <div class="team-role"><i aria-hidden="true" class="fa-solid fa-crown"></i> Fundador &amp; Mestre</div>
           </div>
         </div>
 
@@ -1046,10 +855,10 @@
           <div class="tc-photo">
             <img loading="lazy" src="assets/renata.team2.jpg" alt="Renata" style="object-position: top center;">
           </div>
-          <span class="master-badge"><i class="fa-solid fa-shield-halved"></i> Mestra</span>
+          <span class="master-badge"><i aria-hidden="true" class="fa-solid fa-shield-halved"></i> Mestra</span>
           <div class="tc-info">
             <div class="team-name">RENATA</div>
-            <div class="team-role"><i class="fa-solid fa-shield-halved"></i> Mestra &amp; Instrutora</div>
+            <div class="team-role"><i aria-hidden="true" class="fa-solid fa-shield-halved"></i> Mestra &amp; Instrutora</div>
           </div>
         </div>
 
@@ -1059,7 +868,7 @@
     <!-- ATLETAS -->
     <div class="team-block">
       <div class="team-block-header">
-        <span class="team-block-label"><i class="fa-solid fa-person-running"></i> Nossos Atletas</span>
+        <span class="team-block-label"><i aria-hidden="true" class="fa-solid fa-person-running"></i> Nossos Atletas</span>
       </div>
       <div class="team-grid-athletes">
 
@@ -1067,10 +876,10 @@
           <div class="tc-photo">
             <img src="assets/benja.team.jpg" alt="Benjamin" style="object-position: top center;" loading="lazy">
           </div>
-          <span class="master-badge"><i class="fa-solid fa-shield-halved"></i> Atleta</span>
+          <span class="master-badge"><i aria-hidden="true" class="fa-solid fa-shield-halved"></i> Atleta</span>
           <div class="tc-info">
             <div class="team-name">Benjamin</div>
-            <div class="team-role"><i class="fa-solid fa-shield-halved"></i> Atleta </div>
+            <div class="team-role"><i aria-hidden="true" class="fa-solid fa-shield-halved"></i> Atleta </div>
           </div>
         </div>
 
@@ -1078,10 +887,10 @@
           <div class="tc-photo">
             <img src="assets/leo.team.jpg" alt="Leonardo" style="object-position: top center;" loading="lazy">
           </div>
-          <span class="master-badge"><i class="fa-solid fa-shield-halved"></i> Atleta</span>
+          <span class="master-badge"><i aria-hidden="true" class="fa-solid fa-shield-halved"></i> Atleta</span>
           <div class="tc-info">
             <div class="team-name">Leonardo</div>
-            <div class="team-role"><i class="fa-solid fa-shield-halved"></i> Atleta </div>
+            <div class="team-role"><i aria-hidden="true" class="fa-solid fa-shield-halved"></i> Atleta </div>
           </div>
         </div>
 
@@ -1089,10 +898,10 @@
           <div class="tc-photo">
             <img src="assets/kaio.team.jpg" alt="Kaio Vinícius" style="object-position: top center;" loading="lazy">
           </div>
-          <span class="master-badge"><i class="fa-solid fa-crown"></i> Campeão Brasileiro</span>
+          <span class="master-badge"><i aria-hidden="true" class="fa-solid fa-crown"></i> Campeão Brasileiro</span>
           <div class="tc-info">
             <div class="team-name">Kaio Vinícius</div>
-            <div class="team-role"><i class="fa-solid fa-shield-halved"></i> Atleta </div>
+            <div class="team-role"><i aria-hidden="true" class="fa-solid fa-shield-halved"></i> Atleta </div>
           </div>
         </div>
 
@@ -1100,10 +909,10 @@
           <div class="tc-photo">
             <img src="assets/samira.team.jpg" alt="Samira" style="object-position: top center;" loading="lazy">
           </div>
-          <span class="master-badge"><i class="fa-solid fa-shield-halved"></i> Atleta</span>
+          <span class="master-badge"><i aria-hidden="true" class="fa-solid fa-shield-halved"></i> Atleta</span>
           <div class="tc-info">
             <div class="team-name">Samira</div>
-            <div class="team-role"><i class="fa-solid fa-shield-halved"></i> Atleta </div>
+            <div class="team-role"><i aria-hidden="true" class="fa-solid fa-shield-halved"></i> Atleta </div>
           </div>
         </div>
 
@@ -1113,7 +922,7 @@
           </div>
           <div class="tc-info">
             <div class="team-name">CRISTIAN</div>
-            <div class="team-role"><i class="fa-solid fa-star"></i> Atleta</div>
+            <div class="team-role"><i aria-hidden="true" class="fa-solid fa-star"></i> Atleta</div>
           </div>
         </div>
 
@@ -1123,7 +932,7 @@
           </div>
           <div class="tc-info">
             <div class="team-name">Fabrício</div>
-            <div class="team-role"><i class="fa-solid fa-star"></i> Atleta</div>
+            <div class="team-role"><i aria-hidden="true" class="fa-solid fa-star"></i> Atleta</div>
           </div>
         </div>
 
@@ -1133,7 +942,7 @@
           </div>
           <div class="tc-info">
             <div class="team-name">Sidney</div>
-            <div class="team-role"><i class="fa-solid fa-star"></i> Atleta</div>
+            <div class="team-role"><i aria-hidden="true" class="fa-solid fa-star"></i> Atleta</div>
           </div>
         </div>
 
@@ -1146,26 +955,26 @@
 <section id="kaio">
   <div class="container">
     <div class="section-header">
-      <span class="section-label"><i class="fa-solid fa-hand-holding-heart"></i> &nbsp;Vaquinha Solidária</span>
+      <span class="section-label"><i aria-hidden="true" class="fa-solid fa-hand-holding-heart"></i> &nbsp;Vaquinha Solidária</span>
       <h2 class="section-title">SONHO DA <span class="gold">TAILÂNDIA</span></h2>
       <div class="section-divider"></div>
     </div>
     <div class="kaio-grid fade-in">
       <div class="kaio-photo-wrap">
         <img src="assets/kaio-vinicius.jpg" alt="Kaio Vinícius, atleta da André Sagat Muaythai GYM" loading="lazy">
-        <div class="kaio-photo-badge"><i class="fa-solid fa-crown"></i> Campeão Brasileiro</div>
+        <div class="kaio-photo-badge"><i aria-hidden="true" class="fa-solid fa-crown"></i> Campeão Brasileiro</div>
       </div>
       <div class="kaio-content">
-        <span class="kaio-eyebrow"><i class="fa-solid fa-trophy"></i> Mundial de Muay Thai</span>
+        <span class="kaio-eyebrow"><i aria-hidden="true" class="fa-solid fa-trophy"></i> Mundial de Muay Thai</span>
         <h3 class="kaio-name">KAIO VINÍCIUS</h3>
-        <p class="kaio-subtitle"><i class="fa-solid fa-location-dot"></i> Bangkok, Tailândia</p>
+        <p class="kaio-subtitle"><i aria-hidden="true" class="fa-solid fa-location-dot"></i> Bangkok, Tailândia</p>
         <p class="kaio-desc">Nosso atleta Kaio Vinícius, Campeão Brasileiro de Muay Thai, foi selecionado para representar o Brasil no Mundial de Muay Thai, em Bangkok, na Tailândia. Agora é hora de levar o nosso atleta ainda mais longe!</p>
         <p class="kaio-desc">O Kaio é nosso atleta, nosso orgulho — e agora precisa da nossa ajuda para realizar esse grande sonho. <strong style="color:var(--gold)">Qualquer valor faz a diferença!</strong></p>
         <div class="kaio-cta">
-          <a href="https://www.vakinha.com.br/vaquinha/ajude-o-campeao-brasileiro-kaio-vinicius-a-conquistar-o-mundial-de-muay-thai?utm_source=site-vakinha&amp;utm_medium=share&amp;utm_campaign=pagina-divulgacao" target="_blank" rel="noopener noreferrer" class="btn-primary"><i class="fa-solid fa-heart"></i> Doar na Vakinha</a>
-          <a href="https://wa.me/5511966058202?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20vaquinha%20do%20Kaio%20Vin%C3%ADcius%20para%20o%20Mundial%20na%20Tail%C3%A2ndia." target="_blank" rel="noopener noreferrer" class="btn-secondary"><i class="fa-brands fa-whatsapp"></i> Saiba Mais</a>
+          <a href="https://www.vakinha.com.br/vaquinha/ajude-o-campeao-brasileiro-kaio-vinicius-a-conquistar-o-mundial-de-muay-thai?utm_source=site-vakinha&amp;utm_medium=share&amp;utm_campaign=pagina-divulgacao" target="_blank" rel="noopener noreferrer" class="btn-primary"><i aria-hidden="true" class="fa-solid fa-heart"></i> Doar na Vakinha</a>
+          <a href="https://wa.me/5511966058202?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20vaquinha%20do%20Kaio%20Vin%C3%ADcius%20para%20o%20Mundial%20na%20Tail%C3%A2ndia." target="_blank" rel="noopener noreferrer" class="btn-secondary"><i aria-hidden="true" class="fa-brands fa-whatsapp"></i> Saiba Mais</a>
         </div>
-        <p class="kaio-tagline"><i class="fa-solid fa-people-group"></i> Juntos nessa jornada! Nossa força é a equipe.</p>
+        <p class="kaio-tagline"><i aria-hidden="true" class="fa-solid fa-people-group"></i> Juntos nessa jornada! Nossa força é a equipe.</p>
       </div>
     </div>
   </div>
@@ -1175,7 +984,7 @@
 <section id="conquistas">
   <div class="container">
     <div class="section-header">
-      <span class="section-label"><i class="fa-solid fa-trophy"></i> &nbsp;Conquistas</span>
+      <span class="section-label"><i aria-hidden="true" class="fa-solid fa-trophy"></i> &nbsp;Conquistas</span>
       <h2 class="section-title">CINTURÕES E <span class="gold">TROFÉUS</span></h2>
       <div class="section-divider"></div>
     </div>
@@ -1184,32 +993,32 @@
         <img class="belt-img" loading="lazy" src="assets/belt-grand-fight-champion.jpg" alt="Cinturão Grand Fight Champion, conquistado por Kaio Vinícius">
         <div class="belt-content">
           <h3 class="belt-title">Grand Fight Champion</h3>
-          <p class="belt-subtitle"><i class="fa-solid fa-medal"></i> 5ª Edição Guaxupé</p>
-          <p class="belt-athlete"><i class="fa-solid fa-user"></i> Kaio Vinícius</p>
+          <p class="belt-subtitle"><i aria-hidden="true" class="fa-solid fa-medal"></i> 5ª Edição Guaxupé</p>
+          <p class="belt-athlete"><i aria-hidden="true" class="fa-solid fa-user"></i> Kaio Vinícius</p>
         </div>
       </div>
       <div class="belt-card fade-in">
         <img class="belt-img" loading="lazy" src="assets/belt-grand-fight-campeao.jpg" alt="Cinturão Grand Fight Campeão Muaythai-Boxe, conquistado por Kaio Vinícius">
         <div class="belt-content">
           <h3 class="belt-title">Grand Fight Campeão</h3>
-          <p class="belt-subtitle"><i class="fa-solid fa-medal"></i> Muaythai · Boxe</p>
-          <p class="belt-athlete"><i class="fa-solid fa-user"></i> Kaio Vinícius</p>
+          <p class="belt-subtitle"><i aria-hidden="true" class="fa-solid fa-medal"></i> Muaythai · Boxe</p>
+          <p class="belt-athlete"><i aria-hidden="true" class="fa-solid fa-user"></i> Kaio Vinícius</p>
         </div>
       </div>
       <div class="belt-card fade-in">
         <img class="belt-img" loading="lazy" src="assets/belt-alcateia-fight.jpg" alt="Cinturão Alcateia Fight Campeão, conquistado por Kaio Vinícius">
         <div class="belt-content">
           <h3 class="belt-title">Alcateia Fight</h3>
-          <p class="belt-subtitle"><i class="fa-solid fa-medal"></i> Campeão</p>
-          <p class="belt-athlete"><i class="fa-solid fa-user"></i> Kaio Vinícius</p>
+          <p class="belt-subtitle"><i aria-hidden="true" class="fa-solid fa-medal"></i> Campeão</p>
+          <p class="belt-athlete"><i aria-hidden="true" class="fa-solid fa-user"></i> Kaio Vinícius</p>
         </div>
       </div>
       <div class="belt-card fade-in">
         <img class="belt-img" loading="lazy" src="assets/belt-maia-fight.jpg" alt="Cinturão Maia Fight Muay Thai Campeão, conquistado por Kaio Vinícius">
         <div class="belt-content">
           <h3 class="belt-title">Maia Fight Muay Thai</h3>
-          <p class="belt-subtitle"><i class="fa-solid fa-medal"></i> Campeão</p>
-          <p class="belt-athlete"><i class="fa-solid fa-user"></i> Kaio Vinícius</p>
+          <p class="belt-subtitle"><i aria-hidden="true" class="fa-solid fa-medal"></i> Campeão</p>
+          <p class="belt-athlete"><i aria-hidden="true" class="fa-solid fa-user"></i> Kaio Vinícius</p>
         </div>
       </div>
     </div>
@@ -1220,7 +1029,7 @@
 <section id="eventos">
   <div class="container">
     <div class="section-header">
-      <span class="section-label"><i class="fa-solid fa-calendar-star"></i> &nbsp;Agenda</span>
+      <span class="section-label"><i aria-hidden="true" class="fa-solid fa-calendar-star"></i> &nbsp;Agenda</span>
       <h2 class="section-title">PRÓXIMOS <span class="gold">EVENTOS</span></h2>
       <div class="section-divider"></div>
     </div>
@@ -1233,14 +1042,14 @@
 <section id="novidades">
   <div class="container">
     <div class="section-header">
-      <span class="section-label"><i class="fa-solid fa-bell"></i> &nbsp;Direto do Blog</span>
+      <span class="section-label"><i aria-hidden="true" class="fa-solid fa-bell"></i> &nbsp;Direto do Blog</span>
       <h2 class="section-title">ÚLTIMAS <span class="gold">NOVIDADES</span></h2>
       <div class="section-divider"></div>
     </div>
     <div class="novidades-grid" id="novidadesGrid"></div>
     <div class="novidades-cta">
       <a href="blog.html" class="btn-secondary" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;padding:12px 28px;">
-        <i class="fa-solid fa-rss"></i> Ver todas no Blog
+        <i aria-hidden="true" class="fa-solid fa-rss"></i> Ver todas no Blog
       </a>
     </div>
   </div>
@@ -1250,7 +1059,7 @@
 <section id="patrocinadores">
   <div class="container">
     <div class="section-header">
-      <span class="section-label"><i class="fa-solid fa-handshake"></i> &nbsp;Apoio</span>
+      <span class="section-label"><i aria-hidden="true" class="fa-solid fa-handshake"></i> &nbsp;Apoio</span>
       <h2 class="section-title">PATROCINADORES <span class="gold">&amp; PARCEIROS</span></h2>
       <div class="section-divider"></div>
     </div>
@@ -1273,7 +1082,7 @@
 <section id="matricula">
   <div class="container">
     <div class="section-header">
-      <span class="section-label"><i class="fa-solid fa-dumbbell"></i> &nbsp;Inscrição</span>
+      <span class="section-label"><i aria-hidden="true" class="fa-solid fa-dumbbell"></i> &nbsp;Inscrição</span>
       <h2 class="section-title">FAÇA SUA <span class="gold">MATRÍCULA</span></h2>
       <div class="section-divider"></div>
     </div>
@@ -1282,32 +1091,32 @@
       <!-- LEFT: Info -->
       <div class="fade-in">
         <h3 class="mat-info-title">COMECE HOJE A SUA JORNADA</h3>
-        <p class="mat-info-desc">Preencha o formulário ao lado e nossa equipe entrará em contato em até 24h. Você também pode começar com uma <strong style="color:var(--gold)">aula experimental gratuita</strong> — sem compromisso.</p>
+        <p class="mat-info-desc">Solicite sua matrícula pelo WhatsApp. Você também pode começar com uma <strong style="color:var(--gold)">aula experimental gratuita</strong> — sem compromisso.</p>
 
         <div class="mat-benefits">
           <div class="mat-benefit">
-            <div class="mat-benefit-icon"><i class="fa-solid fa-person-running"></i></div>
+            <div class="mat-benefit-icon"><i aria-hidden="true" class="fa-solid fa-person-running"></i></div>
             <div class="mat-benefit-text">
               <strong>Aula Experimental Grátis</strong>
               <span>Venha conhecer a academia sem pagar nada</span>
             </div>
           </div>
           <div class="mat-benefit">
-            <div class="mat-benefit-icon"><i class="fa-solid fa-users"></i></div>
+            <div class="mat-benefit-icon"><i aria-hidden="true" class="fa-solid fa-users"></i></div>
             <div class="mat-benefit-text">
               <strong>Turmas para Todos os Níveis</strong>
               <span>Iniciantes, intermediários e competidores</span>
             </div>
           </div>
           <div class="mat-benefit">
-            <div class="mat-benefit-icon"><i class="fa-solid fa-child-reaching"></i></div>
+            <div class="mat-benefit-icon"><i aria-hidden="true" class="fa-solid fa-child-reaching"></i></div>
             <div class="mat-benefit-text">
               <strong>Muay Thai Kids</strong>
               <span>Para crianças de 8 a 12 anos</span>
             </div>
           </div>
           <div class="mat-benefit">
-            <div class="mat-benefit-icon"><i class="fa-solid fa-calendar-check"></i></div>
+            <div class="mat-benefit-icon"><i aria-hidden="true" class="fa-solid fa-calendar-check"></i></div>
             <div class="mat-benefit-text">
               <strong>Horários Flexíveis</strong>
               <span>Manhã, tarde e noite — de seg. a sexta</span>
@@ -1316,10 +1125,10 @@
         </div>
 
         <div class="mat-nextfit">
-          <div class="mat-nextfit-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <div class="mat-nextfit-icon"><i aria-hidden="true" class="fa-solid fa-mobile-screen"></i></div>
           <div>
             <strong>App Nextfit</strong>
-            <span>Após a matrícula, você receberá um e-mail com o link para baixar o app e gerenciar sua conta na academia.</span>
+            <span>Após a matrícula, peça à equipe as instruções de acesso ao app.</span>
           </div>
         </div>
       </div>
@@ -1327,115 +1136,83 @@
       <!-- RIGHT: Form -->
       <div class="mat-form-wrap fade-in">
         <div class="mat-form-header">
-          <h3><i class="fa-solid fa-file-signature"></i> Formulário de Matrícula</h3>
-          <p>Preencha os dados abaixo — responderemos em até 24h</p>
+          <h3><i aria-hidden="true" class="fa-solid fa-file-signature"></i> Solicitação de aula ou matrícula</h3>
+          <p>Escolha uma opção e envie a mensagem pelo WhatsApp. A equipe confirma os horários e as matrículas.</p>
         </div>
 
-        <!-- Form body -->
-        <div id="matFormBody">
+        <form id="matFormBody" aria-describedby="matPrivacy">
           <div class="mat-form-body">
-            <div class="mf-row">
-              <div class="mf-group">
-                <label class="mf-label"><i class="fa-solid fa-user"></i> Nome</label>
-                <input type="text" class="mf-input" id="matNome" placeholder="Seu nome completo" required>
-              </div>
-              <div class="mf-group">
-                <label class="mf-label"><i class="fa-solid fa-calendar"></i> Idade</label>
-                <input type="number" class="mf-input" id="matIdade" placeholder="Ex: 25" min="5" max="99">
-              </div>
-            </div>
-
-            <div class="mf-group">
-              <label class="mf-label"><i class="fa-solid fa-envelope"></i> E-mail</label>
-              <input type="email" class="mf-input" id="matEmail" placeholder="seu@email.com" required>
-            </div>
-
-            <div class="mf-group">
-              <label class="mf-label"><i class="fa-brands fa-whatsapp"></i> WhatsApp</label>
-              <input type="tel" class="mf-input" id="matWhatsapp" placeholder="(11) 9 0000-0000" required>
-            </div>
-
-            <div class="mf-group">
-              <label class="mf-label"><i class="fa-solid fa-tag"></i> Escolha seu plano</label>
+            <fieldset class="mf-group plan-fieldset">
+              <legend class="mf-label">Escolha uma opção</legend>
               <div class="plan-options">
 
                 <label class="plan-option">
-                  <input type="radio" name="plano" value="Aula Experimental Gratuita" checked>
-                  <div class="plan-option-info">
-                    <div class="plan-option-name">Aula Experimental</div>
-                    <div class="plan-option-desc">Experimente sem compromisso</div>
-                  </div>
-                  <span class="plan-option-price free"><i class="fa-solid fa-gift"></i> GRÁTIS</span>
+                  <input type="radio" name="plano" id="trialPlan" value="Aula Experimental Gratuita" checked>
+                  <span class="plan-option-info">
+                    <span class="plan-option-name">Aula Experimental</span>
+                    <span class="plan-option-desc">Experimente sem compromisso</span>
+                  </span>
+                  <span class="plan-option-price free"><i aria-hidden="true" class="fa-solid fa-gift"></i> GRÁTIS</span>
                 </label>
 
                 <label class="plan-option">
                   <input type="radio" name="plano" value="Muay Thai Adulto — 3x por semana — R$ 110">
-                  <div class="plan-option-info">
-                    <div class="plan-option-name">Muay Thai Adulto — 3×/sem</div>
-                    <div class="plan-option-desc">Segunda, Quarta e Sexta</div>
-                  </div>
+                  <span class="plan-option-info">
+                    <span class="plan-option-name">Muay Thai Adulto — 3×/sem</span>
+                    <span class="plan-option-desc">Segunda, Quarta e Sexta</span>
+                  </span>
                   <span class="plan-option-price">R$ 110</span>
                 </label>
 
                 <label class="plan-option">
                   <input type="radio" name="plano" value="Muay Thai Adulto — Segunda a Sexta — R$ 130">
-                  <div class="plan-option-info">
-                    <div class="plan-option-name">Muay Thai Adulto — Seg a Sex</div>
-                    <div class="plan-option-desc">Treinos diários de segunda a sexta</div>
-                  </div>
+                  <span class="plan-option-info">
+                    <span class="plan-option-name">Muay Thai Adulto — Seg a Sex</span>
+                    <span class="plan-option-desc">Treinos diários de segunda a sexta</span>
+                  </span>
                   <span class="plan-option-price">R$ 130</span>
                 </label>
 
                 <label class="plan-option">
                   <input type="radio" name="plano" value="Muay Thai Kids — R$ 110">
-                  <div class="plan-option-info">
-                    <div class="plan-option-name">Muay Thai Kids</div>
-                    <div class="plan-option-desc">Para crianças de 8 a 12 anos</div>
-                  </div>
+                  <span class="plan-option-info">
+                    <span class="plan-option-name">Muay Thai Kids</span>
+                    <span class="plan-option-desc">Para crianças de 8 a 12 anos</span>
+                  </span>
                   <span class="plan-option-price">R$ 110</span>
                 </label>
 
                 <label class="plan-option">
                   <input type="radio" name="plano" value="Treino Funcional — Seg. e Sex. — R$ 60">
-                  <div class="plan-option-info">
-                    <div class="plan-option-name">Treino Funcional</div>
-                    <div class="plan-option-desc">Segundas e Sextas, 17h30–18h30</div>
-                  </div>
+                  <span class="plan-option-info">
+                    <span class="plan-option-name">Treino Funcional</span>
+                    <span class="plan-option-desc">Segundas e Sextas, 17h30–18h30</span>
+                  </span>
                   <span class="plan-option-price">R$ 60</span>
                 </label>
 
               </div>
-            </div>
-
-            <div class="mf-group">
-              <label class="mf-label"><i class="fa-solid fa-comment"></i> Mensagem <small style="color:var(--text-muted);font-size:.65rem;letter-spacing:0;text-transform:none">(opcional)</small></label>
-              <textarea class="mf-textarea" id="matMsg" placeholder="Dúvidas, horário preferido, objetivo..."></textarea>
+            </fieldset>
+            <div class="mf-group" id="preferredShift">
+              <label class="mf-label" for="matShift">Turno de preferência (opcional)</label>
+              <select class="mf-select" id="matShift">
+                <option value="">Sem preferência</option>
+                <option>Manhã</option>
+                <option>Tarde</option>
+                <option>Noite</option>
+              </select>
+              <p class="mat-privacy">Aulas de segunda a sexta, conforme a grade e a disponibilidade.</p>
             </div>
           </div>
-
           <div class="mat-form-footer">
-            <button class="mat-submit" id="matSubmitBtn" onclick="submitMatricula()">
-              <div class="spinner" id="matSpinner"></div>
-              <i class="fa-solid fa-paper-plane" id="matBtnIcon"></i>
-              <span id="matBtnText">Enviar Matrícula</span>
+            <button class="mat-submit" type="submit">
+              <i aria-hidden="true" class="fa-brands fa-whatsapp"></i> Continuar no WhatsApp
             </button>
-            <p class="mat-privacy"><i class="fa-solid fa-lock"></i> Seus dados são usados apenas para contato</p>
+            <p class="mat-privacy" id="matPrivacy">Você revisa e envia a mensagem no WhatsApp. Para o Muay Thai Kids, o contato deve ser feito pelo responsável.</p>
+            <p class="mat-privacy"><a href="privacidade.html">Privacidade e contato</a></p>
+            <noscript><p><a href="https://wa.me/5511966058202">Conversar com a academia pelo WhatsApp</a></p></noscript>
           </div>
-        </div>
-
-        <!-- Success state -->
-        <div class="mat-success" id="matSuccess">
-          <div class="success-icon"><i class="fa-solid fa-check"></i></div>
-          <h4>MATRÍCULA ENVIADA!</h4>
-          <p>Recebemos seu cadastro, <strong id="successName"></strong>! Em breve nossa equipe entrará em contato pelo WhatsApp ou e-mail.</p>
-          <div class="nextfit-cta">
-            <i class="fa-solid fa-mobile-screen"></i>
-            <div>
-              <strong>Baixe o app Nextfit</strong>
-              <span>Verifique seu e-mail — enviamos o link de acesso ao app</span>
-            </div>
-          </div>
-        </div>
+        </form>
       </div>
 
     </div>
@@ -1445,7 +1222,7 @@
 <section id="contact">
   <div class="container">
     <div class="section-header">
-      <span class="section-label"><i class="fa-solid fa-message"></i> &nbsp;Fale Conosco</span>
+      <span class="section-label"><i aria-hidden="true" class="fa-solid fa-message"></i> &nbsp;Fale Conosco</span>
       <h2 class="section-title">ONDE <span class="gold">ESTAMOS</span></h2>
       <div class="section-divider"></div>
     </div>
@@ -1455,48 +1232,47 @@
         <p>Estamos prontos para receber você. Venha fazer uma aula experimental e conhecer nossa equipe.</p>
         <div class="contact-items">
           <a href="https://maps.google.com/?q=Avenida+Cangaíba+4530+São+Paulo" target="_blank" rel="noopener noreferrer" class="contact-item">
-            <div class="contact-item-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="contact-item-icon"><i aria-hidden="true" class="fa-solid fa-location-dot"></i></div>
             <div class="contact-item-text">
               <strong>Endereço</strong>
               <span>Avenida Cangaíba, 4530 — São Paulo, SP</span>
             </div>
           </a>
           <a href="https://wa.me/5511966058202" target="_blank" rel="noopener noreferrer" class="contact-item">
-            <div class="contact-item-icon"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="contact-item-icon"><i aria-hidden="true" class="fa-brands fa-whatsapp"></i></div>
             <div class="contact-item-text">
               <strong>WhatsApp</strong>
               <span>(11) 96605-8202</span>
             </div>
           </a>
           <a href="mailto:studiodemuaythai@gmail.com" class="contact-item">
-            <div class="contact-item-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div class="contact-item-icon"><i aria-hidden="true" class="fa-solid fa-envelope"></i></div>
             <div class="contact-item-text">
               <strong>E-mail</strong>
               <span>studiodemuaythai@gmail.com</span>
             </div>
           </a>
-          <a href="https://instagram.com/emt_andresagat" target="_blank" rel="noopener noreferrer" class="contact-item">
-            <div class="contact-item-icon"><i class="fa-brands fa-instagram"></i></div>
+          <a href="https://instagram.com/emt.andresagat" target="_blank" rel="noopener noreferrer" class="contact-item">
+            <div class="contact-item-icon"><i aria-hidden="true" class="fa-brands fa-instagram"></i></div>
             <div class="contact-item-text">
               <strong>Instagram</strong>
-              <span>@emt_andresagat</span>
+              <span>@emt.andresagat</span>
             </div>
           </a>
         </div>
         <div class="social-links">
           <a href="https://wa.me/5511966058202" target="_blank" rel="noopener noreferrer" class="social-link">
-            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+            <i aria-hidden="true" class="fa-brands fa-whatsapp"></i> WhatsApp
           </a>
-          <a href="https://instagram.com/emt_andresagat" target="_blank" rel="noopener noreferrer" class="social-link">
-            <i class="fa-brands fa-instagram"></i> Instagram
+          <a href="https://instagram.com/emt.andresagat" target="_blank" rel="noopener noreferrer" class="social-link">
+            <i aria-hidden="true" class="fa-brands fa-instagram"></i> Instagram
           </a>
         </div>
       </div>
       <div class="contact-map fade-in">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.5!2d-46.503!3d-23.512!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5b8e6f5d4b5f%3A0x0!2sAv.%20Cangaíba%2C%204530%20-%20São%20Paulo!5e0!3m2!1spt-BR!2sbr!4v1640000000000"
-          allowfullscreen="" loading="lazy" title="Localização da Academia">
-        </iframe>
+        <a class="btn-secondary" href="https://maps.google.com/?q=Avenida+Canga%C3%ADba+4530+S%C3%A3o+Paulo">
+          Abrir localização no Google Maps
+        </a>
       </div>
     </div>
   </div>
@@ -1505,18 +1281,19 @@
 <div class="stripe"></div>
  
 <!-- FOOTER -->
+</main>
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <img loading="lazy" src="assets/logo.sagat.png" alt="André Sagat">
+      <img loading="lazy" src="assets/logo-sagat.webp" alt="André Sagat">
       <div>
         <div class="footer-brand-name">ANDRÉ SAGAT</div>
         <div class="footer-brand-sub">Muaythai GYM</div>
       </div>
     </div>
     <div class="footer-copy">
-      <i class="fa-regular fa-copyright"></i> 2025 André Sagat Muaythai GYM · Todos os direitos reservados<br>
-      <span style="color:var(--gold-dark);font-size:.7rem;"><i class="fa-solid fa-certificate"></i> Filiado à CBMT / BT</span>
+      <i aria-hidden="true" class="fa-regular fa-copyright"></i> André Sagat Muaythai GYM · Todos os direitos reservados<br>
+      <span style="color:var(--gold-dark);font-size:.7rem;"><i aria-hidden="true" class="fa-solid fa-certificate"></i> Filiado à CBMT / BT</span>
     </div>
     <div class="footer-cbmt">
       <img loading="lazy" src="assets/CBMTBT.png" alt="CBMT BT">
@@ -1525,434 +1302,57 @@
   </div>
 </footer>
  
-<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <i class="fa-solid fa-chevron-up"></i>
+<button aria-label="Voltar ao topo" class="scroll-top" id="scrollTop">
+  <i aria-hidden="true" class="fa-solid fa-chevron-up"></i>
 </button>
  
-<!-- EmailJS -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/blog-posts.js"></script>
 <script>
-/* =====================================================
-   André Sagat Muaythai GYM — main.js
-   =====================================================
-   SEÇÕES:
-   01. Configuração EmailJS          (linha ~10)
-   02. Navbar / Scroll               (linha ~25)
-   03. Máscara WhatsApp              (linha ~35)
-   04. Formulário de Matrícula       (linha ~45)
-   05. Popup Agendamento — Estado    (linha ~120)
-   06. Popup Agendamento — Calendário(linha ~145)
-   07. Popup Agendamento — Horários  (linha ~200)
-   08. Popup Agendamento — Confirmar (linha ~245)
-   09. Envio de Email Agendamento    (linha ~280)
-   10. Inicialização (DOMContentLoaded)(linha ~320)
-   ===================================================== */
-
-// ── EmailJS init ──────────────────────────────────────
-  // INSTRUÇÕES DE CONFIGURAÇÃO:
-  // 1. Acesse https://www.emailjs.com e crie uma conta gratuita
-  // 2. Crie um Email Service conectado ao Gmail (studiodemuaythai@gmail.com)
-  // 3. Crie dois Email Templates:
-  //    - template_academia : notificação para a academia (to: studiodemuaythai@gmail.com)
-  //    - template_aluno    : boas-vindas + instrução Nextfit para o aluno
-  // 4. Substitua os valores abaixo pelos seus IDs reais:
-  const EJS_PUBLIC_KEY   = 'YOUR_PUBLIC_KEY';   // Account > API Keys
-  const EJS_SERVICE_ID   = 'YOUR_SERVICE_ID';   // Email Services
-  const EJS_TMPL_ACADEMIA = 'template_academia'; // Email Templates
-  const EJS_TMPL_ALUNO   = 'template_aluno';    // Email Templates
-
-  // Guard against the EmailJS CDN failing to load (ad-blockers, network
-  // issues, etc.) — without this, a ReferenceError here would silently
-  // stop every other script below (menu, fade-in animations, forms).
-  if (typeof emailjs !== 'undefined') {
-    emailjs.init({ publicKey: EJS_PUBLIC_KEY });
-  } else {
-    console.warn('EmailJS não carregou — envio de e-mail indisponível.');
-  }
-
-  // ── Nav / Scroll ──────────────────────────────────────
-  function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('open');
-  }
-  // ── SCHEDULE POPUP ───────────────────────────────────────────
-  const MONTHS = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-  const MONTHS_SHORT = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-  const WEEKDAYS_FULL = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
-
-  // Horários por turno (seg-sex / sáb)
-  const SLOTS = {
-    manha: ['07:00','08:30'],
-    tarde: ['15:00','16:30'],
-    noite: ['19:00','20:30'],
-  };
-  const SLOTS_SAB = {
-    manha: ['07:00','08:30'],
-    tarde: [],
-    noite: [],
+  const form = document.getElementById('matFormBody');
+  const shift = document.getElementById('matShift');
+  const getPlan = () => form.querySelector('input[name="plano"]:checked');
+  const isTrialPlan = () => getPlan().id === 'trialPlan';
+  const updateShift = () => {
+    document.getElementById('preferredShift').hidden = !isTrialPlan();
   };
 
-  let calYear, calMonth;
-  let selectedDate = null; // Date object
-  let selectedSlot = null; // string 'HH:MM'
-  let schedStep = 1;
+  form.addEventListener('change', updateShift);
+  window.addEventListener('pageshow', updateShift);
 
-  function openSchedPopup() {
-    const now = new Date();
-    calYear  = now.getFullYear();
-    calMonth = now.getMonth();
-    selectedDate = null;
-    selectedSlot = null;
-    schedStep = 1;
-    renderCal();
-    updateStepUI();
-    const ov = document.getElementById('schedOverlay');
-    ov.style.display = 'flex';
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => ov.classList.add('visible'));
-    });
-  }
+  document.querySelector('.hero-actions a[href="#matricula"]').addEventListener('click', () => {
+    document.getElementById('trialPlan').checked = true;
+    updateShift();
+  });
 
-  function closeSchedPopup() {
-    const ov = document.getElementById('schedOverlay');
-    ov.classList.remove('visible');
-    setTimeout(() => { ov.style.display = 'none'; }, 300);
-  }
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const plan = getPlan().value;
+    const isTrial = isTrialPlan();
+    const preference = isTrial && shift.value ? ' Tenho preferência pelo turno da ' + shift.value.toLowerCase() + '.' : '';
+    const message = isTrial
+      ? 'Olá! Gostaria de solicitar uma aula experimental gratuita.' + preference
+      : 'Olá! Gostaria de saber como fazer a matrícula no plano ' + plan + '.';
+    location.assign('https://wa.me/5511966058202?text=' + encodeURIComponent(message));
+  });
 
-  function handleSchedOverlayClick(e) {
-    if (e.target === document.getElementById('schedOverlay')) closeSchedPopup();
-  }
-
-  // ── Calendar render ──
-  function renderCal() {
-    document.getElementById('calMonthLabel').textContent = `${MONTHS[calMonth]} ${calYear}`;
-    const today = new Date(); today.setHours(0,0,0,0);
-    const minDate = new Date(today); minDate.setDate(today.getDate() + 1); // min: amanhã
-
-    const firstDay = new Date(calYear, calMonth, 1).getDay(); // 0=dom
-    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-
-    let html = '';
-    // Empty cells before first day
-    for (let i = 0; i < firstDay; i++) html += '<div class="cal-day empty"></div>';
-
-    for (let d = 1; d <= daysInMonth; d++) {
-      const date = new Date(calYear, calMonth, d);
-      const dow  = date.getDay(); // 0=dom
-      const isPast   = date < minDate;
-      const isSunday = dow === 0;
-      const isSat    = dow === 6;
-      const isToday  = date.toDateString() === today.toDateString();
-      const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
-      const disabled = isPast || isSunday;
-
-      let cls = 'cal-day';
-      if (disabled)    cls += ' disabled';
-      if (isSat)       cls += ' weekend';
-      if (isToday)     cls += ' today';
-      if (isSelected)  cls += ' selected';
-
-      const click = disabled ? '' : `onclick="selectDay(${calYear},${calMonth},${d})"`;
-      html += `<div class="${cls}" ${click}>${d}</div>`;
-    }
-    document.getElementById('calDays').innerHTML = html;
-  }
-
-  function changeMonth(dir) {
-    calMonth += dir;
-    if (calMonth > 11) { calMonth = 0; calYear++; }
-    if (calMonth < 0)  { calMonth = 11; calYear--; }
-    renderCal();
-  }
-
-  function selectDay(y, m, d) {
-    selectedDate = new Date(y, m, d);
-    selectedSlot = null;
-    renderCal();
-    // Activate next button
-    const btn = document.getElementById('schedNextBtn');
-    btn.classList.add('ready');
-  }
-
-  // ── Time slots ──
-  function renderTimeSlots() {
-    const dow = selectedDate.getDay();
-    const isSat = dow === 6;
-    const slots = isSat ? SLOTS_SAB : SLOTS;
-
-    const d = selectedDate;
-    const dateStr = `${WEEKDAYS_FULL[dow].charAt(0).toUpperCase()+WEEKDAYS_FULL[dow].slice(1)}, ${d.getDate()} de ${MONTHS[d.getMonth()]} de ${d.getFullYear()}`;
-    document.getElementById('selectedDateLabel').querySelector('span').textContent = dateStr;
-
-    function buildSlots(containerId, times) {
-      const wrap = document.getElementById(containerId);
-      const block = wrap.closest('.turno-block');
-      if (!times || times.length === 0) { block.style.display = 'none'; return; }
-      block.style.display = '';
-      wrap.innerHTML = times.map(t =>
-        `<div class="time-slot" onclick="selectSlot('${t}', this)">${t}</div>`
-      ).join('');
-    }
-
-    buildSlots('slotsManha', slots.manha);
-    buildSlots('slotsTarde', slots.tarde);
-    buildSlots('slotsNoite', slots.noite);
-  }
-
-  function selectSlot(time, el) {
-    selectedSlot = time;
-    document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-    el.classList.add('selected');
-    document.getElementById('schedNextBtn').classList.add('ready');
-    document.getElementById('schedNextTxt').textContent = 'Confirmar Agendamento';
-  }
-
-  // ── Confirm ──
-  function renderConfirm() {
-    const dow = selectedDate.getDay();
-    const d   = selectedDate;
-    const dateStr = `${WEEKDAYS_FULL[dow].charAt(0).toUpperCase()+WEEKDAYS_FULL[dow].slice(1)}, ${d.getDate()} de ${MONTHS[d.getMonth()]} de ${d.getFullYear()}`;
-    const nome = document.getElementById('matNome').value.trim() || '—';
-    const tel  = document.getElementById('matWhatsapp').value.trim() || '—';
-
-    document.getElementById('confirmSummary').innerHTML = `
-      <div class="confirm-row"><i class="fa-solid fa-user"></i><strong>Aluno</strong><span>${nome}</span></div>
-      <div class="confirm-row"><i class="fa-solid fa-calendar"></i><strong>Data</strong><span>${dateStr}</span></div>
-      <div class="confirm-row"><i class="fa-solid fa-clock"></i><strong>Horário</strong><span>${selectedSlot}</span></div>
-      <div class="confirm-row"><i class="fa-brands fa-whatsapp"></i><strong>Contato</strong><span>${tel}</span></div>
-      <div class="confirm-row"><i class="fa-solid fa-location-dot"></i><strong>Local</strong><span>Av. Cangaíba, 4530 — São Paulo, SP</span></div>
-    `;
-  }
-
-  // ── Step navigation ──
-  function goToStep(s) {
-    schedStep = s;
-    updateStepUI();
-  }
-
-  function schedNext() {
-    if (schedStep === 1 && selectedDate) {
-      goToStep(2);
-    } else if (schedStep === 2 && selectedSlot) {
-      goToStep(3);
-      // Send scheduling confirmation
-      sendSchedEmail();
-    }
-  }
-
-  function updateStepUI() {
-    // Panels
-    document.getElementById('calWrap').style.display   = schedStep === 1 ? '' : 'none';
-    document.getElementById('timeWrap').style.display  = schedStep === 2 ? 'block' : 'none';
-    document.getElementById('confirmWrap').style.display = schedStep === 3 ? 'block' : 'none';
-
-    // Step indicators
-    [1,2,3].forEach(i => {
-      const el = document.getElementById(`step-ind-${i}`);
-      el.className = 'sched-step' + (i < schedStep ? ' done' : i === schedStep ? ' active' : '');
-    });
-
-    // Next button
-    const btn = document.getElementById('schedNextBtn');
-    const ico = document.getElementById('schedNextIco');
-    const txt = document.getElementById('schedNextTxt');
-
-    if (schedStep === 1) {
-      btn.className = 'sched-btn-next' + (selectedDate ? ' ready' : '');
-      txt.textContent = 'Escolher Horário';
-      ico.className = 'fa-solid fa-arrow-right';
-    } else if (schedStep === 2) {
-      renderTimeSlots();
-      btn.className = 'sched-btn-next' + (selectedSlot ? ' ready' : '');
-      txt.textContent = 'Confirmar Agendamento';
-      ico.className = 'fa-solid fa-check';
-    } else {
-      renderConfirm();
-      btn.className = 'sched-btn-next';
-      btn.style.display = 'none';
-      document.querySelector('.sched-cancel-link').textContent = 'Fechar';
-    }
-  }
-
-  async function sendSchedEmail() {
-    const dow = selectedDate.getDay();
-    const d   = selectedDate;
-    const dateStr = `${WEEKDAYS_FULL[dow].charAt(0).toUpperCase()+WEEKDAYS_FULL[dow].slice(1)}, ${d.getDate()} de ${MONTHS[d.getMonth()]} de ${d.getFullYear()}`;
-    const nome  = document.getElementById('matNome').value.trim() || 'Aluno';
-    const email = document.getElementById('matEmail').value.trim();
-    const tel   = document.getElementById('matWhatsapp').value.trim();
-
-    try {
-      await emailjs.send(EJS_SERVICE_ID, EJS_TMPL_ACADEMIA, {
-        to_email: 'studiodemuaythai@gmail.com',
-        reply_to: email || 'sem@email.com',
-        subject: `Agendamento Aula Experimental: ${nome} — ${dateStr} ${selectedSlot}`,
-        nome, email: email||'—', whatsapp: tel||'—', idade:'—', plano:'Aula Experimental Gratuita',
-        mensagem: `Data: ${dateStr} | Horário: ${selectedSlot}`,
-      });
-      if (email) {
-        await emailjs.send(EJS_SERVICE_ID, EJS_TMPL_ALUNO, {
-          to_email: email,
-          subject: 'Sua aula experimental foi agendada! — André Sagat GYM',
-          nome, email, whatsapp: tel||'—', idade:'—',
-          plano: 'Aula Experimental Gratuita',
-          mensagem: `Data: ${dateStr} | Horário: ${selectedSlot}`,
-          is_experimental:'sim',
-          nextfit_url:'https://www.nextfit.com.br',
-          nextfit_ios:'https://apps.apple.com/br/app/nextfit/id1449761779',
-          nextfit_android:'https://play.google.com/store/apps/details?id=br.com.nextfit',
-          academia_whatsapp:'(11) 96605-8202',
-          academia_endereco:'Av. Cangaíba, 4530 — São Paulo, SP',
+  const observer = 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches
+    ? new IntersectionObserver(entries => {
+        entries.forEach(({target, isIntersecting}) => {
+          if (isIntersecting) {
+            target.classList.add('visible');
+            observer.unobserve(target);
+          }
         });
-      }
-    } catch(e) {
-      console.warn('EmailJS schedule send failed:', e);
-      // Fallback: notify via WhatsApp so the appointment isn't lost silently
-      const msg = encodeURIComponent(
-        `Olá! Gostaria de confirmar minha aula experimental agendada para ${dateStr} às ${selectedSlot}. Nome: ${nome}`
-      );
-      window.open(`https://wa.me/5511966058202?text=${msg}`, '_blank', 'noopener,noreferrer');
-    }
+      }, {threshold: 0.12})
+    : null;
+  if (observer) {
+    document.documentElement.classList.add('js');
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   }
 
-  // ── Hook plan radio to open popup ──
-  document.addEventListener('DOMContentLoaded', () => {
-    const radios = document.querySelectorAll('input[name="plano"]');
-    radios.forEach(r => {
-      r.addEventListener('change', () => {
-        if (r.value.includes('Experimental')) {
-          openSchedPopup();
-        }
-      });
-    });
-  });
-
-    window.addEventListener('scroll', () => {
-    document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
-    document.getElementById('navbar').style.borderBottomColor =
-      window.scrollY > 10 ? 'rgba(212,160,23,0.35)' : 'rgba(212,160,23,0.2)';
-  });
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-  // ── WhatsApp mask ─────────────────────────────────────
-  document.getElementById('matWhatsapp').addEventListener('input', function(e) {
-    let v = e.target.value.replace(/\D/g,'');
-    if (v.length > 11) v = v.slice(0,11);
-    if (v.length > 7) v = `(${v.slice(0,2)}) ${v.slice(2,3)} ${v.slice(3,7)}-${v.slice(7)}`;
-    else if (v.length > 2) v = `(${v.slice(0,2)}) ${v.slice(2)}`;
-    e.target.value = v;
-  });
-
-  // ── Submit ────────────────────────────────────────────
-  async function submitMatricula() {
-    const nome     = document.getElementById('matNome').value.trim();
-    const email    = document.getElementById('matEmail').value.trim();
-    const whatsapp = document.getElementById('matWhatsapp').value.trim();
-    const idade    = document.getElementById('matIdade').value.trim();
-    const msg      = document.getElementById('matMsg').value.trim();
-    const plano    = document.querySelector('input[name="plano"]:checked')?.value || '';
-    const isExperimental = plano.includes('Experimental');
-
-    // Validation
-    if (!nome)  { shakeField('matNome');    return; }
-    if (!email || !email.includes('@')) { shakeField('matEmail'); return; }
-    if (!whatsapp) { shakeField('matWhatsapp'); return; }
-
-    // Loading state
-    setLoading(true);
-
-    const commonParams = { nome, email, whatsapp, idade, plano, mensagem: msg || '—' };
-
-    try {
-      // Email 1: notificação para a academia
-      await emailjs.send(EJS_SERVICE_ID, EJS_TMPL_ACADEMIA, {
-        ...commonParams,
-        to_email: 'studiodemuaythai@gmail.com',
-        reply_to: email,
-        subject:  `Nova Matrícula: ${nome} — ${plano}`,
-      });
-
-      // Email 2: boas-vindas para o aluno (só se não for aula experimental)
-      // Para aula experimental também enviamos, mas com texto diferente (controlado no template)
-      await emailjs.send(EJS_SERVICE_ID, EJS_TMPL_ALUNO, {
-        ...commonParams,
-        to_email: email,
-        is_experimental: isExperimental ? 'sim' : 'não',
-        subject: isExperimental
-          ? 'Sua aula experimental foi agendada! — André Sagat GYM'
-          : 'Bem-vindo(a) à André Sagat Muaythai GYM! 🦁',
-        nextfit_url: 'https://www.nextfit.com.br',
-        nextfit_ios: 'https://apps.apple.com/br/app/nextfit/id1449761779',
-        nextfit_android: 'https://play.google.com/store/apps/details?id=br.com.nextfit',
-        academia_whatsapp: '(11) 96605-8202',
-        academia_endereco: 'Av. Cangaíba, 4530 — São Paulo, SP',
-      });
-
-      // Show success
-      document.getElementById('successName').textContent = nome.split(' ')[0];
-      document.getElementById('matFormBody').style.display = 'none';
-      const s = document.getElementById('matSuccess');
-      s.style.display = 'flex';
-      s.style.flexDirection = 'column';
-
-    } catch (err) {
-      console.error('EmailJS error:', err);
-      // Fallback: open mailto
-      const body = encodeURIComponent(
-        `Nome: ${nome}\nIdade: ${idade}\nWhatsApp: ${whatsapp}\nPlano: ${plano}\nMensagem: ${msg}`
-      );
-      window.location.href = `mailto:studiodemuaythai@gmail.com?subject=Nova%20Matr%C3%ADcula%3A%20${encodeURIComponent(nome)}&body=${body}`;
-      alert('Redirecionando para seu e-mail. Por favor, configure o EmailJS para envio automático.');
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  function setLoading(on) {
-    const btn = document.getElementById('matSubmitBtn');
-    const ico = document.getElementById('matBtnIcon');
-    const txt = document.getElementById('matBtnText');
-    const sp  = document.getElementById('matSpinner');
-    btn.disabled = on;
-    ico.style.display = on ? 'none' : '';
-    sp.style.display  = on ? 'block' : 'none';
-    txt.textContent   = on ? 'Enviando...' : 'Enviar Matrícula';
-  }
-
-  function shakeField(id) {
-    const el = document.getElementById(id);
-    el.style.borderColor = '#e74c3c';
-    el.focus();
-    el.animate([{transform:'translateX(-4px)'},{transform:'translateX(4px)'},{transform:'translateX(0)'}],{duration:300,iterations:2});
-    setTimeout(() => el.style.borderColor = '', 2000);
-  }
-
-  // ── BLOG SYNC ──────────────────────────────────────────────────
-  const BLOG_KEY = 'sagat_blog_posts';
-
-  function getBlogPosts() {
-    try { return JSON.parse(localStorage.getItem(BLOG_KEY)) || []; }
-    catch { return []; }
-  }
-
-  function fmtBlogDate(iso) {
-    if (!iso) return '';
-    const [y,m,d] = iso.split('-');
-    const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-    return `${parseInt(d)} de ${months[parseInt(m)-1]} de ${y}`;
-  }
-
-  function escapeHtml(str) {
-    return String(str ?? '').replace(/[&<>"']/g, c => ({
-      '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
-    }[c]));
-  }
-
-  function syncBlog() {
-    const posts     = getBlogPosts();
-    const eventos   = posts.filter(p => p.type === 'evento');
+  function syncBlog(posts) {
+    const eventos   = posts.filter(p => p.type === 'evento' && p.eventDate >= todayInSaoPaulo());
     const novidades = posts.filter(p => p.type === 'novidade');
 
     // ── Eventos slider ──
@@ -1968,28 +1368,28 @@
         if (navEventosItem) navEventosItem.hidden = false;
         slider.innerHTML = eventos.map(p => {
           const isFight = !!p.isFight;
-          const dateStr = p.eventDate ? fmtBlogDate(p.eventDate) : fmtBlogDate(p.createdAt);
+          const dateStr = p.eventDate ? formatPostDate(p.eventDate) : formatPostDate(p.createdAt);
           const imgHtml = p.image
             ? `<img src="${escapeHtml(p.image)}" class="evento-img" style="height:${isFight?'260':'180'}px;object-fit:cover;object-position:center top;filter:brightness(.85);" alt="${escapeHtml(p.title)}" loading="lazy">`
-            : `<div style="height:180px;background:linear-gradient(135deg,#111 0%,#1c1a10 50%,#111 100%);display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-fist-raised" style="font-size:2.5rem;color:rgba(212,160,23,.15)"></i></div>`;
+            : `<div style="height:180px;background:linear-gradient(135deg,#111 0%,#1c1a10 50%,#111 100%);display:flex;align-items:center;justify-content:center;"><i aria-hidden="true" class="fa-solid fa-fist-raised" style="font-size:2.5rem;color:rgba(212,160,23,.15)"></i></div>`;
           const badgeHtml = isFight
-            ? `<span class="evento-badge"><i class="fa-solid fa-trophy"></i> Fight Card</span>` : '';
-          const localHtml = p.local ? `<div class="evento-local"><i class="fa-solid fa-location-dot"></i> ${escapeHtml(p.local)}</div>` : '';
+            ? `<span class="evento-badge"><i aria-hidden="true" class="fa-solid fa-trophy"></i> Fight Card</span>` : '';
+          const localHtml = p.local ? `<div class="evento-local"><i aria-hidden="true" class="fa-solid fa-location-dot"></i> ${escapeHtml(p.local)}</div>` : '';
           const tagsHtml  = p.tags && p.tags.length
-            ? `<div class="evento-tags">${p.tags.map(t=>`<span class="evento-tag"><i class="fa-solid fa-hashtag"></i>${escapeHtml(t)}</span>`).join('')}</div>` : '';
+            ? `<div class="evento-tags">${p.tags.map(t=>`<span class="evento-tag"><i aria-hidden="true" class="fa-solid fa-hashtag"></i>${escapeHtml(t)}</span>`).join('')}</div>` : '';
           return `
             <div class="evento-card ${isFight?'fight':''} fade-in" style="position:relative;">
               ${badgeHtml}
               <div style="overflow:hidden;">${imgHtml}</div>
               <div class="evento-content">
-                <div class="evento-date"><i class="fa-solid fa-calendar"></i> ${dateStr}</div>
+                <div class="evento-date"><i aria-hidden="true" class="fa-solid fa-calendar"></i> ${dateStr}</div>
                 <div class="evento-title">${escapeHtml(p.title)}</div>
                 ${localHtml}
                 ${tagsHtml}
               </div>
             </div>`;
         }).join('');
-        slider.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        slider.querySelectorAll('.fade-in').forEach(el => observer?.observe(el));
       }
     }
 
@@ -2002,161 +1402,25 @@
         gridNov.innerHTML = novidades.slice(0,3).map(p => {
           const imgHtml = p.image
             ? `<img src="${escapeHtml(p.image)}" class="novidade-img" alt="${escapeHtml(p.title)}" loading="lazy">`
-            : `<div class="novidade-ph"><i class="fa-solid fa-bell"></i></div>`;
+            : `<div class="novidade-ph"><i aria-hidden="true" class="fa-solid fa-bell"></i></div>`;
           return `
             <div class="novidade-card fade-in">
               ${imgHtml}
               <div class="novidade-body">
-                <div class="novidade-date"><i class="fa-solid fa-bell"></i> ${fmtBlogDate(p.createdAt)}</div>
+                <div class="novidade-date"><i aria-hidden="true" class="fa-solid fa-bell"></i> ${formatPostDate(p.createdAt)}</div>
                 <div class="novidade-title">${escapeHtml(p.title)}</div>
                 ${p.excerpt ? `<div class="novidade-excerpt">${escapeHtml(p.excerpt)}</div>` : ''}
               </div>
             </div>`;
         }).join('');
-        gridNov.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        gridNov.querySelectorAll('.fade-in').forEach(el => observer?.observe(el));
       } else {
         secNov.style.display = 'none';
       }
     }
   }
 
-  syncBlog();
-  window.addEventListener('storage', e => { if (e.key === BLOG_KEY) syncBlog(); });
-
-  // ── CONFIRMAR AULA ─────────────────────────────────────────────
-  function confirmAula() {
-    const WDAYS = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
-    const MTHS  = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-
-    if (selectedDate && selectedSlot) {
-      const dow     = selectedDate.getDay();
-      const d       = selectedDate;
-      const dateStr = `${WDAYS[dow].charAt(0).toUpperCase()+WDAYS[dow].slice(1)}, ${d.getDate()} de ${MTHS[d.getMonth()]} de ${d.getFullYear()}`;
-
-      // Inject hidden fields into form
-      ['matSchedDate','matSchedSlot'].forEach(id => {
-        if (!document.getElementById(id)) {
-          const inp = document.createElement('input');
-          inp.type = 'hidden'; inp.id = id;
-          document.getElementById('matFormBody').appendChild(inp);
-        }
-      });
-      document.getElementById('matSchedDate').value = dateStr;
-      document.getElementById('matSchedSlot').value = selectedSlot;
-
-      // Pre-fill the message textarea
-      document.getElementById('matMsg').value =
-        `Aula experimental agendada: ${dateStr} às ${selectedSlot}`;
-    }
-
-    closeSchedPopup();
-
-    setTimeout(() => {
-      document.getElementById('matricula').scrollIntoView({ behavior:'smooth', block:'center' });
-      const fw = document.querySelector('.mat-form-wrap');
-      fw.style.transition = 'box-shadow 0.4s';
-      fw.style.boxShadow  = '0 0 0 2px var(--gold), 0 0 30px rgba(212,160,23,0.2)';
-      setTimeout(() => fw.style.boxShadow = '', 2200);
-      const nome = document.getElementById('matNome');
-      if (!nome.value) nome.focus();
-    }, 350);
-  }
+  loadBlogPosts().then(syncBlog, () => syncBlog([]));
 </script>
-
-<!-- AGENDAMENTO POPUP -->
-<div class="sched-overlay" id="schedOverlay" onclick="handleSchedOverlayClick(event)">
-  <div class="sched-modal" id="schedModal">
-
-    <div class="sched-header">
-      <div class="sched-header-info">
-        <h3><i class="fa-solid fa-calendar-check"></i> Agendar Aula Experimental</h3>
-        <p>Escolha o melhor dia e horário para conhecer a academia — sem custo</p>
-      </div>
-      <button class="sched-close" onclick="closeSchedPopup()"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-
-    <!-- Steps -->
-    <div class="sched-steps">
-      <div class="sched-step active" id="step-ind-1">
-        <span class="step-num">1</span> Dia
-      </div>
-      <div class="step-line"></div>
-      <div class="sched-step" id="step-ind-2">
-        <span class="step-num">2</span> Horário
-      </div>
-      <div class="step-line"></div>
-      <div class="sched-step" id="step-ind-3">
-        <span class="step-num">3</span> Confirmação
-      </div>
-    </div>
-
-    <div class="sched-body">
-
-      <!-- STEP 1: Calendar -->
-      <div id="calWrap">
-        <div class="cal-nav">
-          <button class="cal-nav-btn" onclick="changeMonth(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-          <div class="cal-month-label" id="calMonthLabel"></div>
-          <button class="cal-nav-btn" onclick="changeMonth(1)"><i class="fa-solid fa-chevron-right"></i></button>
-        </div>
-        <div class="cal-weekdays">
-          <div class="cal-weekday">Dom</div>
-          <div class="cal-weekday">Seg</div>
-          <div class="cal-weekday">Ter</div>
-          <div class="cal-weekday">Qua</div>
-          <div class="cal-weekday">Qui</div>
-          <div class="cal-weekday">Sex</div>
-          <div class="cal-weekday weekend">Sáb</div>
-        </div>
-        <div class="cal-days" id="calDays"></div>
-      </div>
-
-      <!-- STEP 2: Time slots -->
-      <div class="time-slots-wrap" id="timeWrap">
-        <div class="time-step-back" onclick="goToStep(1)">
-          <i class="fa-solid fa-arrow-left"></i> Voltar ao calendário
-        </div>
-        <div class="time-selected-date" id="selectedDateLabel">
-          <i class="fa-solid fa-calendar"></i> <span></span>
-        </div>
-
-        <div id="turnoManha" class="turno-block">
-          <div class="turno-label"><i class="fa-solid fa-sun"></i> Manhã</div>
-          <div class="slots-row" id="slotsManha"></div>
-        </div>
-        <div id="turnoTarde" class="turno-block">
-          <div class="turno-label"><i class="fa-solid fa-cloud-sun"></i> Tarde</div>
-          <div class="slots-row" id="slotsTarde"></div>
-        </div>
-        <div id="turnoNoite" class="turno-block">
-          <div class="turno-label"><i class="fa-solid fa-moon"></i> Noite</div>
-          <div class="slots-row" id="slotsNoite"></div>
-        </div>
-      </div>
-
-      <!-- STEP 3: Confirm -->
-      <div class="confirm-wrap" id="confirmWrap">
-        <div class="confirm-icon"><i class="fa-solid fa-check"></i></div>
-        <div class="confirm-title">TUDO CERTO!</div>
-        <div class="confirm-summary" id="confirmSummary"></div>
-        <p class="confirm-note">Nossa equipe confirmará o agendamento pelo WhatsApp em até 2h. Qualquer dúvida ligue: <strong style="color:var(--gold)">(11) 96605-8202</strong></p>
-      </div>
-
-    </div>
-
-    <div class="sched-footer">
-      <span class="sched-cancel-link" id="schedCancelLink" onclick="closeSchedPopup()">Cancelar</span>
-      <button class="sched-btn-next" id="schedNextBtn" onclick="schedNext()">
-        <span id="schedNextTxt">Escolher Horário</span>
-        <i class="fa-solid fa-arrow-right" id="schedNextIco"></i>
-      </button>
-      <button class="sched-btn-confirm" id="schedConfirmBtn" onclick="confirmAula()" style="display:none;">
-        <i class="fa-solid fa-check-double"></i> Confirmar Aula
-      </button>
-    </div>
-
-  </div>
-</div>
-
 </body>
 </html>

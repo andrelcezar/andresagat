@@ -145,37 +145,47 @@
   @media(max-width:768px){
     .hamburger{display:flex}
     .nav-links{display:none}
-    .nav-links.open{display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:rgba(10,10,10,.98);padding:2rem;gap:1.5rem;border-bottom:1px solid rgba(212,160,23,.2);z-index:999}
+    .nav-links.open{display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;max-height:calc(100dvh - 70px);overflow-y:auto;background:rgba(10,10,10,.98);padding:2rem;gap:1.5rem;border-bottom:1px solid rgba(212,160,23,.2);z-index:999}
     .cards-grid{grid-template-columns:1fr}
     .footer-inner{flex-direction:column;align-items:center;text-align:center}
+  }
+  .skip-link { position: fixed; top: 0; left: 1rem; z-index: 3000; padding: .75rem; background: #fff; color: #111; transform: translateY(-110%); }
+  .skip-link:focus { transform: none; }
+  :focus-visible { outline: 2px solid #f2c647; outline-offset: 3px; }
+  .scroll-top:not(.visible) { visibility: hidden; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    .fade-in { opacity: 1; transform: none; }
   }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav id="navbar">
+<a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+<nav id="navbar" aria-label="Navegação principal">
   <a href="index.html" class="nav-logo">
-    <img src="assets/logo.sagat.png" alt="André Sagat">
+    <img src="assets/logo-sagat.webp" alt="André Sagat">
     <div class="nav-brand">André Sagat <span>Muaythai Gym</span></div>
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="index.html">Home</a></li>
     <li><a href="index.html#horarios">Horários</a></li>
     <li><a href="index.html#pricing">Planos</a></li>
-    <li><a href="blog.html" class="active">Blog</a></li>
-    <li><a href="index.html#contact" class="nav-cta"><i class="fa-solid fa-dumbbell"></i> Matricule-se</a></li>
+    <li><a href="blog.html" class="active" aria-current="page">Blog</a></li>
+    <li><a href="index.html#matricula" class="nav-cta"><i aria-hidden="true" class="fa-solid fa-dumbbell"></i> Matricule-se</a></li>
   </ul>
-  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+  <button type="button" class="hamburger" id="hamburger" aria-label="Menu principal" aria-controls="navLinks" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
+<main id="conteudo" tabindex="-1">
 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-texture"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow"><i class="fa-solid fa-rss"></i> Agenda &amp; Novidades</div>
+    <div class="hero-eyebrow"><i aria-hidden="true" class="fa-solid fa-rss"></i> Agenda &amp; Novidades</div>
     <h1 class="hero-title">
       BLOG<br>
       <span class="gold">SAGAT</span><br>
@@ -184,14 +194,14 @@
     <div class="hero-divider"></div>
     <p class="hero-desc">Acompanhe os eventos, fight cards e novidades da academia.</p>
     <div class="filter-bar">
-      <button class="filter-btn active" onclick="applyFilter('all',this)">
-        <i class="fa-solid fa-border-all"></i> Todos
+      <button aria-pressed="true" class="filter-btn active" onclick="applyFilter('all',this)">
+        <i aria-hidden="true" class="fa-solid fa-border-all"></i> Todos
       </button>
-      <button class="filter-btn" onclick="applyFilter('evento',this)">
-        <i class="fa-solid fa-fist-raised"></i> Eventos
+      <button aria-pressed="false" class="filter-btn" onclick="applyFilter('evento',this)">
+        <i aria-hidden="true" class="fa-solid fa-fist-raised"></i> Eventos
       </button>
-      <button class="filter-btn" onclick="applyFilter('novidade',this)">
-        <i class="fa-solid fa-bell"></i> Novidades
+      <button aria-pressed="false" class="filter-btn" onclick="applyFilter('novidade',this)">
+        <i aria-hidden="true" class="fa-solid fa-bell"></i> Novidades
       </button>
     </div>
   </div>
@@ -202,7 +212,7 @@
   <div class="container">
     <div class="block-header">
       <span class="block-title">
-        <i class="fa-solid fa-fist-raised"></i> Eventos
+        <i aria-hidden="true" class="fa-solid fa-fist-raised"></i> Eventos
         <span class="block-count" id="cnt-eventos">0</span>
       </span>
     </div>
@@ -217,7 +227,7 @@
   <div class="container">
     <div class="block-header">
       <span class="block-title">
-        <i class="fa-solid fa-bell"></i> Novidades
+        <i aria-hidden="true" class="fa-solid fa-bell"></i> Novidades
         <span class="block-count" id="cnt-novidades">0</span>
       </span>
     </div>
@@ -228,75 +238,57 @@
 <div class="gold-stripe"></div>
 
 <!-- FOOTER -->
+</main>
 <footer>
   <div class="footer-inner">
     <a href="index.html" class="footer-brand">
-      <img src="assets/logo.sagat.png" alt="André Sagat">
+      <img src="assets/logo-sagat.webp" alt="André Sagat">
       <div>
         <div class="footer-brand-name">ANDRÉ SAGAT</div>
         <div class="footer-brand-sub">Muaythai GYM</div>
       </div>
     </a>
     <div class="footer-copy">
-      <i class="fa-regular fa-copyright"></i> 2025 André Sagat Muaythai GYM<br>
-      <span style="color:var(--gold-dark);font-size:.7rem;"><i class="fa-solid fa-certificate"></i> Filiado à CBMT / BT</span>
+      <i aria-hidden="true" class="fa-regular fa-copyright"></i> André Sagat Muaythai GYM<br>
+      <span style="color:var(--gold-dark);font-size:.7rem;"><i aria-hidden="true" class="fa-solid fa-certificate"></i> Filiado à CBMT / BT</span>
     </div>
-    <a href="index.html" class="footer-back"><i class="fa-solid fa-arrow-left"></i> Voltar ao site</a>
+    <a href="index.html" class="footer-back"><i aria-hidden="true" class="fa-solid fa-arrow-left"></i> Voltar ao site</a>
   </div>
 </footer>
 
-<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <i class="fa-solid fa-chevron-up"></i>
+<button aria-label="Voltar ao topo" class="scroll-top" id="scrollTop">
+  <i aria-hidden="true" class="fa-solid fa-chevron-up"></i>
 </button>
 
+<script src="assets/site.js"></script>
+<script src="assets/blog-posts.js"></script>
 <script>
-// ── Data source: same localStorage key used by the admin ──
-const STORAGE_KEY = 'sagat_blog_posts';
-
-function getPosts() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-  catch { return []; }
-}
-
-function fmtDate(iso) {
-  if (!iso) return '';
-  const [y,m,d] = iso.split('-');
-  const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-  return `${parseInt(d)} de ${months[parseInt(m)-1]} de ${y}`;
-}
-
-function escapeHtml(str) {
-  return String(str ?? '').replace(/[&<>"']/g, c => ({
-    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
-  }[c]));
-}
-
 // ── Build card ────────────────────────────────────────────
 function buildCard(p) {
   const isFight  = !!(p.isFight && p.type === 'evento');
   const isEvento = p.type === 'evento';
   const szClass  = isFight ? 'tall' : 'normal';
-  const dateStr  = isEvento && p.eventDate ? fmtDate(p.eventDate) : fmtDate(p.createdAt);
+  const dateStr  = isEvento && p.eventDate ? formatPostDate(p.eventDate) : formatPostDate(p.createdAt);
 
   const badge = isFight
-    ? `<span class="card-badge badge-fight"><i class="fa-solid fa-trophy"></i> Fight Card</span>`
+    ? `<span class="card-badge badge-fight"><i aria-hidden="true" class="fa-solid fa-trophy"></i> Fight Card</span>`
     : isEvento
-      ? `<span class="card-badge badge-evento"><i class="fa-solid fa-calendar-star"></i> Evento</span>`
-      : `<span class="card-badge badge-novidade"><i class="fa-solid fa-bell"></i> Novidade</span>`;
+      ? `<span class="card-badge badge-evento"><i aria-hidden="true" class="fa-solid fa-calendar-star"></i> Evento</span>`
+      : `<span class="card-badge badge-novidade"><i aria-hidden="true" class="fa-solid fa-bell"></i> Novidade</span>`;
 
   const imgHtml = p.image
     ? `<img src="${escapeHtml(p.image)}" class="card-img ${szClass}" alt="${escapeHtml(p.title)}" loading="lazy">`
-    : `<div class="card-ph ${szClass}"><i class="fa-solid fa-${isEvento?'fist-raised':'bell'}"></i></div>`;
+    : `<div class="card-ph ${szClass}"><i aria-hidden="true" class="fa-solid fa-${isEvento?'fist-raised':'bell'}"></i></div>`;
 
   const localHtml = p.local
-    ? `<div class="card-local"><i class="fa-solid fa-location-dot"></i> ${escapeHtml(p.local)}</div>` : '';
+    ? `<div class="card-local"><i aria-hidden="true" class="fa-solid fa-location-dot"></i> ${escapeHtml(p.local)}</div>` : '';
 
   const excerptHtml = p.excerpt
     ? `<div class="card-excerpt">${escapeHtml(p.excerpt)}</div>` : '';
 
   const tagsHtml = p.tags && p.tags.length
     ? `<div class="card-tags">${p.tags.map(t=>
-        `<span class="card-tag"><i class="fa-solid fa-hashtag"></i>${escapeHtml(t)}</span>`
+        `<span class="card-tag"><i aria-hidden="true" class="fa-solid fa-hashtag"></i>${escapeHtml(t)}</span>`
       ).join('')}</div>` : '';
 
   return `
@@ -306,9 +298,10 @@ function buildCard(p) {
         ${badge}
       </div>
       <div class="card-body">
-        <div class="card-date"><i class="fa-solid fa-calendar"></i>${dateStr}</div>
+        <div class="card-date"><i aria-hidden="true" class="fa-solid fa-calendar"></i>${dateStr}</div>
         <div class="card-title">${escapeHtml(p.title)}</div>
         ${excerptHtml}
+        ${p.link ? `<p><a style="color:var(--gold-light)" href="${escapeHtml(p.link)}">Saiba mais sobre ${escapeHtml(p.title)}</a></p>` : ''}
         ${localHtml}
         ${tagsHtml}
       </div>
@@ -316,12 +309,11 @@ function buildCard(p) {
 }
 
 function emptyState(icon, msg) {
-  return `<div class="empty"><i class="fa-solid fa-${icon}"></i><p>${escapeHtml(msg)}</p></div>`;
+  return `<div class="empty"><i aria-hidden="true" class="fa-solid fa-${icon}"></i><p>${escapeHtml(msg)}</p></div>`;
 }
 
 // ── Render both grids ─────────────────────────────────────
-function render() {
-  const all       = getPosts();
+function render(all) {
   const eventos   = all.filter(p => p.type === 'evento');
   const novidades = all.filter(p => p.type === 'novidade');
 
@@ -345,26 +337,21 @@ function render() {
 }
 
 // ── Filter ────────────────────────────────────────────────
-let curFilter = 'all';
 function applyFilter(f, btn) {
-  curFilter = f;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  document.querySelectorAll('.filter-btn').forEach(button => {
+    button.classList.toggle('active', button === btn);
+    button.setAttribute('aria-pressed', String(button === btn));
+  });
   const sE = document.getElementById('sec-eventos');
   const sN = document.getElementById('sec-novidades');
   sE.style.display = (f === 'all' || f === 'evento')   ? '' : 'none';
   sN.style.display = (f === 'all' || f === 'novidade') ? '' : 'none';
 }
 
-// ── Scroll ────────────────────────────────────────────────
-window.addEventListener('scroll', () => {
-  document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 300);
-  document.getElementById('navbar').style.borderBottomColor =
-    window.scrollY > 10 ? 'rgba(212,160,23,0.35)' : 'rgba(212,160,23,0.2)';
+loadBlogPosts().then(render).catch(() => {
+  document.getElementById('grid-eventos').textContent = 'Não foi possível carregar os eventos. Tente novamente mais tarde.';
+  document.getElementById('grid-novidades').textContent = 'Não foi possível carregar as novidades. Tente novamente mais tarde.';
 });
-
-// ── Init ──────────────────────────────────────────────────
-render();
 </script>
 </body>
 </html>

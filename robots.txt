@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /blog_adm.html
-
-Sitemap: https://andrelcezar.github.io/andresagat/sitemap.xml
